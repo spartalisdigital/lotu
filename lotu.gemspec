@@ -23,7 +23,9 @@ Gem::Specification.new do |s|
      "README.rdoc",
      "Rakefile",
      "VERSION",
+     "examples/01_hello_world.rb",
      "lib/lotu.rb",
+     "lib/lotu/window.rb",
      "lotu.gemspec"
   ]
   s.homepage = %q{http://github.com/lobo-tuerto/lotu}
@@ -31,6 +33,9 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.5}
   s.summary = %q{lotu game development framework}
+  s.test_files = [
+    "examples/01_hello_world.rb"
+  ]
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
