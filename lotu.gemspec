@@ -24,31 +24,25 @@ Gem::Specification.new do |s|
      "Rakefile",
      "VERSION",
      "lib/lotu.rb",
-     "spec/lotu_spec.rb",
-     "spec/spec.opts",
-     "spec/spec_helper.rb"
+     "lotu.gemspec"
   ]
   s.homepage = %q{http://github.com/lobo-tuerto/lotu}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.5}
   s.summary = %q{lotu game development framework}
-  s.test_files = [
-    "spec/lotu_spec.rb",
-     "spec/spec_helper.rb"
-  ]
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
-      s.add_development_dependency(%q<rspec>, [">= 1.2.9"])
+      s.add_development_dependency(%q<gosu>, [">= 0.7.18"])
     else
-      s.add_dependency(%q<rspec>, [">= 1.2.9"])
+      s.add_dependency(%q<gosu>, [">= 0.7.18"])
     end
   else
-    s.add_dependency(%q<rspec>, [">= 1.2.9"])
+    s.add_dependency(%q<gosu>, [">= 0.7.18"])
   end
 end
 
