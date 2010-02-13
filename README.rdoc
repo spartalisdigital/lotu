@@ -1,4 +1,16 @@
 = lotu
+A simple, agile Ruby game development framework.
+
+== TODO
+* Write a better README.rdoc ;)
+* Write the code foundation (enough with the gem experiments!)
+
+== Install
+
+  gem install lotu
+
+
+== Description
 
 *lotu* aims to bring an agile and simple game development framework.
 It's built on top of Gosu, the excellent Cross-platform 2D game development library.
