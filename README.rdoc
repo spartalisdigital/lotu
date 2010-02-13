@@ -1,17 +1,33 @@
 = lotu
 
-Description goes here.
+*lotu* aims to bring an agile and simple game development framework.
+It's built on top of Gosu, the excellent Cross-platform 2D game development library.
+http://code.google.com/p/gosu/
 
-== Note on Patches/Pull Requests
- 
-* Fork the project.
-* Make your feature addition or bug fix.
-* Add tests for it. This is important so I don't break it in a
-  future version unintentionally.
-* Commit, do not mess with rakefile, version, or history.
-  (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
-* Send me a pull request. Bonus points for topic branches.
+After making my first game (*Rubytris* http://github.com/lobo-tuerto/rubytris), and been working for a few days in my new project (a Missile Command clone)... I decided I didn't want to type so much code. Thought I could organize my code better too.
+
+So, what can you do if you spot some patters here, a few more there? well, you do a framework of course! :)
+(disclaimer: well, you might want to do something else, but I will go with this, since I'm very excited about writing my first framework!)
+
+If you have any questions of suggestions don't hesitate and send me a message!
+
+
+== Features (planned)
+
+* Easy way to manage input, rendering, updating, etc.
+* Utility classes for viewports, game states, etc.
+
+
+== Other frameworks
+
+I saw another framework around called Chingu, 
+It's been around for a little while and I recommend you take a look at it:
+http://github.com/ippa/chingu
+
+I did find many of the ideas I have for my framework already implemented in it. But be sure I will take inspiration from many others. ;)
+Nevertheless I'm doing this because I want to become better at architecturing software. And this seems like fitting practice. :D
+
 
 == Copyright
 
-Copyright (c) 2010 lotu. See LICENSE for details.
+Copyright (c) 2010 Víctor Adrián de la Cruz Serrano. See LICENSE for details.
