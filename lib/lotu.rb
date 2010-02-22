@@ -3,3 +3,5 @@ $LOAD_PATH.unshift(framework_dir)
 
 require 'gosu'
 require 'window'
+require 'input_controller'
+require 'actor'

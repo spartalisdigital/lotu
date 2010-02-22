@@ -1,9 +1,8 @@
 = lotu
-A simple, agile Ruby game development framework.
+A simple, agile Ruby game development framework (based on Gosu).
 
-== TODO
-* Write a better README.rdoc ;)
-* Write the code foundation (enough with the gem experiments!)
+== What's new
+* Been working on the input management system.
 
 == Install
 
@@ -28,6 +27,7 @@ If you have any questions of suggestions don't hesitate and send me a message!
 
 * Easy way to manage input, rendering, updating, etc.
 * Utility classes for viewports, game states, etc.
+* Simple access to game resources (images, sounds, songs, etc).
 
 
 == Other frameworks
