@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{lotu}
-  s.version = "0.0.0"
+  s.version = "0.0.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["lobo_tuerto"]
-  s.date = %q{2010-02-12}
+  s.date = %q{2010-02-22}
   s.description = %q{lotu - Gosu based Ruby game development framework}
   s.email = %q{dev@lobotuerto.com}
   s.extra_rdoc_files = [
@@ -25,6 +25,8 @@ Gem::Specification.new do |s|
      "VERSION",
      "examples/01_hello_world.rb",
      "lib/lotu.rb",
+     "lib/lotu/actor.rb",
+     "lib/lotu/input_controller.rb",
      "lib/lotu/window.rb",
      "lotu.gemspec"
   ]
