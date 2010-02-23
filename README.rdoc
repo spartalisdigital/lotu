@@ -1,17 +1,14 @@
 = lotu
-A simple, agile Ruby game development framework (based on Gosu).
-
-== What's new
-* Been working on the input management system.
+A simple, agile Ruby game development framework.
 
 == Install
-
   gem install lotu
 
-
 == Description
+*lotu* aims to bring an agile and simple game development framework to life.
 
-*lotu* aims to bring an agile and simple game development framework.
+It provides useful abstractions so you can concentrate on developing your game.
+
 It's built on top of Gosu, the excellent Cross-platform 2D game development library.
 http://code.google.com/p/gosu/
 
@@ -24,14 +21,12 @@ If you have any questions of suggestions don't hesitate and send me a message!
 
 
 == Features (planned)
-
 * Easy way to manage input, rendering, updating, etc.
 * Utility classes for viewports, game states, etc.
 * Simple access to game resources (images, sounds, songs, etc).
 
 
 == Other frameworks
-
 I saw another framework around called Chingu, 
 It's been around for a little while and I recommend you take a look at it:
 http://github.com/ippa/chingu
@@ -41,5 +36,4 @@ Nevertheless I'm doing this because I want to become better at architecturing so
 
 
 == Copyright
-
 Copyright (c) 2010 Víctor Adrián de la Cruz Serrano. See LICENSE for details.
