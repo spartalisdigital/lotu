@@ -1,5 +1,5 @@
-lib_path = File.join(File.dirname(__FILE__), '..', 'lib', 'lotu.rb')
-require File.expand_path(lib_path)
+LIB_PATH = File.join(File.dirname(__FILE__), '..', 'lib', 'lotu.rb')
+require File.expand_path(LIB_PATH)
 include Gosu::Button
 
 class Player < Lotu::Actor
@@ -12,10 +12,13 @@ end
 class Example < Lotu::Window
   def initialize
     super
-    has_keys(KbEscape => :close)
+    set_keys(KbEscape => :close)
+    load_resources('media')
     
     @player = Player.new(self)
-    @player.has_keys(KbRight => [:puts_data, 50])
+    @player.set_keys(KbRight => [:puts_data, 50])
+    @player.set_image('Soldier.png')
   end
 end
+
 Example.new.show

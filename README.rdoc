@@ -1,3 +1,5 @@
+== Development just started!
+
 = lotu
 A simple, agile Ruby game development framework.
 

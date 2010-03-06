@@ -6,7 +6,7 @@ begin
   Jeweler::Tasks.new do |gem|
     gem.name = "lotu"
     gem.summary = %Q{lotu game development framework}
-    gem.description = %Q{lotu - Gosu based Ruby game development framework}
+    gem.description = %Q{lotu - Ruby game development framework}
     gem.email = "dev@lobotuerto.com"
     gem.homepage = "http://github.com/lobo-tuerto/lotu"
     gem.authors = ["lobo_tuerto"]

@@ -1,6 +1,7 @@
 module Lotu
   class Window < Gosu::Window
     include Controllable
+    include Resourceful
     attr_accessor :update_queue, :draw_queue, :input_listeners
 
     def initialize(params={})
@@ -40,11 +41,15 @@ module Lotu
     end
 
     # Register controller
-    def register_input_controller(controller)
+    def register_for_input(controller)
       controller.keys.each_key do |key|
         @input_register[key] << controller
       end
       @update_queue << controller
+    end
+
+    def register_for_draw(object)
+      @draw_queue << object
     end
   end
 end
