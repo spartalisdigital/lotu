@@ -9,12 +9,13 @@ require 'behaviors/resourceful'
 require 'behaviors/drawable'
 require 'behaviors/input_controller'
 
+require 'fps'
 require 'actor'
 require 'window'
 
 module Lotu
   # General utility methods
-  def self.game_path(path)
+  def self.game_path(path = '')
     File.join(GAME_ROOT, path)
   end
 end

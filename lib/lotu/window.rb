@@ -14,9 +14,17 @@ module Lotu
       @update_queue = []
       @draw_queue = []
       @input_register = Hash.new{|hash,key| hash[key] = []}
+
+      @fps = FpsCounter.new
+      @last_time = Gosu::milliseconds
     end
 
     def update
+      new_time = Gosu::milliseconds
+      elapsed_t = new_time - @last_time
+      @last_time = new_time
+      @fps.update(elapsed_t)
+
       @update_queue.each do |item|
         item.update
       end

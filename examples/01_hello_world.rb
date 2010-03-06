@@ -3,9 +3,9 @@ require File.expand_path(LIB_PATH)
 include Gosu::Button
 
 class Player < Lotu::Actor
-  def puts_data
-    puts @parent.update_interval
-    puts Gosu.milliseconds
+  def move_right
+    @x += 1
+    puts 'lol'
   end
 end
 
@@ -16,9 +16,15 @@ class Example < Lotu::Window
     load_resources('media')
     
     @player = Player.new(self)
-    @player.set_keys(KbRight => [:puts_data, 50])
+    @player.set_keys(KbRight => [:move_right, 0])
+    @font = Gosu::Font.new(self, Gosu::default_font_name, 20)
     @player.set_image('Soldier.png')
   end
-end
 
+  def draw
+    super
+    @font.draw("FPS: #{@fps}", 10, 10, 0, 1.0, 1.0, 0xffffff00)
+  end
+end
+puts Lotu.game_path
 Example.new.show
