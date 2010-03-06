@@ -3,11 +3,12 @@ LOTU_ROOT = File.expand_path(File.join(File.dirname(__FILE__), 'lotu'))
 $LOAD_PATH.unshift(LOTU_ROOT)
 
 require 'gosu'
-require 'controllable'
 
+require 'behaviors/controllable'
 require 'behaviors/resourceful'
 require 'behaviors/drawable'
-require 'input_controller'
+require 'behaviors/input_controller'
+
 require 'actor'
 require 'window'
 
