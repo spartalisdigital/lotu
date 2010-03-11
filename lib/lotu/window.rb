@@ -2,6 +2,8 @@ module Lotu
   class Window < Gosu::Window
     include Controllable
     include Resourceful
+    # delta time
+    attr_reader :dt
     attr_accessor :update_queue, :draw_queue, :input_listeners
 
     def initialize(params={})
@@ -21,9 +23,9 @@ module Lotu
 
     def update
       new_time = Gosu::milliseconds
-      elapsed_t = new_time - @last_time
+      @dt = (new_time - @last_time)/1000.0
       @last_time = new_time
-      @fps.update(elapsed_t)
+      @fps.update(@dt)
 
       @update_queue.each do |item|
         item.update

@@ -6,15 +6,14 @@ class FpsCounter
     @ticks = 0
     @fps = 0.0
     @samples = samples
-
-    @objs = @actors = @input_controllers = @lotu = 0
+    @objs = @actors = @input_controllers = 0
   end
 
-  def update(elapsed_t)
+  def update(dt)
     @ticks += 1
-    @accum += elapsed_t
+    @accum += dt
     if @ticks >= @samples
-      @fps = 1000/(@accum/@ticks)
+      @fps = @ticks/@accum
       @ticks = 0
       @accum = 0.0
       @objs = ObjectSpace.each_object.count

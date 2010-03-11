@@ -11,6 +11,7 @@ require 'behaviors/input_controller'
 
 require 'fps'
 require 'actor'
+require 'cursor'
 require 'window'
 
 module Lotu
