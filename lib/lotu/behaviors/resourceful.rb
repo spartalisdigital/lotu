@@ -1,39 +1,55 @@
-# Add methods to load and access resources
+# Add methods to load and access images, sounds & songs
 module Lotu
   module Resourceful
-    def load_resources(path)
-      @_resources ||= {}
-      path = File.join(@_game_path, path)
-
-      # Load all the images in path
-      Dir.entries(path).select do |entry|
-        entry =~ /\.png|\.jpg|\.bmp/
-      end.each do |entry|
-        begin
-          @_resources[entry] = Gosu::Image.new($window, File.join(path, entry))
-        rescue Exception => e
-          puts e, File.join(path,entry)
-        end
-      end
-
-      # Load all the sounds in path
-      Dir.entries(path).select do |entry|
-        entry =~ /\.ogg|\.mp3|\.wav/
-      end.each do |entry|
-        begin
-          @_resources[entry] = Gosu::Sample.new($window, File.join(path, entry))
-        rescue Exception => e
-          puts e, File.join(path,entry)
-        end
-      end
+    def image(name)
+      @_images[name]
     end
 
-    def set_game_path(path)
-      @_game_path = File.expand_path(File.dirname path)
+    def sound(name)
+      @_sounds[name]
     end
 
-    def resource(name)
-      @_resources[name]
+    def song(name)
+      @_songs[name]
+    end
+
+    def load_images(path)
+      @_images ||= {}
+      load_resources(@_images, /\.png|\.jpg|\.bmp/, path, Gosu::Image)
+    end
+
+    def load_sounds(path)
+      @_sounds ||= {}
+      load_resources(@_sounds, /\.ogg|\.mp3|\.wav/, path, Gosu::Sample)
+    end
+
+    def load_songs(path)
+      @_songs ||= {}
+      load_resources(@_sounds, /\.ogg|\.mp3|\.wav/, path, Gosu::Song)
+    end
+
+    def with_path(path, &blk)
+      @_path = File.expand_path(File.dirname path)
+      yield
+    end
+
+    private
+    def load_resources(container, regexp, path, klass)
+      container ||= {}
+      path = File.join(@_path, path)
+
+      count = 0
+      Dir.entries(path).select do |entry|
+        entry =~ regexp
+      end.each do |entry|
+        begin
+          container[entry] = klass.new($window, File.join(path, entry))
+          count += 1
+        rescue Exception => e
+          puts e, File.join(path, entry)
+        end
+      end
+      puts "#{count} #{klass} files loaded."
     end
   end
 end

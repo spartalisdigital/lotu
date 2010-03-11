@@ -22,7 +22,6 @@ module Lotu
 
       @fps = FpsCounter.new
       @last_time = Gosu::milliseconds
-      puts "Window: #{__FILE__}"
     end
 
     def update

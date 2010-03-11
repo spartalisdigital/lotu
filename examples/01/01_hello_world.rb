@@ -7,7 +7,6 @@ class Player < Lotu::Actor
   attr_reader :speed
   def initialize(parent)
     super
-    @speed = 100
     set_image 'CptnRuby Gem.png'
     set_keys(KbRight => :move_right,
              KbLeft => :move_left,
@@ -16,19 +15,19 @@ class Player < Lotu::Actor
   end
 
   def move_right
-    @x += speed*dt
+    @x += 1
   end
 
   def move_left
-    @x -= speed*dt
+    @x -= 1
   end
 
   def move_up
-    @y -= speed*dt
+    @y -= 1
   end
 
   def move_down
-    @y += speed*dt
+    @y += 1
   end
 end
 
@@ -36,13 +35,14 @@ class Example < Lotu::Window
   def initialize
     super
     set_keys KbEscape => :close
-    set_game_path(__FILE__)
-    load_resources 'media'
+    with_path __FILE__ do
+      load_images 'media'
+      load_sounds 'media'
+    end
 
     @player = Player.new(self)
     @font = Gosu::Font.new(self, Gosu::default_font_name, 20)
     @cursor = Lotu::Cursor.new(self)
-    puts "Example: #{__FILE__}"
   end
 
   def draw
