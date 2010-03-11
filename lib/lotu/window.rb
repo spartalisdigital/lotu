@@ -1,7 +1,10 @@
 module Lotu
   class Window < Gosu::Window
+    # Make it able to receive input events
     include Controllable
+    # Make it able to load media resources
     include Resourceful
+
     # delta time
     attr_reader :dt
     attr_accessor :update_queue, :draw_queue, :input_listeners
@@ -19,6 +22,7 @@ module Lotu
 
       @fps = FpsCounter.new
       @last_time = Gosu::milliseconds
+      puts "Window: #{__FILE__}"
     end
 
     def update

@@ -27,7 +27,7 @@ module Lotu
         # example: [:fire, 50] will call #fire every 50ms
         action_name, rate = action
         time_now = Gosu.milliseconds
-        if @executed_at[action] + (rate || 1000) < time_now
+        if @executed_at[action] + (rate || 0) < time_now
           @executed_at[action] = time_now
           @subject.send(action_name)
         end

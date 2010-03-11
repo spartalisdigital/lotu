@@ -3,7 +3,7 @@ module Lotu
   module Resourceful
     def load_resources(path)
       @_resources ||= {}
-      path = Lotu.game_path(path)
+      path = File.join(@_game_path, path)
 
       # Load all the images in path
       Dir.entries(path).select do |entry|
@@ -26,6 +26,10 @@ module Lotu
           puts e, File.join(path,entry)
         end
       end
+    end
+
+    def set_game_path(path)
+      @_game_path = File.expand_path(File.dirname path)
     end
 
     def resource(name)

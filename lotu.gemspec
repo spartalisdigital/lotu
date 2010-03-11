@@ -9,8 +9,8 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["lobo_tuerto"]
-  s.date = %q{2010-03-06}
-  s.description = %q{lotu - Ruby game development framework}
+  s.date = %q{2010-03-11}
+  s.description = %q{lotu aims to bring an agile and simple game development framework to life. It provides useful abstractions so you can concentrate on developing your game.}
   s.email = %q{dev@lobotuerto.com}
   s.extra_rdoc_files = [
     "LICENSE",
@@ -23,27 +23,13 @@ Gem::Specification.new do |s|
      "README.rdoc",
      "Rakefile",
      "VERSION",
-     "examples/01_hello_world.rb",
-     "examples/media/Beep.wav",
-     "examples/media/CptnRuby Gem.png",
-     "examples/media/CptnRuby Map.txt",
-     "examples/media/CptnRuby Tileset.png",
-     "examples/media/CptnRuby.png",
-     "examples/media/Cursor.png",
-     "examples/media/Earth.png",
-     "examples/media/Explosion.wav",
-     "examples/media/LargeStar.png",
-     "examples/media/Smoke.png",
-     "examples/media/Soldier.png",
-     "examples/media/Space.png",
-     "examples/media/Star.png",
-     "examples/media/Starfighter.bmp",
      "lib/lotu.rb",
      "lib/lotu/actor.rb",
      "lib/lotu/behaviors/controllable.rb",
      "lib/lotu/behaviors/drawable.rb",
      "lib/lotu/behaviors/input_controller.rb",
      "lib/lotu/behaviors/resourceful.rb",
+     "lib/lotu/cursor.rb",
      "lib/lotu/fps.rb",
      "lib/lotu/window.rb",
      "lotu.gemspec"
@@ -52,9 +38,9 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.6}
-  s.summary = %q{lotu game development framework}
+  s.summary = %q{A simple, agile Ruby game development framework.}
   s.test_files = [
-    "examples/01_hello_world.rb"
+    "examples/01/bin/01_hello_world.rb"
   ]
 
   if s.respond_to? :specification_version then

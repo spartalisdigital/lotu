@@ -5,8 +5,8 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "lotu"
-    gem.summary = %Q{lotu game development framework}
-    gem.description = %Q{lotu - Ruby game development framework}
+    gem.summary = %Q{A simple, agile Ruby game development framework.}
+    gem.description = %Q{lotu aims to bring an agile and simple game development framework to life. It provides useful abstractions so you can concentrate on developing your game.}
     gem.email = "dev@lobotuerto.com"
     gem.homepage = "http://github.com/lobo-tuerto/lotu"
     gem.authors = ["lobo_tuerto"]
