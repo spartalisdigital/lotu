@@ -23,6 +23,25 @@ Gem::Specification.new do |s|
      "README.rdoc",
      "Rakefile",
      "VERSION",
+     "examples/01/01_hello_world.rb",
+     "examples/01/media/Beep.wav",
+     "examples/01/media/CptnRuby Gem.png",
+     "examples/01/media/CptnRuby Map.txt",
+     "examples/01/media/CptnRuby Tileset.png",
+     "examples/01/media/CptnRuby.png",
+     "examples/01/media/Cursor.png",
+     "examples/01/media/Earth.png",
+     "examples/01/media/Explosion.wav",
+     "examples/01/media/LargeStar.png",
+     "examples/01/media/Smoke.png",
+     "examples/01/media/Soldier.png",
+     "examples/01/media/Space.png",
+     "examples/01/media/Star.png",
+     "examples/01/media/Starfighter.bmp",
+     "examples/01/media/amenoske.png",
+     "examples/01/media/crosshair.png",
+     "examples/01/media/lobo_tuerto.png",
+     "examples/01/media/title.png",
      "lib/lotu.rb",
      "lib/lotu/actor.rb",
      "lib/lotu/behaviors/controllable.rb",
@@ -40,7 +59,7 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.6}
   s.summary = %q{A simple, agile Ruby game development framework.}
   s.test_files = [
-    "examples/01/bin/01_hello_world.rb"
+    "examples/01/01_hello_world.rb"
   ]
 
   if s.respond_to? :specification_version then
