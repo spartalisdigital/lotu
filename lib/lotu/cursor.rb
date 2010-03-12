@@ -16,7 +16,9 @@ module Lotu
     end
 
     # This is the method you want to call when a user press the
-    # "click" key of your preference
+    # "click" key of your preference with something like:
+    # set_keys Gosu::Button::MsLeft => :click
+    # It'll yield the x, y coordinates of the click
     def click
       @click_x = $window.mouse_x
       @click_y = $window.mouse_y
