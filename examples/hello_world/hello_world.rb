@@ -52,12 +52,11 @@ class Example < Lotu::Window
     end
 
     @player = Player.new
-    @font = Gosu::Font.new(self, Gosu::default_font_name, 20)
   end
 
   def draw
     super
-    @font.draw("FPS: #{@fps}", 10, 10, 0, 1.0, 1.0, 0xffffff00)
+    @fps_counter.draw
   end
 end
 

@@ -10,6 +10,8 @@ module Lotu
       @y = opts[:y] || 0
       @parent = $window
       @parent.update_queue << self
+
+      # Initialize the behaviors included in subclasses
       init_behavior
     end
 

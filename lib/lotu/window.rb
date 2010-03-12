@@ -4,7 +4,7 @@ module Lotu
 
     # delta time
     attr_reader :dt
-    attr_accessor :update_queue, :draw_queue, :input_listeners
+    attr_accessor :update_queue, :draw_queue, :input_listeners, :font
 
     def initialize(params={})
       super(640, 480, false)
@@ -17,8 +17,11 @@ module Lotu
       @draw_queue = []
       @input_register = Hash.new{|hash,key| hash[key] = []}
 
-      @fps = FpsCounter.new
+      @fps_counter = FpsCounter.new
       @last_time = Gosu::milliseconds
+      @font = Gosu::Font.new(self, Gosu::default_font_name, 14)
+
+      # Initialize the behaviors included in subclasses
       init_behavior
     end
 
@@ -26,7 +29,7 @@ module Lotu
       new_time = Gosu::milliseconds
       @dt = (new_time - @last_time)/1000.0
       @last_time = new_time
-      @fps.update(@dt)
+      @fps_counter.update(@dt)
 
       @update_queue.each do |item|
         item.update
