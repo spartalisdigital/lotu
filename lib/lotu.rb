@@ -8,6 +8,7 @@ require 'behaviors/resourceful'
 require 'behaviors/drawable'
 require 'behaviors/input_controller'
 require 'behaviors/eventful'
+require 'behaviors/has_behavior'
 
 require 'fps'
 require 'actor'

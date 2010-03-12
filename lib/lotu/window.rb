@@ -1,9 +1,6 @@
 module Lotu
   class Window < Gosu::Window
-    # Make it able to receive input events
-    include Controllable
-    # Make it able to load media resources
-    include Resourceful
+    extend HasBehavior
 
     # delta time
     attr_reader :dt
@@ -22,6 +19,7 @@ module Lotu
 
       @fps = FpsCounter.new
       @last_time = Gosu::milliseconds
+      init_behavior
     end
 
     def update
@@ -64,5 +62,8 @@ module Lotu
     def register_for_draw(object)
       @draw_queue << object
     end
+
+    # Meant to be overriden by behaviors
+    def init_behavior;end
   end
 end

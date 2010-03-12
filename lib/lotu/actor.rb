@@ -1,23 +1,24 @@
 module Lotu
   class Actor
-    include Controllable
-    include Drawable
-    include Eventful
+    extend HasBehavior
+
     attr_accessor :parent, :x, :y
 
-    def initialize
-      super
-      @x = 0
-      @y = 0
+    def initialize(opts={})
+      super()
+      @x = opts[:x] || 0
+      @y = opts[:y] || 0
       @parent = $window
       @parent.update_queue << self
-    end
-
-    def update
+      init_behavior
     end
 
     def dt
       $window.dt
     end
+
+    # Meant to be overriden by behaviors
+    def init_behavior;end
+    def update;end
   end
 end

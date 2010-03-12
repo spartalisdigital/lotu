@@ -4,6 +4,10 @@ require File.expand_path(LIB_PATH)
 include Gosu::Button
 
 class Cursor < Lotu::Cursor
+  is_eventful
+  is_controllable
+  is_drawable
+
   def initialize
     super
     set_keys(Gosu::Button::MsLeft => [:click, false],
@@ -16,14 +20,18 @@ class Cursor < Lotu::Cursor
 end
 
 class Player < Lotu::Actor
+  is_drawable
+  is_controllable
+
   attr_reader :speed
+
   def initialize
     super
     set_image 'CptnRuby Gem.png'
-    set_keys(KbRight => [:move_right,0],
-             KbLeft => [:move_left,0],
-             KbUp => [:move_up,0],
-             KbDown => [:move_down,0])
+    set_keys(KbRight => :move_right,
+             KbLeft => :move_left,
+             KbUp => :move_up,
+             KbDown => :move_down)
   end
 
   def move_right
@@ -48,6 +56,9 @@ class Player < Lotu::Actor
 end
 
 class Example < Lotu::Window
+  is_controllable
+  is_resourceful
+
   def initialize
     super
     set_keys KbEscape => :close
