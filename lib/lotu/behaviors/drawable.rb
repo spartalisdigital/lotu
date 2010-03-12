@@ -12,11 +12,16 @@ module Lotu
 
       def set_image(image)
         @_image = $window.image(image)
-        $window.register_for_draw(self)
+        @parent.register_for_draw(self)
       end
 
       def draw
         @_image.draw(@x,@y,0)
+      end
+
+      def die
+        super
+        @parent.draw_queue.delete(self)
       end
     end
   end

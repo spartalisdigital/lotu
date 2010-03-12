@@ -19,6 +19,10 @@ module Lotu
       $window.dt
     end
 
+    def die
+      @parent.update_queue.delete(self)
+    end
+
     # Meant to be overriden by behaviors
     def init_behavior;end
     def update;end
