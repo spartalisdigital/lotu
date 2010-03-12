@@ -33,7 +33,7 @@ module Lotu
       end
 
       def load_songs(path)
-        load_resources(@_sounds, /\.ogg|\.mp3|\.wav/, path, Gosu::Song)
+        load_resources(@_songs, /\.ogg|\.mp3|\.wav/, path, Gosu::Song)
       end
 
       def with_path(path, &blk)
