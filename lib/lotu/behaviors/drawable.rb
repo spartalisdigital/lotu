@@ -12,7 +12,7 @@ module Lotu
 
       def set_image(image)
         @_image = $window.image(image)
-        @parent.register_for_draw(self)
+        @parent.draw_queue << self unless @parent.draw_queue.include?(self)
       end
 
       def draw

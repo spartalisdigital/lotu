@@ -15,10 +15,12 @@ module Lotu
       init_behavior
     end
 
+    # Easy access to delta-time
     def dt
       $window.dt
     end
 
+    # Remove ourselves from the update queue
     def die
       @parent.update_queue.delete(self)
     end

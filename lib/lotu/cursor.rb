@@ -1,48 +1,56 @@
 # Provides a mouse pointer usable through mouse or keyboard
 module Lotu
   class Cursor < Actor
-    attr_reader :click_x, :click_y
-    attr_accessor :arrow_speed
+    attr_reader :clicked_x, :clicked_y
+    attr_accessor :speed, :use_mouse
 
     def initialize
       super
-      @click_x = @click_y = 0
-      @arrow_speed = 1
+      @clicked_x = @clicked_y = 0
+      @speed = 100
+      @use_mouse = true
     end
 
     def update
-      @x = $window.mouse_x
-      @y = $window.mouse_y
+      if @use_mouse
+        @x = $window.mouse_x
+        @y = $window.mouse_y
+      end
     end
 
     # This is the method you want to call when a user press the
     # "click" key of your preference with something like:
     # set_keys Gosu::Button::MsLeft => :click
-    # It'll yield the x, y coordinates of the click
+    # It'll yield the x, y coordinates of the clicked point
     def click
-      @click_x = $window.mouse_x
-      @click_y = $window.mouse_y
-      fire(:click, @click_x, @click_y)
+      @clicked_x = @x
+      @clicked_y = @y
+      fire(:click, @clicked_x, @clicked_y)
+    end
+
+    def adjust_mouse
+      $window.mouse_y = @y
+      $window.mouse_x = @x
     end
 
     def up
-      $window.mouse_y -= @arrow_speed
+      @y -= @speed * dt
+      adjust_mouse if use_mouse
     end
 
     def down
-      $window.mouse_y += @arrow_speed
+      @y += @speed * dt
+      adjust_mouse if use_mouse
     end
 
     def left
-      $window.mouse_x -= @arrow_speed
+      @x -= @speed * dt
+      adjust_mouse if use_mouse
     end
 
     def right
-      $window.mouse_x += @arrow_speed
-    end
-
-    def last_click
-      "#{@click_x}, #{@click_y}"
+      @x += @speed * dt
+      adjust_mouse if use_mouse
     end
   end
 end

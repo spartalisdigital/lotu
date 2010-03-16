@@ -10,12 +10,12 @@ class Cursor < Lotu::Cursor
 
   def initialize
     super
-    set_keys(Gosu::Button::MsLeft => [:click, false],
-             Gosu::Button::KbSpace => [:click, false],
-             Gosu::Button::KbUp => :up,
-             Gosu::Button::KbDown => :down,
-             Gosu::Button::KbLeft => :left,
-             Gosu::Button::KbRight => :right)
+    set_keys(MsLeft => [:click, false],
+             KbSpace => [:click, false],
+             KbUp => :up,
+             KbDown => :down,
+             KbLeft => :left,
+             KbRight => :right)
   end
 end
 
@@ -78,8 +78,8 @@ class Example < Lotu::Window
 
   def draw
     super
-    @font.draw("FPS: #{@fps}", 10, 10, 0, 1.0, 1.0, 0xffffff00)
-    @font.draw("Click? #{@cursor.last_click}", 10, 30, 0, 1.0, 1.0, 0xfffff000)
+    @fps_counter.draw
+    @font.draw("Clicked on? #{@cursor.clicked_x}, #{@cursor.clicked_y}", 10, 30, 0, 1.0, 1.0, 0xfffff000)
   end
 end
 

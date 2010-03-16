@@ -2,15 +2,5 @@ LOTU_ROOT = File.expand_path(File.join(File.dirname(__FILE__), 'lotu'))
 $LOAD_PATH.unshift(LOTU_ROOT)
 
 require 'gosu'
-
-require 'behaviors/controllable'
-require 'behaviors/resourceful'
-require 'behaviors/drawable'
-require 'behaviors/input_controller'
-require 'behaviors/eventful'
-require 'behaviors/has_behavior'
-
-require 'fps'
-require 'actor'
-require 'cursor'
-require 'window'
+%w{controllable resourceful drawable input_controller eventful has_behavior}.each{|file| require "behaviors/#{file}"}
+%w{fps actor cursor window}.each{|file| require file}
