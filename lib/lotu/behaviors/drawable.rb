@@ -8,6 +8,14 @@ module Lotu
     def init_behavior
       @_image = nil
       @_color = 0xffffffff
+      @_z = 0
+      @_angle = 0
+      @_center_x = 0
+      @_center_y = 0
+      @_factor_x = 1
+      @_factor_y = 1
+      @_color = 0xffffffff
+      @_mode = :default
     end
 
     def set_image(image)
@@ -16,7 +24,7 @@ module Lotu
     end
 
     def draw
-      @_image.draw(@x,@y,0)
+      @_image.draw_rot(@x, @y, @_z, @_angle, @_center_x, @_center_y, @_factor_x, @_factor_y, @_color, @_mode)
     end
 
     def die
