@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["lobo_tuerto"]
-  s.date = %q{2010-03-17}
+  s.date = %q{2010-03-18}
   s.description = %q{lotu aims to bring an agile and simple game development framework to life. It provides useful abstractions so you can concentrate on developing your game.}
   s.email = %q{dev@lobotuerto.com}
   s.extra_rdoc_files = [
@@ -42,13 +42,11 @@ Gem::Specification.new do |s|
      "examples/media/crosshair.png",
      "examples/media/lobo_tuerto.png",
      "examples/media/title.png",
-     "examples/mouse_pointer/mouse.rb",
      "lib/lotu.rb",
      "lib/lotu/actor.rb",
      "lib/lotu/behaviors/controllable.rb",
      "lib/lotu/behaviors/drawable.rb",
      "lib/lotu/behaviors/eventful.rb",
-     "lib/lotu/behaviors/has_behavior.rb",
      "lib/lotu/behaviors/input_controller.rb",
      "lib/lotu/behaviors/resourceful.rb",
      "lib/lotu/cursor.rb",
@@ -63,7 +61,7 @@ Gem::Specification.new do |s|
   s.summary = %q{A simple, agile Ruby game development framework.}
   s.test_files = [
     "examples/hello_world/hello_world.rb",
-     "examples/mouse_pointer/mouse.rb"
+     "examples/mouse_pointer/mouse_pointer.rb"
   ]
 
   if s.respond_to? :specification_version then
