@@ -45,7 +45,7 @@ Gem::Specification.new do |s|
      "examples/mouse_pointer/mouse_pointer.rb",
      "lib/lotu.rb",
      "lib/lotu/actor.rb",
-     "lib/lotu/behaviors/controllable.rb",
+     "lib/lotu/behaviors/controllable/controllable.rb",
      "lib/lotu/behaviors/drawable.rb",
      "lib/lotu/behaviors/eventful.rb",
      "lib/lotu/behaviors/input_controller.rb",
