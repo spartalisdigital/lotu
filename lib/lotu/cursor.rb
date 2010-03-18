@@ -4,11 +4,18 @@ module Lotu
     attr_reader :clicked_x, :clicked_y
     attr_accessor :speed, :use_mouse
 
-    def initialize
+    def initialize(opts={})
+      default_opts = {
+        :use_mouse => true,
+        :speed => 100
+      }
+      opts = default_opts.merge!(opts)
       super
       @clicked_x = @clicked_y = 0
-      @speed = 100
-      @use_mouse = true
+      @speed = opts[:speed]
+      @use_mouse = opts[:use_mouse]
+      set_image(opts[:image]) unless opts[:image].nil?
+      set_keys(opts[:keys]) unless opts[:keys].nil?
     end
 
     def update
@@ -52,5 +59,6 @@ module Lotu
       @x += @speed * dt
       adjust_mouse if use_mouse
     end
+
   end
 end

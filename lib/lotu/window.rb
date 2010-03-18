@@ -1,7 +1,5 @@
 module Lotu
   class Window < Gosu::Window
-    extend HasBehavior
-
     # delta time
     attr_reader :dt
     attr_accessor :update_queue, :draw_queue, :input_listeners, :font
@@ -19,10 +17,11 @@ module Lotu
 
       @fps_counter = FpsCounter.new
       @last_time = Gosu::milliseconds
-      @font = Gosu::Font.new(self, Gosu::default_font_name, 14)
+      @font = Gosu::Font.new(self, Gosu::default_font_name, 20)
 
-      # Initialize the behaviors included in subclasses
-      init_behavior
+      # Add extra functionality
+      self.extend Controllable
+      self.extend Resourceful
     end
 
     def update
@@ -65,8 +64,5 @@ module Lotu
     def register_for_draw(object)
       @draw_queue << object
     end
-
-    # Meant to be overriden by behaviors
-    def init_behavior;end
   end
 end

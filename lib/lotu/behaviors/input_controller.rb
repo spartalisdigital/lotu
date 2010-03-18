@@ -51,5 +51,6 @@ module Lotu
     def button_up(id)
       @actions.delete(@keys[id])
     end
+
   end
 end

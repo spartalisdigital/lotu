@@ -3,11 +3,7 @@ LIB_PATH = File.join(File.dirname(__FILE__), '..', '..', 'lib', 'lotu.rb')
 require File.expand_path(LIB_PATH)
 include Gosu::Button
 
-class Player < Lotu::Actor
-  is_drawable
-  is_controllable
-
-  attr_reader :speed
+class MovingRuby < Lotu::Actor
 
   def initialize
     super
@@ -34,30 +30,26 @@ class Player < Lotu::Actor
     @y += 1
   end
 
-  def warp(x, y)
-    @x, @y = x, y
-  end
 end
 
 class Example < Lotu::Window
-  is_controllable
-  is_resourceful
 
   def initialize
     super
     set_keys KbEscape => :close
+
     with_path(__FILE__) do
       load_images '../media'
-      load_sounds '../media'
     end
 
-    @player = Player.new
+    @ruby = MovingRuby.new
   end
 
   def draw
     super
     @fps_counter.draw
   end
+
 end
 
 Example.new.show

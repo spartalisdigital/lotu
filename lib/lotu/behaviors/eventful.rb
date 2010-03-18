@@ -17,23 +17,22 @@
 
 module Lotu
   module Eventful
-    def is_eventful
-      include InstanceMethods
+
+    def self.extended(instance)
+      instance.init_behavior
     end
 
-    module InstanceMethods
-      def init_behavior
-        super
-        @_events = {}
-      end
-
-      def on(event, &blk)
-        @_events[event] = blk
-      end
-
-      def fire(event, *args)
-        @_events[event].call(*args) if @_events[event]
-      end
+    def init_behavior
+      @_events = {}
     end
+
+    def on(event, &blk)
+      @_events[event] = blk
+    end
+
+    def fire(event, *args)
+      @_events[event].call(*args) if @_events[event]
+    end
+
   end
 end

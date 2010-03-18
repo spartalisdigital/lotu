@@ -1,18 +1,24 @@
 module Lotu
   class Actor
-    extend HasBehavior
-
     attr_accessor :parent, :x, :y
 
     def initialize(opts={})
-      super()
-      @x = opts[:x] || 0
-      @y = opts[:y] || 0
+      default_opts = {
+        :x => 0,
+        :y => 0,
+        :color => 0xffffffff
+      }
+      opts = default_opts.merge!(opts)
+      @x = opts[:x]
+      @y = opts[:y]
+      @color = opts[:color]
       @parent = $window
       @parent.update_queue << self
 
-      # Initialize the behaviors included in subclasses
-      init_behavior
+      # Add extra functionality
+      self.extend Drawable
+      self.extend Controllable
+      self.extend Eventful
     end
 
     # Easy access to delta-time
@@ -25,8 +31,6 @@ module Lotu
       @parent.update_queue.delete(self)
     end
 
-    # Meant to be overriden by behaviors
-    def init_behavior;end
     def update;end
   end
 end
