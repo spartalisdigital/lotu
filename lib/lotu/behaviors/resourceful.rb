@@ -7,42 +7,42 @@ module Lotu
     end
 
     def init_behavior
-      @_images = {}
-      @_sounds = {}
-      @_songs = {}
+      @images = {}
+      @sounds = {}
+      @songs = {}
     end
 
     def image(name)
-      @_images[name]
+      @images[name]
     end
 
     def sound(name)
-      @_sounds[name]
+      @sounds[name]
     end
 
     def song(name)
-      @_songs[name]
+      @songs[name]
     end
 
     def load_images(path)
-      load_resources(@_images, /\.png|\.jpg|\.bmp/, path, Gosu::Image)
+      load_resources(@images, /\.png|\.jpg|\.bmp/, path, Gosu::Image)
     end
 
     def load_sounds(path)
-      load_resources(@_sounds, /\.ogg|\.mp3|\.wav/, path, Gosu::Sample)
+      load_resources(@sounds, /\.ogg|\.mp3|\.wav/, path, Gosu::Sample)
     end
 
     def load_songs(path)
-      load_resources(@_songs, /\.ogg|\.mp3|\.wav/, path, Gosu::Song)
+      load_resources(@songs, /\.ogg|\.mp3|\.wav/, path, Gosu::Song)
     end
 
     def with_path(path, &blk)
-      @_path = File.expand_path(File.dirname path)
+      @path = File.expand_path(File.dirname path)
       yield
     end
 
     def load_resources(container, regexp, path, klass)
-      path = File.expand_path(File.join(@_path, path))
+      path = File.expand_path(File.join(@path, path))
       puts "Loading from: #{path}"
 
       count = 0

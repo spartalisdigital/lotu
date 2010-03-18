@@ -42,6 +42,7 @@ Gem::Specification.new do |s|
      "examples/media/crosshair.png",
      "examples/media/lobo_tuerto.png",
      "examples/media/title.png",
+     "examples/mouse_pointer/mouse_pointer.rb",
      "lib/lotu.rb",
      "lib/lotu/actor.rb",
      "lib/lotu/behaviors/controllable.rb",

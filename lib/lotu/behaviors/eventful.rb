@@ -23,15 +23,15 @@ module Lotu
     end
 
     def init_behavior
-      @_events = {}
+      @events = {}
     end
 
     def on(event, &blk)
-      @_events[event] = blk
+      @events[event] = blk
     end
 
     def fire(event, *args)
-      @_events[event].call(*args) if @_events[event]
+      @events[event].call(*args) if @events[event]
     end
 
   end

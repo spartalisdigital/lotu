@@ -7,7 +7,7 @@ module Lotu
     end
 
     def init_behavior
-      @_input_controller = nil
+      @input_controller = nil
     end
 
     # This will call #go_up every game loop
@@ -21,7 +21,7 @@ module Lotu
     # This will call #go_up every 50ms
     # Gosu::Button::KbUp => [:go_up, 50]
     def set_keys(keys)
-      @_input_controller = InputController.new(self, keys)
+      @input_controller = InputController.new(self, keys)
     end
 
   end
