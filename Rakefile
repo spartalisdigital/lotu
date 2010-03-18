@@ -10,7 +10,7 @@ begin
     gem.email = "dev@lobotuerto.com"
     gem.homepage = "http://github.com/lobo-tuerto/lotu"
     gem.authors = ["lobo_tuerto"]
-    gem.add_development_dependency "gosu", ">= 0.7.18"
+    gem.add_dependency "gosu", ">= 0.7.18"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
