@@ -15,7 +15,7 @@ module Lotu
     end
 
     def collides_with(other)
-      Gosu.distance(@x, @y, other.x, other.y) < @radius + other.radius
+      Gosu.distance(@x, @y, other.x, other.y) < @collision_radius + other.collision_radius
     end
 
     def die

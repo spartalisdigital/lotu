@@ -9,11 +9,11 @@ module Lotu
       @image = nil
       @color = 0xffffffff
       @z = 0
-      @angle = 0
-      @center_x = 0
-      @center_y = 0
-      @factor_x = 1
-      @factor_y = 1
+      @angle = 0.0
+      @center_x = 0.5
+      @center_y = 0.5
+      @factor_x = 1.0
+      @factor_y = 1.0
       @color = 0xffffffff
       @mode = :default
     end
