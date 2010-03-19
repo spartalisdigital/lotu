@@ -21,8 +21,8 @@ module Lotu
       @font = Gosu::Font.new(self, Gosu::default_font_name, 20)
 
       # Add extra functionality
-      self.extend Controllable
-      self.extend Resourceful
+      extend Controllable
+      extend Resourceful
       extend Systems::Collision
     end
 

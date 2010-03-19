@@ -5,6 +5,10 @@ module Lotu
       def self.extended(instance)
         instance.systems[:collision] = CollisionSystem.new
       end
+
+      def when_colliding(*args, &blk)
+        systems[:collision].when_colliding(*args, &blk)
+      end
     end
 
     class CollisionSystem
