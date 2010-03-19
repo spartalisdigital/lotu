@@ -45,6 +45,7 @@ Gem::Specification.new do |s|
      "examples/mouse_pointer/mouse_pointer.rb",
      "lib/lotu.rb",
      "lib/lotu/actor.rb",
+     "lib/lotu/behaviors/collidable.rb",
      "lib/lotu/behaviors/controllable.rb",
      "lib/lotu/behaviors/controllable/input_controller.rb",
      "lib/lotu/behaviors/drawable.rb",
@@ -52,6 +53,7 @@ Gem::Specification.new do |s|
      "lib/lotu/behaviors/resourceful.rb",
      "lib/lotu/cursor.rb",
      "lib/lotu/fps.rb",
+     "lib/lotu/systems/collision.rb",
      "lib/lotu/window.rb",
      "lotu.gemspec"
   ]

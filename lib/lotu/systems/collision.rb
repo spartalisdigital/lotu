@@ -23,14 +23,14 @@ module Lotu
       end
 
       def when_colliding(type1, type2, &blk)
-        @actions[[type1, type2].sort!] = blk
+        @actions[[type1, type2]] = blk
       end
 
       def update
         @actions.each do |tags, blk|
           @entities[tags[0]].each do |ent1|
             @entities[tags[1]].each do |ent2|
-              blk.call if ent1.collides_with(ent2)
+              blk.call(ent1, ent2) if ent1.collides_with(ent2)
             end
           end
         end
