@@ -19,6 +19,7 @@ module Lotu
       self.extend Drawable
       self.extend Controllable
       self.extend Eventful
+      self.extend Collidable
     end
 
     # Easy access to delta-time

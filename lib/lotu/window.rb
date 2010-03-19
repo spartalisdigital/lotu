@@ -1,7 +1,7 @@
 module Lotu
   class Window < Gosu::Window
     # delta time
-    attr_reader :dt
+    attr_reader :dt, :systems
     attr_accessor :update_queue, :draw_queue, :input_listeners, :font
 
     def initialize(params={})
@@ -11,6 +11,7 @@ module Lotu
       $window = self
 
       # Systems setup
+      @systems = {}
       @update_queue = []
       @draw_queue = []
       @input_register = Hash.new{|hash,key| hash[key] = []}
@@ -22,6 +23,7 @@ module Lotu
       # Add extra functionality
       self.extend Controllable
       self.extend Resourceful
+      extend Systems::Collision
     end
 
     def update
@@ -29,6 +31,10 @@ module Lotu
       @dt = (new_time - @last_time)/1000.0
       @last_time = new_time
       @fps_counter.update(@dt)
+
+      @systems.each_value do |system|
+        system.update
+      end
 
       @update_queue.each do |item|
         item.update
