@@ -46,9 +46,7 @@ module Lotu
       puts "Loading from: #{path}"
 
       count = 0
-      Dir.entries(path).select do |entry|
-        entry =~ regexp
-      end.each do |entry|
+      Dir.entries(path).grep(regexp).each do |entry|
         begin
           container[entry] = klass.new($window, File.join(path, entry))
           count += 1

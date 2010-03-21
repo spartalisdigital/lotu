@@ -134,6 +134,7 @@ module Lotu
       return flee
     end
 
+    # TODO: Fix wander
     def wander
       wander_jitter = 10
 

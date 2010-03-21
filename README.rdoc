@@ -1,10 +1,13 @@
-== Development just started!
-So bear with me while this framework is in a primordial state. But fear not, it's shaping up pretty nicely! :D
-
 = lotu
 A simple, agile Ruby game development framework.
 
 == Install
+The preferred way to try it out is cloning from github:
+
+  git clone git://github.com/lobo-tuerto/lotu.git
+
+The is a gem right now, but while the API stabilizes it is not updated as often as the github repo.
+
   gem install lotu
 
 == Description
@@ -23,16 +26,23 @@ So, what can you do if you spot some patters here, a few more there? well, you d
 If you have any questions of suggestions don't hesitate and send me a message!
 
 
-== Features (planned)
-* Easy way to manage input, rendering, updating, etc. (check!)
-* Utility classes for viewports, game states, etc. (this is comming next!)
-* Simple access to game resources (images, sounds, songs, etc). (check!)
+== Features
+* Easy way to manage input, rendering, updating, etc.
+* Simple access to game resources (images, sounds, songs, etc).
+* Steering behaviors
+
+
+== Coming features
+* Utility classes for viewports, game states, etc.
+* Pathfinding and more AI stuff
 
 
 == Other frameworks
-I saw another framework around called Chingu, 
-It's been around for a little while and I recommend you take a look at it:
+I saw another framework around called *Chingu*, It's been around for a little while and I recommend you take a look at it:
 http://github.com/ippa/chingu
+
+There is also *gamebox*, it's based on Rubygame though:
+http://github.com/shawn42/gamebox
 
 I did find many of the ideas I have for my framework already implemented in it. But be sure I will take inspiration from many others. ;)
 Nevertheless I'm doing this because I want to become better at architecturing software. And this seems like fitting practice. :D
