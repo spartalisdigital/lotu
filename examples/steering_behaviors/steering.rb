@@ -4,11 +4,10 @@ require File.expand_path(LIB_PATH)
 include Gosu::Button
 
 class SteeringRuby < Lotu::Actor
-  def initialize
+  def initialize(opts={})
     super
     set_image 'CptnRuby Gem.png'
-    activate_system Lotu::Steering
-    @systems[Lotu::Steering].activate(:seek)
+    activate_system(Lotu::Steering, opts)
   end
 
   def warp(x, y)
@@ -19,25 +18,38 @@ end
 class Example < Lotu::Window
   def initialize
     super
-    set_keys KbEscape => :close
+    set_keys(KbEscape => :close,
+             MsRight => :reset_ruby)
 
     with_path __FILE__ do
       load_images '../media'
     end
 
-    @ruby = SteeringRuby.new
+    @ruby = SteeringRuby.new(:mass => 0.3, :max_speed => 100, :max_turn_rate => 140)
     @ruby.warp(width/2, height/2)
+    @ruby.activate(:evade)
+
+    @ruby2 = SteeringRuby.new
+    @ruby2.activate(:pursuit)
+
     @cursor = Lotu::Cursor.new(:image => 'crosshair.png',
                                :keys => {MsLeft => [:click, false]})
     @cursor.on(:click) do |x,y|
-      @ruby.seek_target = Lotu::Vector2d.new(x,y)
+      @ruby.pursuer = @ruby2#Lotu::Vector2d.new(x, y)
+      @ruby2.evader = @ruby
     end
 
-    @window_text_box = Lotu::TextBox.new
-    @window_text_box.watch(@fps_counter)
-    @window_text_box.watch(@cursor, :color => 0xffff0000)
-    @ruby_text_box = Lotu::TextBox.new(:font_size => 30, :attach_to => @ruby)
-    @ruby_text_box.watch(@ruby, :font_size => 18)
+    @window_info = Lotu::TextBox.new
+    @window_info.watch(@fps_counter)
+    @window_info.watch(@cursor, :color => 0xffff0000)
+
+    @ruby_info = Lotu::TextBox.new(:attach_to => @ruby, :font_size => 16)
+    @ruby_info.watch(@ruby)
+  end
+
+  def reset_ruby
+    @ruby.pos.x = width/2
+    @ruby.pos.y = height/2
   end
 end
 

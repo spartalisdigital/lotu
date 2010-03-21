@@ -49,8 +49,10 @@ class Example < Lotu::Window
 
     @info = Lotu::TextBox.new
     @info.watch(@fps_counter)
-    @info.watch(@cursor1, :color => 0xff0099ff)
-    @info.watch(@cursor2, :color => 0xff99ff00)
+    @info.watch("@cursor1 data:")
+    @info.watch(@cursor1, :color => 0xff0099ff, :font_size => 15)
+    @info.watch("@cursor2 data:")
+    @info.watch(@cursor2, :color => 0xff99ff00, :font_size => 15)
   end
 
 end

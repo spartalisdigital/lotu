@@ -36,7 +36,7 @@ class Example < Lotu::Window
 
   def initialize
     super
-    set_keys KbEscape => :close
+    set_keys(KbEscape => :close)
 
     with_path(__FILE__) do
       load_images '../media'

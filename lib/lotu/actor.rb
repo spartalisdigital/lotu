@@ -34,8 +34,8 @@ module Lotu
       @parent.update_queue.delete(self)
     end
 
-    def activate_system(klass)
-      @systems[klass] = klass.new(self)
+    def activate_system(klass, opts={})
+      @systems[klass] = klass.new(self, opts)
     end
 
     def update
