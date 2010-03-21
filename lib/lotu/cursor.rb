@@ -60,5 +60,9 @@ module Lotu
       adjust_mouse if use_mouse
     end
 
+    def to_s
+      "@pos(#{format('%.2f, %.2f', @x, @y)}) @clicked(#{format('%.2f, %.2f', @clicked_x, @clicked_y)})"
+    end
+
   end
 end

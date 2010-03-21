@@ -22,11 +22,7 @@ class FpsCounter
     end
   end
 
-  def draw
-    $window.font.draw("FPS: #{to_s}", 10, 10, 0, 1.0, 1.0, 0xffffff00)
-  end
-
   def to_s
-    "Samples: #{@samples} FPS: #{format("%.2f",@fps)} Objs: #{@objs} Acts: #{@actors} InputsCs: #{@inputs}"
+    "@samples(#{@samples}) @fps(#{format("%.2f",@fps)}) @objs(#{@objs}) @actors(#{@actors}) @inputs(#{@inputs})"
   end
 end

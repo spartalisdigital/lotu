@@ -5,7 +5,7 @@ include Gosu::Button
 
 class MovingRuby < Lotu::Actor
 
-  def initialize
+  def initialize(opts={})
     super
     set_image 'CptnRuby Gem.png'
     set_keys(KbRight => :move_right,
@@ -42,12 +42,7 @@ class Example < Lotu::Window
       load_images '../media'
     end
 
-    @ruby = MovingRuby.new
-  end
-
-  def draw
-    super
-    @fps_counter.draw
+    @ruby = MovingRuby.new(:x => width/2, :y => height/2)
   end
 
 end
