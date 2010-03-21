@@ -25,7 +25,8 @@ class Example < Lotu::Window
 
     @ruby = WarpingRuby.new
     @cursor1 = Lotu::Cursor.new(:image => 'crosshair.png',
-                                :keys => {MsLeft => [:click, false]})
+                                :keys => {MsLeft => [:click, false]},
+                                :color => 0xff0099ff)
     @cursor2 = Lotu::Cursor.new(:image => 'crosshair.png',
                                 :use_mouse => false,
                                 :keys => {
@@ -33,8 +34,8 @@ class Example < Lotu::Window
                                   KbUp => :up,
                                   KbDown => :down,
                                   KbLeft => :left,
-                                  KbRight => :right
-                                })
+                                  KbRight => :right},
+                                :color => 0xff99ff00)
 
     @cursor1.on(:click) do |x,y|
       @ruby.warp(x,y)
@@ -42,14 +43,16 @@ class Example < Lotu::Window
     @cursor2.on(:click) do |x,y|
       @ruby.warp(x,y)
     end
+
+    @cursor2.x = width*3/4
+    @cursor2.y = height/2
+
+    @info = Lotu::TextBox.new
+    @info.watch(@fps_counter)
+    @info.watch(@cursor1, :color => 0xff0099ff)
+    @info.watch(@cursor2, :color => 0xff99ff00)
   end
 
-  def draw
-    super
-    @fps_counter.draw
-    @font.draw("@cursor1: #{@cursor1.clicked_x}, #{@cursor1.clicked_y}", 10, 30, 0, 1.0, 1.0, 0xfffff000)
-    @font.draw("@cursor2: #{@cursor2.clicked_x}, #{@cursor2.clicked_y}", 10, 30+@font.height, 0, 1.0, 1.0, 0xfffff000)
-  end
 end
 
 Example.new.show

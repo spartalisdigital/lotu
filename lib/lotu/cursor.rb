@@ -61,7 +61,7 @@ module Lotu
     end
 
     def to_s
-      "@pos(#{@x}, #{@y}) @clicked(#{@clicked_x}, #{clicked_y})"
+      "@pos(#{format('%.2f, %.2f', @x, @y)}) @clicked(#{format('%.2f, %.2f', @clicked_x, @clicked_y)})"
     end
 
   end

@@ -18,7 +18,6 @@ module Lotu
 
       @fps_counter = FpsCounter.new
       @last_time = Gosu::milliseconds
-      @font = Gosu::Font.new(self, Gosu::default_font_name, 20)
       @fonts = Hash.new{|h,k| h[k] = Gosu::Font.new(self, Gosu::default_font_name, k)}
 
       # Add extra functionality
