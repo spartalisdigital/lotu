@@ -6,6 +6,10 @@ module Lotu
     end
 
     def init_behavior
+      class << self
+        attr_accessor :angle
+      end
+
       @image = nil
       @color = 0xffffffff
       @z = 0
@@ -18,13 +22,22 @@ module Lotu
       @mode = :default
     end
 
-    def set_image(image)
-      @image = @parent.image(image)
+    def draw_me
       @parent.draw_queue << self unless @parent.draw_queue.include?(self)
     end
 
+    def image
+      @image
+    end
+
+    def set_image(image)
+      @image = @parent.image(image)
+      draw_me
+    end
+
     def draw
-      @image.draw_rot(@x, @y, @z, @angle, @center_x, @center_y, @factor_x, @factor_y, @color, @mode)
+      super
+      @image.draw_rot(@x, @y, @z, @angle, @center_x, @center_y, @factor_x, @factor_y, @color, @mode) unless @image.nil?
     end
 
     def die

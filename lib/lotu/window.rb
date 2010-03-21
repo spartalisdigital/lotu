@@ -1,11 +1,11 @@
 module Lotu
   class Window < Gosu::Window
     # delta time
-    attr_reader :dt, :systems
+    attr_reader :dt, :systems, :fonts
     attr_accessor :update_queue, :draw_queue, :input_listeners, :font
 
     def initialize(params={})
-      super(640, 480, false)
+      super(800, 600, false)
 
       # Handy global window variable
       $window = self
@@ -19,6 +19,7 @@ module Lotu
       @fps_counter = FpsCounter.new
       @last_time = Gosu::milliseconds
       @font = Gosu::Font.new(self, Gosu::default_font_name, 20)
+      @fonts = Hash.new{|h,k| h[k] = Gosu::Font.new(self, Gosu::default_font_name, k)}
 
       # Add extra functionality
       extend Controllable

@@ -1,6 +1,6 @@
 module Lotu
   class Actor
-    attr_accessor :parent, :x, :y
+    attr_accessor :parent, :x, :y, :systems
 
     def initialize(opts={})
       default_opts = {
@@ -20,6 +20,8 @@ module Lotu
       self.extend Controllable
       self.extend Eventful
       self.extend Collidable
+
+      @systems = {}
     end
 
     # Easy access to delta-time
@@ -32,6 +34,17 @@ module Lotu
       @parent.update_queue.delete(self)
     end
 
-    def update;end
+    def activate_system(klass)
+      @systems[klass] = klass.new(self)
+    end
+
+    def update
+      @systems.each_pair do |klass, system|
+        system.update
+      end
+    end
+
+    def draw;end
+
   end
 end
