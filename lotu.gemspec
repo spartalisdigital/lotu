@@ -44,6 +44,7 @@ Gem::Specification.new do |s|
      "examples/media/lobo_tuerto.png",
      "examples/media/title.png",
      "examples/mouse_pointer/mouse_pointer.rb",
+     "examples/steering_behaviors/steering.rb",
      "lib/lotu.rb",
      "lib/lotu/actor.rb",
      "lib/lotu/behaviors/collidable.rb",
@@ -53,7 +54,11 @@ Gem::Specification.new do |s|
      "lib/lotu/behaviors/eventful.rb",
      "lib/lotu/behaviors/resourceful.rb",
      "lib/lotu/cursor.rb",
+     "lib/lotu/misc/fps.rb",
+     "lib/lotu/misc/vector2d.rb",
      "lib/lotu/systems/collision.rb",
+     "lib/lotu/systems/steering.rb",
+     "lib/lotu/text_box.rb",
      "lib/lotu/window.rb",
      "lotu.gemspec"
   ]
