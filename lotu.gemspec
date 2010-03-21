@@ -9,12 +9,13 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["lobo_tuerto"]
-  s.date = %q{2010-03-19}
+  s.date = %q{2010-03-20}
   s.description = %q{lotu aims to bring an agile and simple game development framework to life. It provides useful abstractions so you can concentrate on developing your game.}
   s.email = %q{dev@lobotuerto.com}
   s.extra_rdoc_files = [
     "LICENSE",
-     "README.rdoc"
+     "README.rdoc",
+     "TODO"
   ]
   s.files = [
     ".document",
@@ -52,7 +53,6 @@ Gem::Specification.new do |s|
      "lib/lotu/behaviors/eventful.rb",
      "lib/lotu/behaviors/resourceful.rb",
      "lib/lotu/cursor.rb",
-     "lib/lotu/fps.rb",
      "lib/lotu/systems/collision.rb",
      "lib/lotu/window.rb",
      "lotu.gemspec"
@@ -63,7 +63,8 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.6}
   s.summary = %q{A simple, agile Ruby game development framework.}
   s.test_files = [
-    "examples/hello_world/hello_world.rb",
+    "examples/steering_behaviors/steering.rb",
+     "examples/hello_world/hello_world.rb",
      "examples/mouse_pointer/mouse_pointer.rb"
   ]
 
