@@ -36,7 +36,7 @@ module Lotu
       load_resources(@songs, /\.ogg|\.mp3|\.wav/, path, Gosu::Song)
     end
 
-    def with_path(path, &blk)
+    def with_path_from_file(path, &blk)
       @path = File.expand_path(File.dirname path)
       yield
     end

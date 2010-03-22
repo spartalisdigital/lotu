@@ -21,7 +21,7 @@ class Example < Lotu::Window
     set_keys(KbEscape => :close,
              MsRight => :reset_ruby)
 
-    with_path __FILE__ do
+    with_path_from_file(__FILE__) do
       load_images '../media'
     end
 

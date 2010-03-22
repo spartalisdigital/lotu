@@ -185,7 +185,18 @@ module Lotu
       end
 
       def distance_to_target
-        @target && (@target - @pos).length
+        (@target - @pos).length
+      end
+
+      def facing_target?
+        @heading.facing_to?(@target - @pos)
+      end
+
+      def draw
+        super
+        $window.draw_line(0, 0, 0xff999999, @pos.x, @pos.y, 0xff333333)
+        $window.draw_line(@pos.x, @pos.y, 0xffffffff, (@pos + @heading*50).x, (@pos+@heading*50).y, 0xffff0000)
+        $window.draw_line(@pos.x, @pos.y, 0xffffffff, @target.x, @target.y, 0xff00ff00) if @target
       end
 
       # to_s utility methods
@@ -195,7 +206,9 @@ module Lotu
          "@heading(#{@heading})",
          "@vel |#{format('%.2f', @vel.length)}| (#{@vel})",
          "@accel |#{format('%.2f', @accel.length)}| (#{@accel})",
-         "@seek_target(#{@seek_target})"]
+         "facing_target? #{facing_target? if @target}",
+         "angle_to(@target) #{format('%.2f', @heading.angle_to(@target - @pos)) if @target}",
+         "@seek_target(#{@target})"]
       end
 
     end

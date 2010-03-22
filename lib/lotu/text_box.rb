@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 module Lotu
   class TextBox < Actor
 
@@ -7,6 +8,8 @@ module Lotu
       }
       opts = default_opts.merge!(opts)
       super(opts)
+      #TODO puede especificar a quién watchear y sus opciones de
+      #dibujado en los parámetros
       @watch_list = []
       @subject_opts = {}
       @font_size = opts[:font_size]

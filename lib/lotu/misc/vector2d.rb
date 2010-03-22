@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 module Lotu
   class Vector2d
     attr_reader :x, :y
@@ -108,15 +109,30 @@ module Lotu
       Gosu.angle_diff(angle, v.angle)
     end
 
-    def sign_to(v)
-      if @y * v.x > @x * v.y
+    def sign_to(vector)
+      if @y * vector.x > @x * vector.y
         return -1
       else
         return 1
       end
     end
 
+    def clockwise?(vector)
+      sign_to(vector) == 1
+    end
+
+    def counter_clockwise?(vector)
+      !clockwise?
+    end
+
+    def facing_to?(vector)
+      dot(vector) > 0
+    end
+
     def to_s
+      # TODO tratar de reducir la cantidad de vectores creados, al
+      # menos cuando no se está moviendo
+      #format('%d %.2f, %.2f', object_id, @x, @y)
       format('%.2f, %.2f', @x, @y)
     end
 
