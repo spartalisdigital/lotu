@@ -43,6 +43,8 @@ class Example < Lotu::Window
     end
 
     @ruby = MovingRuby.new(:x => width/2, :y => height/2)
+    @info = Lotu::TextBox.new
+    @info.text("Move around with arrow keys")
   end
 
 end

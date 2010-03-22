@@ -39,11 +39,13 @@ class Example < Lotu::Window
       @ruby2.evader = @ruby
     end
 
-    @window_info = Lotu::TextBox.new
-    @window_info.watch(@fps_counter)
+    @window_info = Lotu::TextBox.new(:font_size => 15)
+    @window_info.watch(@fps_counter, :font_size => 20)
     @window_info.watch(@cursor, :color => 0xffff0000)
+    @window_info.text("Click to start the simulation")
+    @window_info.text("One will pursuit while the other evades, right click to center evader on screen")
 
-    @ruby_info = Lotu::TextBox.new(:attach_to => @ruby, :font_size => 16)
+    @ruby_info = Lotu::TextBox.new(:attach_to => @ruby, :font_size => 14)
     @ruby_info.watch(@ruby)
   end
 

@@ -53,6 +53,8 @@ class Example < Lotu::Window
     @info.watch(@cursor1, :color => 0xff0099ff, :font_size => 15)
     @info.watch("@cursor2 data:")
     @info.watch(@cursor2, :color => 0xff99ff00, :font_size => 15)
+    @info.text("")
+    @info.text("Move @cursor1 with mouse and @cursor2 with arrow keys (click with space!)", :font_size => 15)
   end
 
 end

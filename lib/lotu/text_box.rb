@@ -19,6 +19,10 @@ module Lotu
       draw_me
     end
 
+    def text(text, opts={})
+      watch(text, opts)
+    end
+
     def watch(subject, opts={})
       @watch_list << subject
       @subject_opts[subject] = opts
