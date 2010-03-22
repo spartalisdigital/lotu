@@ -5,13 +5,11 @@ module Lotu
     def initialize(opts={})
       default_opts = {
         :x => 0,
-        :y => 0,
-        :color => 0xffffffff
+        :y => 0
       }
-      opts = default_opts.merge!(opts)
-      @x = opts[:x]
-      @y = opts[:y]
-      @color = opts[:color]
+      @opts = default_opts.merge!(opts)
+      @x = @opts[:x]
+      @y = @opts[:y]
       @parent = $window
       @parent.update_queue << self
 

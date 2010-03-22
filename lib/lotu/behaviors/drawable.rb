@@ -7,17 +7,31 @@ module Lotu
 
     def init_behavior
       class << self
-        attr_accessor :angle
+        attr_accessor :z, :angle, :center_x, :center_y,
+        :factor_x, :factor_y, :color, :mode
       end
 
+      default_opts = {
+        :z => 0,
+        :angle => 0.0,
+        :center_x => 0.5,
+        :center_y => 0.5,
+        :factor_x => 1.0,
+        :factor_y => 1.0,
+        :color => 0xffffffff,
+        :mode => :default
+      }
+      @opts = default_opts.merge!(@opts)
+
       @image = nil
-      @z = 0
-      @angle = 0.0
-      @center_x = 0.5
-      @center_y = 0.5
-      @factor_x = 1.0
-      @factor_y = 1.0
-      @mode = :default
+      @z = @opts[:z]
+      @angle = @opts[:angle]
+      @center_x = @opts[:center_x]
+      @center_y = @opts[:center_y]
+      @factor_x = @opts[:factor_x]
+      @factor_y = @opts[:factor_y]
+      @color = @opts[:color]
+      @mode = @opts[:mode]
     end
 
     def draw_me

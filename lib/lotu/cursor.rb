@@ -7,10 +7,14 @@ module Lotu
     def initialize(opts={})
       default_opts = {
         :use_mouse => true,
-        :speed => 100
+        :speed => 100,
+        :x => $window.width/2,
+        :y => $window.height/2
       }
       opts = default_opts.merge!(opts)
       super
+      $window.mouse_x = opts[:x]
+      $window.mouse_y = opts[:y]
       @clicked_x = @clicked_y = 0
       @speed = opts[:speed]
       @use_mouse = opts[:use_mouse]
@@ -61,7 +65,8 @@ module Lotu
     end
 
     def to_s
-      "@pos(#{format('%.2f, %.2f', @x, @y)}) @clicked(#{format('%.2f, %.2f', @clicked_x, @clicked_y)})"
+      ["@pos(#{format('%.2f, %.2f', @x, @y)})",
+       "@clicked(#{format('%.2f, %.2f', @clicked_x, @clicked_y)})"]
     end
 
   end

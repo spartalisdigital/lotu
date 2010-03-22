@@ -4,7 +4,7 @@ require File.expand_path(LIB_PATH)
 include Gosu::Button
 
 class WarpingRuby < Lotu::Actor
-  def initialize
+  def initialize(opts={})
     super
     set_image 'CptnRuby Gem.png'
   end
@@ -23,7 +23,7 @@ class Example < Lotu::Window
       load_images '../media'
     end
 
-    @ruby = WarpingRuby.new
+    @ruby = WarpingRuby.new(:x => width/2, :y => height/2)
     @cursor1 = Lotu::Cursor.new(:image => 'crosshair.png',
                                 :keys => {MsLeft => [:click, false]},
                                 :color => 0xff0099ff)

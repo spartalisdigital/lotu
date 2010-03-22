@@ -30,6 +30,8 @@ module Lotu
       @behaviors = {}
       @force = Vector2d.new
       @zero = Vector2d.new
+      actor.pos.x = actor.x
+      actor.pos.y = actor.y
     end
 
     def update
@@ -180,6 +182,10 @@ module Lotu
 
       def activate(behavior)
         @systems[Steering].activate(behavior)
+      end
+
+      def distance_to_target
+        @target && (@target - @pos).length
       end
 
       # to_s utility methods
