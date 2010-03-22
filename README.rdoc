@@ -37,14 +37,22 @@ If you have any questions of suggestions don't hesitate and send me a message!
 * Pathfinding and more AI stuff
 
 
-== Other frameworks
-I saw another framework around called *Chingu*, It's been around for a little while and I recommend you take a look at it:
-http://github.com/ippa/chingu
+== Game frameworks
+Here are some other Gosu based frameworks:
+* [Chingu] (http://github.com/ippa/chingu)
+* [Exuberant] (http://github.com/adamsanderson/lexery/tree/master/lib/exuberant)
+* [FWD] (http://github.com/walski/FWD)
+* [Nimo] (http://github.com/moonpxi/nimo)
+* [PuitUniverse] (http://github.com/oneup/puituniverse)
+* [Ramverk] (http://github.com/deps/Ramverk)
+* [Space Shooter Engine] (http://github.com/belen-albeza/space-shooter/tree/master/engine/)
+* [SpriteJam] (http://github.com/richardeden/spritejam)
 
-There is also *gamebox*, it's based on Rubygame though:
-http://github.com/shawn42/gamebox
+There are others not base on Gosu you might like to check out:
+* [gamebox](http://github.com/shawn42/gamebox)
+* [jemini](http://github.com/jemini/jemini-core)
 
-I did find many of the ideas I have for my framework already implemented in it. But be sure I will take inspiration from many others. ;)
+Be sure I will take inspiration from them. ;)
 Nevertheless I'm doing this because I want to become better at architecturing software. And this seems like fitting practice. :D
 
 

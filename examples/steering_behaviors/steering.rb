@@ -35,7 +35,7 @@ class Example < Lotu::Window
     @cursor = Lotu::Cursor.new(:image => 'crosshair.png',
                                :keys => {MsLeft => [:click, false]})
     @cursor.on(:click) do |x,y|
-      @ruby.pursuer = @ruby2#Lotu::Vector2d.new(x, y)
+      @ruby.pursuer = @ruby2
       @ruby2.evader = @ruby
     end
 
