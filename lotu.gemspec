@@ -60,7 +60,8 @@ Gem::Specification.new do |s|
      "lib/lotu/systems/steering.rb",
      "lib/lotu/text_box.rb",
      "lib/lotu/window.rb",
-     "lotu.gemspec"
+     "lotu.gemspec",
+     "test/actor_test.rb"
   ]
   s.homepage = %q{http://github.com/lobo-tuerto/lotu}
   s.rdoc_options = ["--charset=UTF-8"]
@@ -68,7 +69,8 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.6}
   s.summary = %q{A simple, agile Ruby game development framework.}
   s.test_files = [
-    "examples/steering_behaviors/steering.rb",
+    "test/actor_test.rb",
+     "examples/steering_behaviors/steering.rb",
      "examples/hello_world/hello_world.rb",
      "examples/mouse_pointer/mouse_pointer.rb"
   ]
