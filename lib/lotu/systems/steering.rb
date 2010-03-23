@@ -3,9 +3,9 @@ module Lotu
   class Steering
     attr_reader :force
 
-    def initialize(actor, opts={})
+    def initialize(user, opts={})
       # Add new functionality to Actor
-      actor.extend ActorMethods
+      user.extend UserMethods
 
       # Initialize attributes
       default_opts = {
@@ -18,20 +18,20 @@ module Lotu
       }
       opts = default_opts.merge!(opts)
 
-      actor.mass = opts[:mass]
-      actor.max_speed = opts[:max_speed]
-      actor.max_turn_rate = opts[:max_turn_rate]
-      actor.max_force = opts[:max_force]
-      actor.wander_radius = opts[:wander_radius]
-      actor.wander_distance = opts[:wander_distance]
+      user.mass = opts[:mass]
+      user.max_speed = opts[:max_speed]
+      user.max_turn_rate = opts[:max_turn_rate]
+      user.max_force = opts[:max_force]
+      user.wander_radius = opts[:wander_radius]
+      user.wander_distance = opts[:wander_distance]
 
       # More attributes
-      @actor = actor
+      @user = user
       @behaviors = {}
       @force = Vector2d.new
       @zero = Vector2d.new
-      actor.pos.x = actor.x
-      actor.pos.y = actor.y
+      user.pos.x = user.x
+      user.pos.y = user.y
     end
 
     def update
@@ -40,32 +40,32 @@ module Lotu
         @force += send(behavior) if active
       end
 
-      @actor.accel = @force / @actor.mass
-      @actor.accel.truncate!(@actor.max_force)
+      @user.accel = @force / @user.mass
+      @user.accel.truncate!(@user.max_force)
 
-      max_angle = @actor.max_turn_rate * @actor.dt
-      new_velocity = @actor.vel + @actor.accel * @actor.dt
-      angle_to_new_velocity = @actor.heading.angle_to(new_velocity)
+      max_angle = @user.max_turn_rate * @user.dt
+      new_velocity = @user.vel + @user.accel * @user.dt
+      angle_to_new_velocity = @user.heading.angle_to(new_velocity)
 
       if angle_to_new_velocity.abs > max_angle
-        sign = @actor.heading.sign_to(new_velocity)
-        corrected_angle = @actor.heading.angle + max_angle * sign
-        @actor.vel.x = Gosu.offset_x(corrected_angle, new_velocity.length)
-        @actor.vel.y = Gosu.offset_y(corrected_angle, new_velocity.length)
+        sign = @user.heading.sign_to(new_velocity)
+        corrected_angle = @user.heading.angle + max_angle * sign
+        @user.vel.x = Gosu.offset_x(corrected_angle, new_velocity.length)
+        @user.vel.y = Gosu.offset_y(corrected_angle, new_velocity.length)
       else
-        @actor.vel = new_velocity
+        @user.vel = new_velocity
       end
 
-      @actor.vel.truncate!(@actor.max_speed)
-      @actor.pos += @actor.vel * @actor.dt
+      @user.vel.truncate!(@user.max_speed)
+      @user.pos += @user.vel * @user.dt
 
-      if @actor.vel.length > 0.0001
-        @actor.heading = @actor.vel.normalize
+      if @user.vel.length > 0.0001
+        @user.heading = @user.vel.normalize
       end
 
-      @actor.x = @actor.pos.x
-      @actor.y = @actor.pos.y
-      @actor.angle = @actor.heading.angle
+      @user.x = @user.pos.x
+      @user.y = @user.pos.y
+      @user.angle = @user.heading.angle
     end
 
     def activate(behavior)
@@ -78,61 +78,61 @@ module Lotu
 
     # The steering behaviors themselves
     def seek
-      return @zero if @actor.target.nil?
-      desired_velocity = (@actor.target - @actor.pos).normalize * @actor.max_speed
-      return desired_velocity - @actor.vel
+      return @zero if @user.target.nil?
+      desired_velocity = (@user.target - @user.pos).normalize * @user.max_speed
+      return desired_velocity - @user.vel
     end
 
     def flee
-      return @zero if @actor.target.nil?
-      desired_velocity = (@actor.pos - @actor.target).normalize * @actor.max_speed
-      return desired_velocity - @actor.vel
+      return @zero if @user.target.nil?
+      desired_velocity = (@user.pos - @user.target).normalize * @user.max_speed
+      return desired_velocity - @user.vel
     end
 
     def arrive(deceleration = :normal)
-      return @zero if @actor.target.nil?
+      return @zero if @user.target.nil?
       deceleration_values = {
         :fast => 0.5,
         :normal => 1,
         :slow => 2
       }
       deceleration_tweaker = 1.0
-      to_target = @actor.target - @actor.pos
+      to_target = @user.target - @user.pos
       distance_to_target = to_target.length
 
       if distance_to_target > 10
         speed = distance_to_target / (deceleration_tweaker * deceleration_values[deceleration])
-        speed = [speed, @actor.max_speed].min
+        speed = [speed, @user.max_speed].min
         desired_velocity = to_target * speed / distance_to_target
-        return desired_velocity - @actor.vel
+        return desired_velocity - @user.vel
       else
-        @actor.vel /= 1.15
-        @actor.accel /= 1.15
+        @user.vel /= 1.15
+        @user.accel /= 1.15
       end
       return @zero
     end
 
     def pursuit
-      return @zero if @actor.evader.nil?
-      to_evader = @actor.evader.pos - @actor.pos
-      relative_heading = @actor.heading.dot(@actor.evader.heading)
-      if to_evader.dot(@actor.heading) > 0 && relative_heading < -0.95
-        @actor.target = @actor.evader.pos
+      return @zero if @user.evader.nil?
+      to_evader = @user.evader.pos - @user.pos
+      relative_heading = @user.heading.dot(@user.evader.heading)
+      if to_evader.dot(@user.heading) > 0 && relative_heading < -0.95
+        @user.target = @user.evader.pos
         return seek
       end
 
-      look_ahead_time = to_evader.length / (@actor.max_speed + @actor.evader.vel.length)
-      predicted_position = @actor.evader.pos + @actor.evader.vel * look_ahead_time
-      @actor.target = predicted_position
+      look_ahead_time = to_evader.length / (@user.max_speed + @user.evader.vel.length)
+      predicted_position = @user.evader.pos + @user.evader.vel * look_ahead_time
+      @user.target = predicted_position
       return seek
     end
 
     def evade
-      return @zero if @actor.pursuer.nil?
-      to_pursuer = @actor.pursuer.pos - @actor.pos
-      look_ahead_time = to_pursuer.length / (@actor.max_speed + @actor.pursuer.vel.length)
-      predicted_position = @actor.pursuer.pos + @actor.pursuer.vel * look_ahead_time
-      @actor.target = @actor.pursuer.pos
+      return @zero if @user.pursuer.nil?
+      to_pursuer = @user.pursuer.pos - @user.pos
+      look_ahead_time = to_pursuer.length / (@user.max_speed + @user.pursuer.vel.length)
+      predicted_position = @user.pursuer.pos + @user.pursuer.vel * look_ahead_time
+      @user.target = @user.pursuer.pos
       return flee
     end
 
@@ -140,12 +140,12 @@ module Lotu
     def wander
       wander_jitter = 10
 
-      @actor.wander_target += Vector2d.new(Gosu.random(-1,1), Gosu.random(-1,1))
-      @actor.wander_target.normalize!
-      @actor.wander_target *= @actor.wander_radius
-      target_local = @actor.wander_target + Vector2d.new(0, @actor.wander_distance)
-      target_world = local_to_world(target_local, @actor.heading, @actor.heading.perp, @actor.pos)
-      return target_world - @actor.pos
+      @user.wander_target += Vector2d.new(Gosu.random(-1,1), Gosu.random(-1,1))
+      @user.wander_target.normalize!
+      @user.wander_target *= @user.wander_radius
+      target_local = @user.wander_target + Vector2d.new(0, @user.wander_distance)
+      target_world = local_to_world(target_local, @user.heading, @user.heading.perp, @user.pos)
+      return target_world - @user.pos
     end
 
     def local_to_world(local_target, heading, side, pos)
@@ -155,14 +155,14 @@ module Lotu
       world_point = Vector2d.new(x, y) + pos
     end
 
-    module ActorMethods
+    module UserMethods
 
       def self.extended(instance)
         instance.steering_setup
       end
 
       def steering_setup
-        # Create accessors for the actor
+        # Create accessors for the user
         class << self
           attr_accessor :mass, :pos, :heading, :vel, :accel,
           :max_speed, :max_turn_rate, :max_force,
