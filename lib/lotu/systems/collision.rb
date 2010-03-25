@@ -40,6 +40,8 @@ module Lotu
         end
       end
 
+      def draw;end
+
     end
 
   end

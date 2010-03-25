@@ -25,15 +25,21 @@ module Lotu
     end
 
     def load_images(path)
-      load_resources(@images, /\.png|\.jpg|\.bmp/, path, Gosu::Image)
+      with_files(/\.png|\.jpg|\.bmp/, path) do |file_name, file_path|
+        @images[file_name] = Gosu::Image.new($window, file_path)
+      end
     end
 
     def load_sounds(path)
-      load_resources(@sounds, /\.ogg|\.mp3|\.wav/, path, Gosu::Sample)
+      with_files(/\.ogg|\.mp3|\.wav/, path) do |file_name, file_path|
+        @sounds[file_name] = Gosu::Sample.new($window, file_path)
+      end
     end
 
     def load_songs(path)
-      load_resources(@songs, /\.ogg|\.mp3|\.wav/, path, Gosu::Song)
+      with_files(/\.ogg|\.mp3|\.wav/, path) do |file_name, file_path|
+        @songs[file_name] = Gosu::Song.new($window, file_path)
+      end
     end
 
     def with_path_from_file(path, &blk)
@@ -41,20 +47,20 @@ module Lotu
       yield
     end
 
-    def load_resources(container, regexp, path, klass)
+    def with_files(regexp, path)
       path = File.expand_path(File.join(@path, path))
       puts "Loading from: #{path}"
 
       count = 0
       Dir.entries(path).grep(regexp).each do |entry|
         begin
-          container[entry] = klass.new($window, File.join(path, entry))
+          yield(entry, File.join(path, entry))
           count += 1
         rescue Exception => e
           puts e, File.join(path, entry)
         end
       end
-      puts "#{count} #{klass} files loaded."
+      puts "#{count} files loaded."
     end
 
   end
