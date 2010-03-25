@@ -5,9 +5,6 @@ module Lotu
     # Accessors for queues
     attr_accessor :update_queue, :draw_queue, :input_listeners
 
-    include ActorManager
-    #include InputManager
-
     def initialize(params={})
       super(800, 600, false)
 
@@ -71,6 +68,17 @@ module Lotu
       @draw_queue.each do |actor|
         actor.draw
       end
+    end
+
+    # For actor management
+    def manage_me(actor)
+      @draw_queue << actor
+      @update_queue << actor
+    end
+
+    def kill_me(actor)
+      @draw_queue.delete(actor)
+      @update_queue.delete(actor)
     end
 
     # These are for managing input

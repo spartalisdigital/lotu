@@ -55,6 +55,7 @@ Gem::Specification.new do |s|
      "lib/lotu/behaviors/resourceful.rb",
      "lib/lotu/cursor.rb",
      "lib/lotu/misc/fps.rb",
+     "lib/lotu/misc/string.rb",
      "lib/lotu/misc/vector2d.rb",
      "lib/lotu/systems/collision.rb",
      "lib/lotu/systems/steering.rb",
