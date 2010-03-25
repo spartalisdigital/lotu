@@ -11,7 +11,7 @@ module Lotu
 
     def collides_as(tag)
       @collision_tag = tag
-      @parent.systems[:collision].add_entity(self, tag)
+      @parent.systems[CollisionSystem].add_entity(self, tag)
     end
 
     def collides_with(other)
@@ -20,7 +20,7 @@ module Lotu
 
     def die
       super
-      @parent.systems[:collision].remove_entity(self, @collision_tag)
+      @parent.systems[CollisionSystem].remove_entity(self, @collision_tag)
     end
 
   end

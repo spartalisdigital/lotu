@@ -52,7 +52,6 @@ Gem::Specification.new do |s|
      "lib/lotu/behaviors/controllable/input_controller.rb",
      "lib/lotu/behaviors/drawable.rb",
      "lib/lotu/behaviors/eventful.rb",
-     "lib/lotu/behaviors/resourceful.rb",
      "lib/lotu/cursor.rb",
      "lib/lotu/misc/fps.rb",
      "lib/lotu/misc/string.rb",

@@ -5,6 +5,8 @@ module Lotu
     # Accessors for queues
     attr_accessor :update_queue, :draw_queue, :input_listeners
 
+    include SystemUser
+
     def initialize(params={})
       super(800, 600, false)
 
@@ -19,7 +21,6 @@ module Lotu
 
       # Add extra functionality
       extend Controllable
-      extend Systems::Collision
     end
 
     # Setup various containers
@@ -172,7 +173,7 @@ module Lotu
           puts e, File.join(path, entry) if @debug
         end
       end
-      puts "\n#{count} files loaded."
+      puts "\n#{count} file(s) loaded."
     end
 
   end

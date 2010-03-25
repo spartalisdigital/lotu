@@ -32,10 +32,6 @@ module Lotu
       @parent.update_queue.delete(self)
     end
 
-    def activate_system(klass, opts={})
-      @systems[klass] = klass.new(self, opts)
-    end
-
     def update
       @systems.each_pair do |klass, system|
         system.update
