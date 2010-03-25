@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 module Lotu
   class SteeringSystem
-    attr_reader :force
 
     def initialize(user, opts={})
       # Add new functionality to Actor

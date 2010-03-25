@@ -33,6 +33,7 @@ class Example < Lotu::Window
 
   def setup_systems
     use(Lotu::FpsSystem)
+    use(Lotu::StalkerSystem, :stalk => [Lotu::Actor, Lotu::InputController, Object])
   end
 
   def setup_actors
@@ -52,14 +53,17 @@ class Example < Lotu::Window
     @cursor2.x = width*3/4
     @cursor2.y = height/2
 
-    @info = Lotu::TextBox.new
+    # Create a TextBox with default option :size => 15
+    @info = Lotu::TextBox.new(:size => 15)
     @info.watch(@systems[Lotu::FpsSystem])
-    @info.watch("@cursor1 data:")
-    @info.watch(@cursor1, :color => 0xff0099ff, :size => 15)
-    @info.watch("@cursor2 data:")
-    @info.watch(@cursor2, :color => 0xff99ff00, :size => 15)
-    @info.text("")
-    @info.text("Move @cursor1 with mouse and @cursor2 with arrow keys (click with space!)", :size => 15)
+    @info.watch(@systems[Lotu::StalkerSystem])
+    # We can change the size for a specific line of text
+    @info.watch("@cursor1 data:", :size => 20)
+    # Color too
+    @info.watch(@cursor1, :color => 0xff0099ff)
+    @info.watch("@cursor2 data:", :size => 20)
+    @info.watch(@cursor2, :color => 0xff99ff00)
+    @info.text("Move @cursor1 with mouse and @cursor2 with arrow keys (click with space!)")
   end
 
   def setup_input

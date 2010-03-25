@@ -3,7 +3,6 @@ module Lotu
 
     def initialize(user, opts={})
       user.extend UserMethods
-
       @entities = Hash.new{ |h,k| h[k] = [] }
       @actions = {}
     end

@@ -7,13 +7,16 @@ class MovingRuby < Lotu::Actor
 
   def initialize(opts={})
     super
+    # Use the image which filename is CptnRuby Gem.png
     set_image 'CptnRuby Gem.png'
+    # Map keys to some methods
     set_keys(KbRight => :move_right,
              KbLeft => :move_left,
              KbUp => :move_up,
              KbDown => :move_down)
   end
 
+  # Let's define some basic movement methods
   def move_right
     @x += 1
   end
@@ -44,13 +47,16 @@ class Example < Lotu::Window
   end
 
   def load_resources
+    # From this file,
     with_path_from_file(__FILE__) do
-      load_images '../media'
+      # go back one dir and search inside media/
+      load_images '../media/'
     end
   end
 
   def setup_actors
     @ruby = MovingRuby.new(:x => width/2, :y => height/2)
+    # Create a TextBox so we can display a message on screen
     @info = Lotu::TextBox.new
     @info.text("Move around with arrow keys")
   end
