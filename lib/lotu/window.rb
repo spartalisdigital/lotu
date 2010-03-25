@@ -15,7 +15,6 @@ module Lotu
       @debug = true
       setup_containers
 
-      @fps_counter = FpsCounter.new
       @last_time = Gosu::milliseconds
       @fonts = Hash.new{|h,k| h[k] = Gosu::Font.new(self, Gosu::default_font_name, k)}
 
@@ -45,7 +44,6 @@ module Lotu
       new_time = Gosu::milliseconds
       @dt = (new_time - @last_time)/1000.0
       @last_time = new_time
-      @fps_counter.update(@dt)
 
       # Update each system
       @systems.each_value do |system|
