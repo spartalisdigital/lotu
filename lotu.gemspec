@@ -58,6 +58,7 @@ Gem::Specification.new do |s|
      "lib/lotu/misc/vector2d.rb",
      "lib/lotu/systems/collision_system.rb",
      "lib/lotu/systems/fps_system.rb",
+     "lib/lotu/systems/stalker_system.rb",
      "lib/lotu/systems/steering_system.rb",
      "lib/lotu/text_box.rb",
      "lib/lotu/window.rb",
