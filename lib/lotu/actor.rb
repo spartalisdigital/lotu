@@ -2,6 +2,8 @@ module Lotu
   class Actor
     attr_accessor :parent, :x, :y, :systems
 
+    include SystemUser
+
     def initialize(opts={})
       default_opts = {
         :x => 0,
