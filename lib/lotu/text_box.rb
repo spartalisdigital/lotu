@@ -4,15 +4,14 @@ module Lotu
 
     def initialize(opts={})
       default_opts = {
-        :font_size => 20
+        :size => 20
       }
       opts = default_opts.merge!(opts)
       super(opts)
       #TODO puede especificar a quién watchear y sus opciones de
       #dibujado en los parámetros
       @watch_list = []
-      @subject_opts = {}
-      @font_size = opts[:font_size]
+      @size = opts[:size]
       @attached_to = opts[:attach_to]
       # Since we aren't setting an image for this, we need to specify
       # this actor needs to be drawed
@@ -24,8 +23,7 @@ module Lotu
     end
 
     def watch(subject, opts={})
-      @watch_list << subject
-      @subject_opts[subject] = opts
+      @watch_list << [subject, opts]
     end
 
     def attach_to(actor)
@@ -41,17 +39,17 @@ module Lotu
 
     def draw
       pos_y = 0
-      @watch_list.each do |watched|
-        my_font_size = @subject_opts[watched][:font_size] || @font_size
-        my_color = @subject_opts[watched][:color] || @color
+      @watch_list.each do |watched, opts|
+        my_size = opts[:size] || @size
+        my_color = opts[:color] || @color
         my_text = watched.to_s
         if my_text.is_a?(String)
-          $window.fonts[my_font_size].draw(my_text, @x, @y + pos_y, @z, @factor_x, @factor_y, my_color)
-          pos_y += my_font_size
+          $window.fonts[my_size].draw(my_text, @x, @y + pos_y, @z, @factor_x, @factor_y, my_color)
+          pos_y += my_size
         else
           my_text.each do |line|
-            $window.fonts[my_font_size].draw(line, @x, @y + pos_y, @z, @factor_x, @factor_y, my_color)
-            pos_y += my_font_size
+            $window.fonts[my_size].draw(line, @x, @y + pos_y, @z, @factor_x, @factor_y, my_color)
+            pos_y += my_size
           end
         end
       end

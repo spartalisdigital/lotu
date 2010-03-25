@@ -2,6 +2,8 @@ module Lotu
   class Actor
     attr_accessor :parent, :x, :y, :systems
 
+    include SystemUser
+
     def initialize(opts={})
       default_opts = {
         :x => 0,
@@ -30,10 +32,6 @@ module Lotu
     # Remove ourselves from the update queue
     def die
       @parent.update_queue.delete(self)
-    end
-
-    def activate_system(klass, opts={})
-      @systems[klass] = klass.new(self, opts)
     end
 
     def update

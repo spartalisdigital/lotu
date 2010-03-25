@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 module Lotu
-  class Steering
-    attr_reader :force
+  class SteeringSystem
 
     def initialize(user, opts={})
       # Add new functionality to Actor
@@ -181,7 +180,7 @@ module Lotu
       end
 
       def activate(behavior)
-        @systems[Steering].activate(behavior)
+        @systems[SteeringSystem].activate(behavior)
       end
 
       def distance_to_target

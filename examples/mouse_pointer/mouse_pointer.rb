@@ -16,13 +16,27 @@ end
 
 class Example < Lotu::Window
   def initialize
+    # This will call the hooks:
+    # load_resources, setup_systems and setup_actors
+    # declared in the parent class
     super
-    set_keys KbEscape => :close
+    # Custom setup methods for this class
+    setup_input
+    setup_events
+  end
 
+  def load_resources
     with_path_from_file(__FILE__) do
       load_images '../media'
     end
+  end
 
+  def setup_systems
+    use(Lotu::FpsSystem)
+    use(Lotu::StalkerSystem, :stalk => [Lotu::Actor, Lotu::InputController, Object])
+  end
+
+  def setup_actors
     @ruby = WarpingRuby.new(:x => width/2, :y => height/2)
     @cursor1 = Lotu::Cursor.new(:image => 'crosshair.png',
                                 :keys => {MsLeft => [:click, false]},
@@ -36,25 +50,33 @@ class Example < Lotu::Window
                                   KbLeft => :left,
                                   KbRight => :right},
                                 :color => 0xff99ff00)
+    @cursor2.x = width*3/4
+    @cursor2.y = height/2
 
+    # Create a TextBox with default option :size => 15
+    @info = Lotu::TextBox.new(:size => 15)
+    @info.watch(@systems[Lotu::FpsSystem])
+    @info.watch(@systems[Lotu::StalkerSystem])
+    # We can change the size for a specific line of text
+    @info.watch("@cursor1 data:", :size => 20)
+    # Color too
+    @info.watch(@cursor1, :color => 0xff0099ff)
+    @info.watch("@cursor2 data:", :size => 20)
+    @info.watch(@cursor2, :color => 0xff99ff00)
+    @info.text("Move @cursor1 with mouse and @cursor2 with arrow keys (click with space!)")
+  end
+
+  def setup_input
+    set_keys KbEscape => :close
+  end
+
+  def setup_events
     @cursor1.on(:click) do |x,y|
       @ruby.warp(x,y)
     end
     @cursor2.on(:click) do |x,y|
       @ruby.warp(x,y)
     end
-
-    @cursor2.x = width*3/4
-    @cursor2.y = height/2
-
-    @info = Lotu::TextBox.new
-    @info.watch(@fps_counter)
-    @info.watch("@cursor1 data:")
-    @info.watch(@cursor1, :color => 0xff0099ff, :font_size => 15)
-    @info.watch("@cursor2 data:")
-    @info.watch(@cursor2, :color => 0xff99ff00, :font_size => 15)
-    @info.text("")
-    @info.text("Move @cursor1 with mouse and @cursor2 with arrow keys (click with space!)", :font_size => 15)
   end
 
 end
