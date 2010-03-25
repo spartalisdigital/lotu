@@ -17,21 +17,13 @@ end
 
 class Example < Lotu::Window
   def initialize
+    # This will call the hooks:
+    # load_resources, setup_systems and setup_actors
+    # declared in the parent class
     super
-    load_resources
+    # Custom setup methods for this class
     setup_input
-    setup_systems
-    setup_actors
     setup_events
-
-    @window_info = Lotu::TextBox.new(:size => 15)
-    @window_info.watch(@systems[Lotu::FpsSystem])
-    @window_info.watch(@cursor, :color => 0xffff0000)
-    @window_info.text("Click to start the simulation")
-    @window_info.text("One will pursuit while the other evades, right click to center evader on screen")
-
-    @ruby_info = Lotu::TextBox.new(:attach_to => @ruby, :size => 14)
-    @ruby_info.watch(@ruby)
   end
 
   def load_resources
@@ -59,6 +51,15 @@ class Example < Lotu::Window
 
     @cursor = Lotu::Cursor.new(:image => 'crosshair.png',
                                :keys => {MsLeft => [:click, false]})
+
+    @window_info = Lotu::TextBox.new(:size => 15)
+    @window_info.watch(@systems[Lotu::FpsSystem])
+    @window_info.watch(@cursor, :color => 0xffff0000)
+    @window_info.text("Click to start the simulation")
+    @window_info.text("One will pursuit while the other evades, right click to center evader on screen")
+
+    @ruby_info = Lotu::TextBox.new(:attach_to => @ruby, :size => 14)
+    @ruby_info.watch(@ruby)
   end
 
   def setup_events

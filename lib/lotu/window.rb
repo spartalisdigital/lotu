@@ -15,12 +15,25 @@ module Lotu
       @debug = true
       setup_containers
 
+      # For timer initialization
       @last_time = Gosu::milliseconds
+      # Memoize fonts by size
       @fonts = Hash.new{|h,k| h[k] = Gosu::Font.new(self, Gosu::default_font_name, k)}
 
       # Add extra functionality
       extend Controllable
+
+      # Call hook methods
+      load_resources
+      setup_systems
+      setup_actors
     end
+
+
+    # Hook methods, these are meant to be replaced by subclasses
+    def load_resources;end
+    def setup_systems;end
+    def setup_actors;end
 
     # Setup various containers
     def setup_containers

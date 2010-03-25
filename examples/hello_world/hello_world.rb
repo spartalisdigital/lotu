@@ -35,13 +35,21 @@ end
 class Example < Lotu::Window
 
   def initialize
+    # This will call the hooks:
+    # load_resources, setup_systems and setup_actors
+    # declared in the parent class
     super
+    # When the Escape key is pressed, call the close method on class Example
     set_keys(KbEscape => :close)
+  end
 
+  def load_resources
     with_path_from_file(__FILE__) do
       load_images '../media'
     end
+  end
 
+  def setup_actors
     @ruby = MovingRuby.new(:x => width/2, :y => height/2)
     @info = Lotu::TextBox.new
     @info.text("Move around with arrow keys")
