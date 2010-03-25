@@ -7,7 +7,7 @@ class SteeringRuby < Lotu::Actor
   def initialize(opts={})
     super
     set_image 'CptnRuby Gem.png'
-    activate_system(Lotu::Steering, opts)
+    use(Lotu::SteeringSystem, opts)
   end
 
   def warp(x, y)
