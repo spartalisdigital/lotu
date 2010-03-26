@@ -1,9 +1,11 @@
 #!/usr/bin/env ruby
 LIB_PATH = File.join(File.dirname(__FILE__), '..', '..', 'lib', 'lotu.rb')
 require File.expand_path(LIB_PATH)
-include Gosu::Button
 
-class MovingRuby < Lotu::Actor
+include Gosu::Button
+include Lotu
+
+class MovingRuby < Actor
 
   def initialize(opts={})
     super
@@ -35,7 +37,7 @@ class MovingRuby < Lotu::Actor
 
 end
 
-class Example < Lotu::Window
+class Example < Game
 
   def initialize
     # This will call the hooks:

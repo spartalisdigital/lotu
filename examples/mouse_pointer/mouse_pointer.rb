@@ -1,9 +1,11 @@
 #!/usr/bin/env ruby
 LIB_PATH = File.join(File.dirname(__FILE__), '..', '..', 'lib', 'lotu.rb')
 require File.expand_path(LIB_PATH)
-include Gosu::Button
 
-class WarpingRuby < Lotu::Actor
+include Gosu::Button
+include Lotu
+
+class WarpingRuby < Actor
   def initialize(opts={})
     super
     set_image 'CptnRuby Gem.png'
@@ -14,7 +16,7 @@ class WarpingRuby < Lotu::Actor
   end
 end
 
-class Example < Lotu::Window
+class Example < Game
   def initialize
     # This will call the hooks:
     # load_resources, setup_systems and setup_actors

@@ -1,5 +1,5 @@
 module Lotu
-  class Window < Gosu::Window
+  class Game < Gosu::Window
     # Accessors for time delta, systems and fonts
     attr_reader :dt, :systems, :fonts
     # Accessors for queues

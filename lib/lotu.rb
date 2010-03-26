@@ -5,4 +5,4 @@ require 'gosu'
 %w{vector2d string}.each{|file| require "misc/#{file}"}
 %w{system_user collidable controllable controllable/input_controller eventful}.each{|file| require "behaviors/#{file}"}
 %w{stalker_system fps_system collision_system steering_system}.each{|file| require "systems/#{file}"}
-%w{window actor cursor text_box}.each{|file| require file}
+%w{game actor cursor text_box}.each{|file| require file}
