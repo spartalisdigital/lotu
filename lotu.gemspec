@@ -50,7 +50,6 @@ Gem::Specification.new do |s|
      "lib/lotu/behaviors/collidable.rb",
      "lib/lotu/behaviors/controllable.rb",
      "lib/lotu/behaviors/controllable/input_controller.rb",
-     "lib/lotu/behaviors/drawable.rb",
      "lib/lotu/behaviors/eventful.rb",
      "lib/lotu/behaviors/system_user.rb",
      "lib/lotu/cursor.rb",

@@ -8,13 +8,13 @@ module Lotu
       default_opts = {
         :use_mouse => true,
         :speed => 100,
-        :x => $window.width/2,
-        :y => $window.height/2
+        :x => $lotu.width/2,
+        :y => $lotu.height/2
       }
       opts = default_opts.merge!(opts)
       super
-      $window.mouse_x = opts[:x]
-      $window.mouse_y = opts[:y]
+      $lotu.mouse_x = opts[:x]
+      $lotu.mouse_y = opts[:y]
       @clicked_x = @clicked_y = 0
       @speed = opts[:speed]
       @use_mouse = opts[:use_mouse]
@@ -24,8 +24,8 @@ module Lotu
 
     def update
       if @use_mouse
-        @x = $window.mouse_x
-        @y = $window.mouse_y
+        @x = $lotu.mouse_x
+        @y = $lotu.mouse_y
       end
     end
 
@@ -40,8 +40,8 @@ module Lotu
     end
 
     def adjust_mouse
-      $window.mouse_y = @y
-      $window.mouse_x = @x
+      $lotu.mouse_y = @y
+      $lotu.mouse_x = @x
     end
 
     def up

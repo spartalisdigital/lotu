@@ -18,7 +18,7 @@ module Lotu
       @executed_at = {}
 
       # Register this controller with the main window
-      $window.register_for_input(self)
+      $lotu.register_for_input(self)
     end
 
     # If there are some actions currently going on, dispatch them

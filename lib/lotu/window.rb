@@ -11,7 +11,7 @@ module Lotu
       super(800, 600, false)
 
       # Handy global window variable
-      $window = self
+      $lotu = self
       @debug = true
       setup_containers
 
@@ -132,19 +132,19 @@ module Lotu
 
     def load_images(path)
       with_files(/\.png|\.jpg|\.bmp/, path) do |file_name, file_path|
-        @images[file_name] = Gosu::Image.new($window, file_path)
+        @images[file_name] = Gosu::Image.new($lotu, file_path)
       end
     end
 
     def load_sounds(path)
       with_files(/\.ogg|\.mp3|\.wav/, path) do |file_name, file_path|
-        @sounds[file_name] = Gosu::Sample.new($window, file_path)
+        @sounds[file_name] = Gosu::Sample.new($lotu, file_path)
       end
     end
 
     def load_songs(path)
       with_files(/\.ogg|\.mp3|\.wav/, path) do |file_name, file_path|
-        @songs[file_name] = Gosu::Song.new($window, file_path)
+        @songs[file_name] = Gosu::Song.new($lotu, file_path)
       end
     end
 
@@ -155,7 +155,7 @@ module Lotu
       count = 0
       Dir.entries(path).grep(regexp).each do |entry|
         begin
-          @animations[entry] = klass.new($window, File.join(path, entry))
+          @animations[entry] = klass.new($lotu, File.join(path, entry))
           count += 1
         rescue Exception => e
           puts e, File.join(path, entry)

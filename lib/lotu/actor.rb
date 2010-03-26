@@ -17,7 +17,8 @@ module Lotu
         :factor_x => 1.0,
         :factor_y => 1.0,
         :color => 0xffffffff,
-        :mode => :default
+        :mode => :default,
+        :parent => $lotu
       }
       @opts = default_opts.merge!(opts)
       @image = nil
@@ -31,21 +32,19 @@ module Lotu
       @factor_y = @opts[:factor_y]
       @color = @opts[:color]
       @mode = @opts[:mode]
-
-      @parent = $window
+      @parent = @opts[:parent]
+      @parent.manage_me(self)
+      @systems = {}
 
       # Add extra functionality
       self.extend Controllable
       self.extend Eventful
       self.extend Collidable
-
-      @systems = {}
-      @parent.manage_me(self)
     end
 
     # Easy access to delta-time
     def dt
-      $window.dt
+      $lotu.dt
     end
 
     def set_image(image)

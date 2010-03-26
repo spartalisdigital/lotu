@@ -193,9 +193,9 @@ module Lotu
 
       def draw
         super
-        $window.draw_line(0, 0, 0xff999999, @pos.x, @pos.y, 0xff333333)
-        $window.draw_line(@pos.x, @pos.y, 0xffffffff, (@pos + @heading*50).x, (@pos+@heading*50).y, 0xffff0000)
-        $window.draw_line(@pos.x, @pos.y, 0xffffffff, @target.x, @target.y, 0xff00ff00) if @target
+        $lotu.draw_line(0, 0, 0xff999999, @pos.x, @pos.y, 0xff333333)
+        $lotu.draw_line(@pos.x, @pos.y, 0xffffffff, (@pos + @heading*50).x, (@pos+@heading*50).y, 0xffff0000)
+        $lotu.draw_line(@pos.x, @pos.y, 0xffffffff, @target.x, @target.y, 0xff00ff00) if @target
       end
 
       # to_s utility methods

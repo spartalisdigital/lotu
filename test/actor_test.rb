@@ -12,7 +12,7 @@ Protest.report_with(:documentation)
  
 Protest.context('An Actor') do
   setup do
-    $window = Lotu::Window.new
+    $lotu = Lotu::Window.new
     @actor = Lotu::Actor.new
   end
  
@@ -32,14 +32,14 @@ Protest.context('An Actor') do
   end
   
   it 'has a window reference.' do
-    assert_equal $window, @actor.parent
+    assert_equal $lotu, @actor.parent
   end
  
   # some context...
   #
   context 'when dying' do
     it 'removes itself from Window update_queue.' do
-      mock.proxy($window.update_queue).delete(@actor)
+      mock.proxy($lotu.update_queue).delete(@actor)
       @actor.die
     end
   end

@@ -14,7 +14,7 @@ module Lotu
 
     def update
       @ticks += 1
-      @accum += $window.dt
+      @accum += $lotu.dt
       if @ticks >= @samples
         @fps = @ticks/@accum
         @ticks = 0

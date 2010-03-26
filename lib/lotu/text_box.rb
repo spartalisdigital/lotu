@@ -41,11 +41,11 @@ module Lotu
         my_color = opts[:color] || @color
         my_text = watched.to_s
         if my_text.is_a?(String)
-          $window.fonts[my_size].draw(my_text, @x, @y + pos_y, @z, @factor_x, @factor_y, my_color)
+          $lotu.fonts[my_size].draw(my_text, @x, @y + pos_y, @z, @factor_x, @factor_y, my_color)
           pos_y += my_size
         else
           my_text.each do |line|
-            $window.fonts[my_size].draw(line, @x, @y + pos_y, @z, @factor_x, @factor_y, my_color)
+            $lotu.fonts[my_size].draw(line, @x, @y + pos_y, @z, @factor_x, @factor_y, my_color)
             pos_y += my_size
           end
         end
