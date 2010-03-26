@@ -34,8 +34,9 @@ class Example < Game
   end
 
   def setup_systems
+    super
     use(FpsSystem)
-    use(StalkerSystem, :stalk => [Actor, InputController, Object])
+    use(StalkerSystem, :stalk => [Actor, Cursor, WarpingRuby, TextBox, Object])
   end
 
   def setup_actors

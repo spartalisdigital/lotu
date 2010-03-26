@@ -40,6 +40,7 @@ class Example < Game
   end
 
   def setup_systems
+    super
     use(FpsSystem)
   end
 

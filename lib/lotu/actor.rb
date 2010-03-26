@@ -5,6 +5,7 @@ module Lotu
     :factor_x, :factor_y, :color, :mode, :image
 
     include SystemUser
+    include Controllable
 
     def initialize(opts={})
       default_opts = {
@@ -37,7 +38,6 @@ module Lotu
       @systems = {}
 
       # Add extra functionality
-      self.extend Controllable
       self.extend Eventful
       self.extend Collidable
     end

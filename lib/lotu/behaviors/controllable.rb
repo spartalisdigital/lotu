@@ -2,14 +2,6 @@
 module Lotu
   module Controllable
 
-    def self.extended(instance)
-      instance.init_behavior
-    end
-
-    def init_behavior
-      @input_controller = nil
-    end
-
     # This will call #go_up every game loop
     # Gosu::Button::KbUp => :go_up
     # This is the same as the above
@@ -21,7 +13,7 @@ module Lotu
     # This will call #go_up every 50ms
     # Gosu::Button::KbUp => [:go_up, 50]
     def set_keys(keys)
-      @input_controller = InputController.new(self, keys)
+      @parent.systems[InputSystem].set_keys(self, keys)
     end
 
   end

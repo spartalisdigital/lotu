@@ -20,9 +20,6 @@ module Lotu
       # Memoize fonts by size
       @fonts = Hash.new{|h,k| h[k] = Gosu::Font.new(self, Gosu::default_font_name, k)}
 
-      # Add extra functionality
-      extend Controllable
-
       # Call hook methods
       load_resources
       setup_systems
@@ -32,8 +29,11 @@ module Lotu
 
     # Hook methods, these are meant to be replaced by subclasses
     def load_resources;end
-    def setup_systems;end
     def setup_actors;end
+
+    def setup_systems
+      use(InputSystem)
+    end
 
     # Setup various containers
     def setup_containers
