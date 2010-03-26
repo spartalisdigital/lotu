@@ -34,31 +34,31 @@ class Example < Game
   end
 
   def setup_systems
-    use(Lotu::FpsSystem)
-    use(Lotu::StalkerSystem, :stalk => [Lotu::Actor, Lotu::InputController, Object])
+    use(FpsSystem)
+    use(StalkerSystem, :stalk => [Actor, InputController, Object])
   end
 
   def setup_actors
     @ruby = WarpingRuby.new(:x => width/2, :y => height/2)
-    @cursor1 = Lotu::Cursor.new(:image => 'crosshair.png',
-                                :keys => {MsLeft => [:click, false]},
-                                :color => 0xff0099ff)
-    @cursor2 = Lotu::Cursor.new(:image => 'crosshair.png',
-                                :use_mouse => false,
-                                :keys => {
-                                  KbSpace => [:click, false],
-                                  KbUp => :up,
-                                  KbDown => :down,
-                                  KbLeft => :left,
-                                  KbRight => :right},
-                                :color => 0xff99ff00)
+    @cursor1 = Cursor.new(:image => 'crosshair.png',
+                          :keys => {MsLeft => [:click, false]},
+                          :color => 0xff0099ff)
+    @cursor2 = Cursor.new(:image => 'crosshair.png',
+                          :use_mouse => false,
+                          :keys => {
+                            KbSpace => [:click, false],
+                            KbUp => :up,
+                            KbDown => :down,
+                            KbLeft => :left,
+                            KbRight => :right},
+                          :color => 0xff99ff00)
     @cursor2.x = width*3/4
     @cursor2.y = height/2
 
     # Create a TextBox with default option :size => 15
-    @info = Lotu::TextBox.new(:size => 15)
-    @info.watch(@systems[Lotu::FpsSystem])
-    @info.watch(@systems[Lotu::StalkerSystem])
+    @info = TextBox.new(:size => 15)
+    @info.watch(@systems[FpsSystem])
+    @info.watch(@systems[StalkerSystem])
     # We can change the size for a specific line of text
     @info.watch("@cursor1 data:", :size => 20)
     # Color too

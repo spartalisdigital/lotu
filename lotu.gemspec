@@ -53,6 +53,7 @@ Gem::Specification.new do |s|
      "lib/lotu/behaviors/eventful.rb",
      "lib/lotu/behaviors/system_user.rb",
      "lib/lotu/cursor.rb",
+     "lib/lotu/game.rb",
      "lib/lotu/misc/string.rb",
      "lib/lotu/misc/vector2d.rb",
      "lib/lotu/systems/collision_system.rb",
@@ -60,7 +61,6 @@ Gem::Specification.new do |s|
      "lib/lotu/systems/stalker_system.rb",
      "lib/lotu/systems/steering_system.rb",
      "lib/lotu/text_box.rb",
-     "lib/lotu/window.rb",
      "lotu.gemspec",
      "test/actor_test.rb"
   ]

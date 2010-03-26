@@ -9,7 +9,7 @@ class SteeringRuby < Actor
   def initialize(opts={})
     super
     set_image 'CptnRuby Gem.png'
-    use(Lotu::SteeringSystem, opts)
+    use(SteeringSystem, opts)
   end
 
   def warp(x, y)
@@ -40,7 +40,7 @@ class Example < Game
   end
 
   def setup_systems
-    use(Lotu::FpsSystem)
+    use(FpsSystem)
   end
 
   def setup_actors
@@ -51,16 +51,16 @@ class Example < Game
     @ruby2 = SteeringRuby.new
     @ruby2.activate(:pursuit)
 
-    @cursor = Lotu::Cursor.new(:image => 'crosshair.png',
-                               :keys => {MsLeft => [:click, false]})
+    @cursor = Cursor.new(:image => 'crosshair.png',
+                         :keys => {MsLeft => [:click, false]})
 
-    @window_info = Lotu::TextBox.new(:size => 15)
-    @window_info.watch(@systems[Lotu::FpsSystem])
+    @window_info = TextBox.new(:size => 15)
+    @window_info.watch(@systems[FpsSystem])
     @window_info.watch(@cursor, :color => 0xffff0000)
     @window_info.text("Click to start the simulation")
     @window_info.text("One will pursuit while the other evades, right click to center evader on screen")
 
-    @ruby_info = Lotu::TextBox.new(:attach_to => @ruby, :size => 14)
+    @ruby_info = TextBox.new(:attach_to => @ruby, :size => 14)
     @ruby_info.watch(@ruby)
   end
 

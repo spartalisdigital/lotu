@@ -59,7 +59,7 @@ class Example < Game
   def setup_actors
     @ruby = MovingRuby.new(:x => width/2, :y => height/2)
     # Create a TextBox so we can display a message on screen
-    @info = Lotu::TextBox.new
+    @info = TextBox.new
     @info.text("Move around with arrow keys")
   end
 
