@@ -40,6 +40,7 @@ class Example < Game
   end
 
   def setup_systems
+    # It's important to call super here to setup the InputSystem
     super
     use(FpsSystem)
   end
