@@ -13,9 +13,6 @@ module Lotu
       @watch_list = []
       @size = opts[:size]
       @attached_to = opts[:attach_to]
-      # Since we aren't setting an image for this, we need to specify
-      # this actor needs to be drawed
-      draw_me
     end
 
     def text(text, opts={})
