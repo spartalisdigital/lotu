@@ -23,7 +23,7 @@ module Lotu
     end
 
     def to_s
-      "Samples per second: #{@samples} | FPS: #{format("%.2f",@fps)}"
+      "Samples: #{@samples} | FPS: #{format("%.2f",@fps)}"
     end
 
     def draw;end
