@@ -3,7 +3,9 @@ require 'rubygems'
 require 'protest'
 require 'rr'
 require File.dirname(__FILE__) + '/../lib/lotu'
- 
+
+include Lotu
+
 class Protest::TestCase
   include RR::Adapters::TestUnit
 end
@@ -12,34 +14,46 @@ Protest.report_with(:documentation)
  
 Protest.context('An Actor') do
   setup do
-    $lotu = Lotu::Window.new
-    @actor = Lotu::Actor.new
+    @game = Game.new
+    @actor = Actor.new
   end
  
-  it 'has an x coordinate. (default: 0)' do
+  it 'has an x coordinate (default: 0)' do
     assert_equal 0, @actor.x
   end
  
-  it 'has an y coordinate. (default: 0)' do
+  it 'has an y coordinate (default: 0)' do
     assert_equal 0, @actor.y
   end
  
-  # faltaría el attr_reader :color en actor.rb
-  #
-  it 'has a color. (default: 0xffffffff)' do
-    pending
-    #assert_equal Gosu::Color::WHITE, @actor.color
+  it 'has a color (default: 0xffffffff)' do
+    assert_equal 0xffffffff, @actor.color
   end
   
-  it 'has a window reference.' do
-    assert_equal $lotu, @actor.parent
+  it 'has a parent reference == Game' do
+    assert_equal @game, @actor.parent
+  end
+
+  context 'when creating' do
+    it 'asks Game to manage it' do
+      pending
+      #crear método 'init' para poder probar esto?
+    end
   end
  
-  # some context...
-  #
   context 'when dying' do
-    it 'removes itself from Window update_queue.' do
-      mock.proxy($lotu.update_queue).delete(@actor)
+    it 'asks Game to kill it' do
+      mock.proxy(@game).kill_me(@actor)
+      @actor.die
+    end
+
+    it 'is removed from Game update_queue' do
+      mock.proxy(@game.update_queue).delete(@actor)
+      @actor.die
+    end
+
+    it 'is removed from Game draw_queue' do
+      mock.proxy(@game.update_queue).delete(@actor)
       @actor.die
     end
   end

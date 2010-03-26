@@ -37,7 +37,7 @@ class Example < Game
     # It's important to call super here to setup the InputSystem
     super
     use(FpsSystem)
-    use(StalkerSystem, :stalk => [Actor, Cursor, WarpingRuby, TextBox, Object])
+    use(StalkerSystem, :stalk => [Actor, Cursor, TextBox, WarpingRuby, Object])
   end
 
   def setup_actors
@@ -60,7 +60,7 @@ class Example < Game
     # Create a TextBox with default option :size => 15
     @info = TextBox.new(:size => 15)
     @info.watch(@systems[FpsSystem])
-    @info.watch(@systems[StalkerSystem])
+    @info.watch(@systems[StalkerSystem], :color => 0xff3ffccf)
     # We can change the size for a specific line of text
     @info.watch("@cursor1 data:", :size => 20)
     # Color too

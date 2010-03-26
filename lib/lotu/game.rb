@@ -26,7 +26,6 @@ module Lotu
       setup_actors
     end
 
-
     # Hook methods, these are meant to be replaced by subclasses
     def load_resources;end
     def setup_actors;end

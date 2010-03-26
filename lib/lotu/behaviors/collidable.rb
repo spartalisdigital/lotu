@@ -20,7 +20,7 @@ module Lotu
 
     def die
       super
-      @parent.systems[CollisionSystem].remove_entity(self, @collision_tag)
+      @parent.systems[CollisionSystem].remove_entity(self, @collision_tag) if @parent.systems[CollisionSystem]
     end
 
   end
