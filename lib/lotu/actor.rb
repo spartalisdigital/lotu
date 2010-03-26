@@ -40,6 +40,7 @@ module Lotu
       # Add extra functionality
       self.extend Eventful
       self.extend Collidable
+      use(AnimationSystem)
     end
 
     # Easy access to delta-time

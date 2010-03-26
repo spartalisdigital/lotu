@@ -57,6 +57,7 @@ class Example < Game
   end
 
   def setup_actors
+    # Create a ruby in the middle of the screen
     @ruby = MovingRuby.new(:x => width/2, :y => height/2)
     # Create a TextBox so we can display a message on screen
     @info = TextBox.new

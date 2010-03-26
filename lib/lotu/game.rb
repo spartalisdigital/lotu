@@ -148,19 +148,22 @@ module Lotu
     end
 
     def load_animations(path)
-      path = File.expand_path(File.join(@path, path))
-      puts "Loading from: #{path}"
-
-      count = 0
-      Dir.entries(path).grep(regexp).each do |entry|
-        begin
-          @animations[entry] = klass.new($lotu, File.join(path, entry))
-          count += 1
-        rescue Exception => e
-          puts e, File.join(path, entry)
+      coords = {}
+      with_files(/\.txt/, path) do |file_name, file_path|
+        name = File.basename(file_name, '.txt')
+        File.open(file_path) do |file|
+          puts file.class
+          puts file.respond_to?(:lines)
         end
+        coords[name] = 1
       end
-      puts "#{count} #{klass} files loaded."
+      #with_files(/\.png|\.jpg|\.bmp/, path) do |file_name, file_path|
+      #  name = File.basename(file_name, '.txt')
+      #  @animations[file_name] = []
+      #  coords[name].each do
+      #    @animations[file_name] << Gosu::Image.new($lotu, file_path)
+      #  end
+      #end
     end
 
     def with_path_from_file(path, &blk)

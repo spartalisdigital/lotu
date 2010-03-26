@@ -25,32 +25,48 @@ So, what can you do if you spot some patters here, a few more there? well, you d
 
 If you have any questions of suggestions don't hesitate and send me a message!
 
+#--
+== So you want to make a game with *lotu*?
 
-== Features
-* Easy way to manage input, rendering, updating, etc.
-* Simple access to game resources (images, sounds, songs, etc).
-* Steering behaviors
+Ok, then you need to know a bit about the facilities it provides. Let's start with the main classes:
 
+=== Main classes
 
-== Coming features
-* Utility classes for viewports, game states, etc.
-* Pathfinding and more AI stuff
+==== Game
 
+==== Actor
+
+==== Cursor
+
+==== TextBox
+
+=== Systems
+
+==== Collision
+
+==== Fps
+
+==== Input
+
+==== Stalker
+
+==== Steering
+#++
 
 == Game frameworks
 Here are some other Gosu based frameworks:
-* [Chingu] (http://github.com/ippa/chingu)
-* [Exuberant] (http://github.com/adamsanderson/lexery/tree/master/lib/exuberant)
-* [FWD] (http://github.com/walski/FWD)
-* [Nimo] (http://github.com/moonpxi/nimo)
-* [PuitUniverse] (http://github.com/oneup/puituniverse)
-* [Ramverk] (http://github.com/deps/Ramverk)
-* [Space Shooter Engine] (http://github.com/belen-albeza/space-shooter/tree/master/engine/)
-* [SpriteJam] (http://github.com/richardeden/spritejam)
+* Chingu[http://github.com/ippa/chingu]
+* Exuberant[http://github.com/adamsanderson/lexery/tree/master/lib/exuberant]
+* FWD[http://github.com/walski/FWD]
+* Nimo[http://github.com/moonpxi/nimo]
+* PuitUniverse[http://github.com/oneup/puituniverse]
+* Ramverk[http://github.com/deps/Ramverk]
+* {Space Shooter Engine}[http://github.com/belen-albeza/space-shooter/tree/master/engine/]
+* SpriteJam[http://github.com/richardeden/spritejam]
 
 There are others not base on Gosu you might like to check out:
-* [gamebox](http://github.com/shawn42/gamebox)
-* [jemini](http://github.com/jemini/jemini-core)
+* gamebox[http://github.com/shawn42/gamebox]
+* jemini[http://github.com/jemini/jemini-core]
 
 Be sure I will take inspiration from them. ;)
 Nevertheless I'm doing this because I want to become better at architecturing software. And this seems like fitting practice. :D

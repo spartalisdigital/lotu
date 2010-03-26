@@ -43,6 +43,7 @@ class Example < Game
     # It's important to call super here to setup the InputSystem
     super
     use(FpsSystem)
+    use(StalkerSystem, :stalk => [Actor, Vector2d, Object])
   end
 
   def setup_actors
@@ -58,6 +59,7 @@ class Example < Game
 
     @window_info = TextBox.new(:size => 15)
     @window_info.watch(@systems[FpsSystem])
+    @window_info.watch(@systems[StalkerSystem])
     @window_info.watch(@cursor, :color => 0xffff0000)
     @window_info.text("Click to start the simulation")
     @window_info.text("One will pursuit while the other evades, right click to center evader on screen")

@@ -55,6 +55,7 @@ Gem::Specification.new do |s|
      "lib/lotu/game.rb",
      "lib/lotu/misc/string.rb",
      "lib/lotu/misc/vector2d.rb",
+     "lib/lotu/systems/animation_system.rb",
      "lib/lotu/systems/collision_system.rb",
      "lib/lotu/systems/fps_system.rb",
      "lib/lotu/systems/input_system.rb",

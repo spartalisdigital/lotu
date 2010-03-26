@@ -4,11 +4,11 @@ module Lotu
     def initialize(user, opts={})
       default_opts = {
         :stalk => [Actor],
-        :samples => 10
+        :ticks_per_update => 30
       }
       opts = default_opts.merge!(opts)
       @ticks = 0
-      @samples = opts[:samples]
+      @ticks_per_update = opts[:ticks_per_update]
       @stalked = {}
       opts[:stalk].each do |type|
         @stalked[type] = 0
@@ -17,7 +17,7 @@ module Lotu
 
     def update
       @ticks += 1
-      if @ticks >= @samples
+      if @ticks >= @ticks_per_update
         @stalked.each_key do |type|
           @stalked[type] = ObjectSpace.each_object(type).count
         end
