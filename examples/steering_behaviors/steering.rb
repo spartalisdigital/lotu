@@ -68,7 +68,7 @@ class SteeringMissiles < Game
 
     @little_missile = Missile.new
     @little_missile.activate(:pursuit)
-    @little_missile.play_animation('missile.png', :factor_x => 0.5, :factor_y => 0.5, :fps => 60)
+    @little_missile.play_animation('missile.png', :fps => 60, :height => 20)
 
     @cursor = Cursor.new(:image => 'crosshair-3.png',
                          :keys => {MsLeft => [:click, false]})

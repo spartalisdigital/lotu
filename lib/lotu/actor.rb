@@ -55,18 +55,19 @@ module Lotu
 
     def set_image(image, opts={})
       @image = @parent.image(image)
-      puts "Image \"#{image}\" not found".red if @image.nil?
+      if @image.nil?
+        puts "Image \"#{image}\" not found".red
+        return
+      end
       parse_options(opts)
-      @width = opts[:width] || @image.width
-      @height = opts[:height] || @image.height
+      adjust_width_and_height(opts)
       calc_zoom
     end
 
     def set_gosu_image(image, opts={})
       @image = image
       parse_options(opts)
-      @width = opts[:width] || @image.width
-      @height = opts[:height] || @image.height
+      adjust_width_and_height(opts)
       calc_zoom
     end
 
@@ -78,6 +79,22 @@ module Lotu
     def height=(height)
       @height = height
       calc_zoom
+    end
+
+    def adjust_width_and_height(opts)
+      if(opts[:width] && opts[:height])
+        @width = opts[:width]
+        @height = opts[:height]
+      elsif(opts[:width])
+        @width = opts[:width]
+        @height = @width * @image.height / @image.width
+      elsif(opts[:height])
+        @height = opts[:height]
+        @width = @height * @image.width / @image.height
+      else
+        @width = @image.width
+        @height = @image.height
+      end
     end
 
     def calc_zoom
