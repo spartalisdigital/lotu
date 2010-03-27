@@ -82,7 +82,7 @@ class EvadeMultiple < Game
     @window_info.watch(@systems[StalkerSystem])
     @window_info.watch(@cursor, :color => 0xffff0000)
     @window_info.text("Click to start the simulation", :color => 0xffffff00)
-    @window_info.text("One will pursuit while the other evades, right click to center evader on screen")
+    @window_info.text("Little missiles will pursuit while the big one evades, right click to center big one on screen")
 
     @missile_info = TextBox.new(:attach_to => @big_missile, :size => 14)
     @missile_info.watch(@big_missile)
