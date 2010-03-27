@@ -114,12 +114,13 @@ module Lotu
     end
 
     def draw
-      @image.draw_rot(@x, @y, @z, @angle, @center_x, @center_y, @factor_x*@zoom_x, @factor_y*@zoom_y, @color, @mode) unless @image.nil?
-      draw_debug if $lotu.debug? unless @image.nil?
+      unless @image.nil?
+        @image.draw_rot(@x, @y, @z, @angle, @center_x, @center_y, @factor_x*@zoom_x, @factor_y*@zoom_y, @color, @mode)
+        draw_debug if $lotu.debug?
+      end
     end
 
     def draw_debug
-      puts "w: #{@width} h: #{@height}".red if self.kind_of?(Missile)
       draw_box(@x-@image.width/2, @y-@image.height/2, @image.width, @image.height)
       draw_box(@x-@width/2, @y-@height/2, @width, @height, 0xff00ff00)
     end

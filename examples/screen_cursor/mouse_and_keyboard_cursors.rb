@@ -57,7 +57,8 @@ class Cursors < Game
   # Setup some input handling for our Cursors app
   def setup_input
     set_keys(KbEscape => :close,
-             KbD => [:debug!, false])
+             KbD => [:debug!, false],
+             KbT => [:toggle_text, false])
   end
 
   # Now onto define some events
@@ -116,12 +117,17 @@ class Cursors < Game
     @info.watch(@systems[StalkerSystem], :color => 0xff3ffccf)
     # We can change the size for a specific line of text
     @info.text("@cursor1 data:", :size => 20)
+    @info.text("move with Mouse | click with LeftMouseButton")
     # And color
     @info.watch(@cursor1, :color => 0xff0099ff)
     @info.text("@cursor2 data:", :size => 20)
+    @info.text("move with Arrow keys | click with Space")
     @info.watch(@cursor2, :color => 0xff99ff00)
-    @info.text("Use the mouse to move @cursor1 around, use arrow keys for @cursor2")
-    @info.text("click with space and left mouse button to teleport the portrait!")
+    @info.text("click to teleport the portrait!")
+  end
+
+  def toggle_text
+    @info.toggle!
   end
 
 end

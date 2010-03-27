@@ -135,6 +135,23 @@ module Lotu
       return flee
     end
 
+    def evade_multiple
+      return @zero if @user.pursuers.empty?
+      combined_velocities = Vector2d.new
+      combined_positions = Vector2d.new
+      @user.pursuers.each do |p|
+        combined_velocities += p.vel
+        combined_positions += p.pos
+      end
+      combined_velocities /= @user.pursuers.length
+      combined_positions /= @user.pursuers.length
+      to_pursuers = combined_positions - @user.pos
+      look_ahead_time = to_pursuers.length / (@user.max_speed + combined_velocities.length)
+      predicted_position = combined_positions + combined_velocities * look_ahead_time
+      @user.target = combined_positions
+      return flee
+    end
+
     # TODO: Fix wander
     def wander
       wander_jitter = 10
@@ -166,9 +183,11 @@ module Lotu
           attr_accessor :mass, :pos, :heading, :vel, :accel,
           :max_speed, :max_turn_rate, :max_force,
           :wander_radius, :wander_distance, :wander_target,
-          :target, :evader, :pursuer
+          :target, :evader, :pursuer, :pursuers
         end
 
+        # TODO: move these inside the SteeringSystem?
+        # and just delegate with accessors?
         # Some defaults
         @pos = Vector2d.new(@x, @y)
         offset_x = Gosu.offset_x(@angle, 1)
@@ -177,6 +196,24 @@ module Lotu
         @vel = Vector2d.new
         @accel = Vector2d.new
         @wander_target = Vector2d.new
+        @pursuers = []
+
+        # Some colors for debugging
+        color_luck = [{:set => 10, :random =>30}, # range: 10 - 39
+                      {:set => 80,:random =>160}, # range: 80 - 239
+                      {:set => 220, :random => 36}] #range: 220 - 255
+        first = color_luck.delete_at(rand(color_luck.size))
+        red = rand(first[:random])+first[:set]
+        second = color_luck.delete_at(rand(color_luck.size))
+        green = rand(second[:random])+second[:set]
+        third = color_luck[0]
+        blue = rand(third[:random])+third[:set]
+        solid_color = Gosu::Color.new(255, red, green, blue)
+        @colors = {
+          :position => 0xff666666,
+          :heading => 0xffff0000,
+          :target => solid_color
+        }
       end
 
       def activate(behavior)
@@ -191,15 +228,11 @@ module Lotu
         @heading.facing_to?(@target - @pos)
       end
 
-      def draw
-        super
-        draw_debug if $lotu.debug?
-      end
-
       def draw_debug
-        $lotu.draw_line(0, 0, 0xff999999, @pos.x, @pos.y, 0xff333333)
-        $lotu.draw_line(@pos.x, @pos.y, 0xffffffff, (@pos + @heading*50).x, (@pos+@heading*50).y, 0xffff0000)
-        $lotu.draw_line(@pos.x, @pos.y, 0xffffffff, @target.x, @target.y, 0xff00ff00) if @target
+        super
+        $lotu.draw_line(0, 0, @colors[:position], @pos.x, @pos.y, @colors[:position])
+        $lotu.draw_line(@pos.x, @pos.y, @colors[:heading], (@pos + @heading*50).x, (@pos+@heading*50).y, @colors[:heading])
+        $lotu.draw_line(@pos.x, @pos.y, @colors[:target], @target.x, @target.y, @colors[:target]) if @target
       end
 
       # to_s utility methods

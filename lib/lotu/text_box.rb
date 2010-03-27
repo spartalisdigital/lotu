@@ -13,6 +13,19 @@ module Lotu
       @watch_list = []
       @size = opts[:size]
       @attached_to = opts[:attach_to]
+      @hiding = false
+    end
+
+    def hide!
+      @hiding = true
+    end
+
+    def show!
+      @hiding = false
+    end
+
+    def toggle!
+      @hiding = !@hiding
     end
 
     def watch(subject, opts={})
@@ -25,6 +38,7 @@ module Lotu
     end
 
     def update
+      return if @hiding
       unless @attached_to.nil?
         @x = @attached_to.x + @attached_to.image.width / 2
         @y = @attached_to.y - @attached_to.image.height / 2
@@ -32,6 +46,7 @@ module Lotu
     end
 
     def draw
+      return if @hiding
       pos_y = 0
       @watch_list.each do |watched, opts|
         my_size = opts[:size] || @size
