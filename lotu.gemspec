@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
      "README.rdoc",
      "Rakefile",
      "VERSION",
-     "examples/hello_world/hello_world.rb",
+     "examples/hello_world/moving_portraits.rb",
      "examples/media/animations/missile.png",
      "examples/media/animations/missile.txt",
      "examples/media/images/cohete-big.png",
@@ -36,8 +36,8 @@ Gem::Specification.new do |s|
      "examples/media/images/lobo_tuerto.png",
      "examples/media/images/missile-med.png",
      "examples/media/images/silo.png",
-     "examples/mouse_pointer/mouse_pointer.rb",
-     "examples/steering_behaviors/steering.rb",
+     "examples/screen_cursor/cursors.rb",
+     "examples/steering_behaviors/steering_missiles.rb",
      "lib/lotu.rb",
      "lib/lotu/actor.rb",
      "lib/lotu/behaviors/collidable.rb",
@@ -66,9 +66,9 @@ Gem::Specification.new do |s|
   s.summary = %q{A simple, agile Ruby game development framework.}
   s.test_files = [
     "test/actor_test.rb",
-     "examples/steering_behaviors/steering.rb",
-     "examples/hello_world/hello_world.rb",
-     "examples/mouse_pointer/mouse_pointer.rb"
+     "examples/steering_behaviors/steering_missiles.rb",
+     "examples/hello_world/moving_portraits.rb",
+     "examples/screen_cursor/cursors.rb"
   ]
 
   if s.respond_to? :specification_version then
