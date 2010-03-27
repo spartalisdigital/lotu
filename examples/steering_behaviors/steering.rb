@@ -8,7 +8,6 @@ include Lotu
 class SteeringRuby < Actor
   def initialize(opts={})
     super
-    set_image 'CptnRuby Gem.png'
     use(SteeringSystem, opts)
   end
 
@@ -24,19 +23,20 @@ class Example < Game
     # declared in the parent class
     super
     # Custom setup methods for this class
-    setup_input
     setup_events
   end
 
   def load_resources
     with_path_from_file(__FILE__) do
-      load_images '../media'
+      load_images '../media/images'
+      load_animations '../media/animations'
     end
   end
 
   def setup_input
     set_keys(KbEscape => :close,
-             MsRight => :reset_ruby)
+             MsRight => :reset_ruby,
+             KbD => [:debug!, false])
   end
 
   def setup_systems
@@ -50,11 +50,13 @@ class Example < Game
     @ruby = SteeringRuby.new(:mass => 0.3, :max_speed => 100, :max_turn_rate => 140)
     @ruby.warp(width/2, height/2)
     @ruby.activate(:evade)
+    @ruby.play_animation('missile.png')
 
     @ruby2 = SteeringRuby.new
     @ruby2.activate(:pursuit)
+    @ruby2.play_animation('missile.png', :factor_x => 0.5, :factor_y => 0.5, :fps => 60)
 
-    @cursor = Cursor.new(:image => 'crosshair.png',
+    @cursor = Cursor.new(:image => 'crosshair-1.png',
                          :keys => {MsLeft => [:click, false]})
 
     @window_info = TextBox.new(:size => 15)

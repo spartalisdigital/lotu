@@ -157,10 +157,10 @@ module Lotu
     module UserMethods
 
       def self.extended(instance)
-        instance.steering_setup
+        instance.setup_steering
       end
 
-      def steering_setup
+      def setup_steering
         # Create accessors for the user
         class << self
           attr_accessor :mass, :pos, :heading, :vel, :accel,
@@ -193,6 +193,10 @@ module Lotu
 
       def draw
         super
+        draw_debug if $lotu.debug?
+      end
+
+      def draw_debug
         $lotu.draw_line(0, 0, 0xff999999, @pos.x, @pos.y, 0xff333333)
         $lotu.draw_line(@pos.x, @pos.y, 0xffffffff, (@pos + @heading*50).x, (@pos+@heading*50).y, 0xffff0000)
         $lotu.draw_line(@pos.x, @pos.y, 0xffffffff, @target.x, @target.y, 0xff00ff00) if @target

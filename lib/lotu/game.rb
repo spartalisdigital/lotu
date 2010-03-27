@@ -12,7 +12,7 @@ module Lotu
 
       # Handy global window variable
       $lotu = self
-      @debug = true
+      @debug = false
       setup_containers
 
       # For timer initialization
@@ -24,11 +24,21 @@ module Lotu
       load_resources
       setup_systems
       setup_actors
+      setup_input
+    end
+
+    def debug!
+      @debug = !@debug
+    end
+
+    def debug?
+      @debug
     end
 
     # Hook methods, these are meant to be replaced by subclasses
     def load_resources;end
     def setup_actors;end
+    def setup_input;end
 
     def setup_systems
       use(InputSystem)
@@ -48,7 +58,7 @@ module Lotu
       @images = {}
       @sounds = {}
       @songs = {}
-      @animations = {}
+      @animations = Hash.new{|h,k| h[k] = []}
     end
 
     # Main update loop
@@ -148,22 +158,23 @@ module Lotu
     end
 
     def load_animations(path)
-      coords = {}
+      coords = Hash.new{|h,k| h[k] = []}
+
       with_files(/\.txt/, path) do |file_name, file_path|
         name = File.basename(file_name, '.txt')
         File.open(file_path) do |file|
-          puts file.class
-          puts file.respond_to?(:lines)
+          file.lines.each do |line|
+            coords[name] << line.scan(/\d+/).map!(&:to_i)
+          end
         end
-        coords[name] = 1
       end
-      #with_files(/\.png|\.jpg|\.bmp/, path) do |file_name, file_path|
-      #  name = File.basename(file_name, '.txt')
-      #  @animations[file_name] = []
-      #  coords[name].each do
-      #    @animations[file_name] << Gosu::Image.new($lotu, file_path)
-      #  end
-      #end
+
+      with_files(/\.png|\.jpg|\.bmp/, path) do |file_name, file_path|
+        name, extension = file_name.split('.')
+        coords[name].each do |index, x, y, width, height|
+          @animations[file_name] << Gosu::Image.new($lotu, file_path, true, x, y, width, height)
+        end
+      end
     end
 
     def with_path_from_file(path, &blk)

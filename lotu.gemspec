@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["lobo_tuerto"]
-  s.date = %q{2010-03-26}
+  s.date = %q{2010-03-27}
   s.description = %q{lotu aims to bring an agile and simple game development framework to life. It provides useful abstractions so you can concentrate on developing your game.}
   s.email = %q{dev@lobotuerto.com}
   s.extra_rdoc_files = [
@@ -25,24 +25,17 @@ Gem::Specification.new do |s|
      "Rakefile",
      "VERSION",
      "examples/hello_world/hello_world.rb",
-     "examples/media/Beep.wav",
-     "examples/media/CptnRuby Gem.png",
-     "examples/media/CptnRuby Map.txt",
-     "examples/media/CptnRuby Tileset.png",
-     "examples/media/CptnRuby.png",
-     "examples/media/Cursor.png",
-     "examples/media/Earth.png",
-     "examples/media/Explosion.wav",
-     "examples/media/LargeStar.png",
-     "examples/media/Smoke.png",
-     "examples/media/Soldier.png",
-     "examples/media/Space.png",
-     "examples/media/Star.png",
-     "examples/media/Starfighter.bmp",
-     "examples/media/amenoske.png",
-     "examples/media/crosshair.png",
-     "examples/media/lobo_tuerto.png",
-     "examples/media/title.png",
+     "examples/media/animations/missile.png",
+     "examples/media/animations/missile.txt",
+     "examples/media/images/cohete-big.png",
+     "examples/media/images/cohete-medium.png",
+     "examples/media/images/cohete-small.png",
+     "examples/media/images/crosshair-1.png",
+     "examples/media/images/crosshair-2.png",
+     "examples/media/images/crosshair-3.png",
+     "examples/media/images/lobo_tuerto.png",
+     "examples/media/images/missile-med.png",
+     "examples/media/images/silo.png",
      "examples/mouse_pointer/mouse_pointer.rb",
      "examples/steering_behaviors/steering.rb",
      "lib/lotu.rb",
@@ -55,6 +48,7 @@ Gem::Specification.new do |s|
      "lib/lotu/game.rb",
      "lib/lotu/misc/string.rb",
      "lib/lotu/misc/vector2d.rb",
+     "lib/lotu/system.rb",
      "lib/lotu/systems/animation_system.rb",
      "lib/lotu/systems/collision_system.rb",
      "lib/lotu/systems/fps_system.rb",

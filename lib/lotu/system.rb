@@ -3,7 +3,6 @@ module Lotu
 
     def initialize(user, opts={})
       @user = user
-      @user.extend (UserMethods) if defined? (UserMethods)
     end
 
     def dt

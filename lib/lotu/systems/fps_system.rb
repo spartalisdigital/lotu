@@ -23,7 +23,7 @@ module Lotu
     end
 
     def to_s
-      "Ticks_Per_Update: #{@ticks_per_update} | FPS: #{format("%.2f",@fps)}"
+      "Ticks per update: #{@ticks_per_update} | FPS: #{format("%.2f",@fps)}"
     end
 
     def draw;end

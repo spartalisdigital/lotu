@@ -8,7 +8,7 @@ include Lotu
 class WarpingRuby < Actor
   def initialize(opts={})
     super
-    set_image 'CptnRuby Gem.png'
+    set_image 'lobo_tuerto.png', :factor_x => 0.3, :factor_y => 0.3
   end
 
   def warp(x, y)
@@ -23,13 +23,12 @@ class Example < Game
     # declared in the parent class
     super
     # Custom setup methods for this class
-    setup_input
     setup_events
   end
 
   def load_resources
     with_path_from_file(__FILE__) do
-      load_images '../media'
+      load_images '../media/images'
     end
   end
 
@@ -40,12 +39,28 @@ class Example < Game
     use(StalkerSystem, :stalk => [Actor, Cursor, TextBox, WarpingRuby, Object])
   end
 
+  def setup_input
+    set_keys(KbEscape => :close,
+             KbD => [:debug!, false])
+  end
+
+  def setup_events
+    @cursor1.on(:click) do |x,y|
+      @ruby.warp(x,y)
+    end
+    @cursor2.on(:click) do |x,y|
+      @ruby.warp(x,y)
+    end
+  end
+
   def setup_actors
     @ruby = WarpingRuby.new(:x => width/2, :y => height/2)
-    @cursor1 = Cursor.new(:image => 'crosshair.png',
+    @cursor1 = Cursor.new(:image => 'crosshair-1.png',
                           :keys => {MsLeft => [:click, false]},
-                          :color => 0xff0099ff)
-    @cursor2 = Cursor.new(:image => 'crosshair.png',
+                          :color => 0xff0099ff,
+                          :width => 100,
+                          :height => 100)
+    @cursor2 = Cursor.new(:image => 'crosshair-2.png',
                           :use_mouse => false,
                           :keys => {
                             KbSpace => [:click, false],
@@ -53,7 +68,9 @@ class Example < Game
                             KbDown => :down,
                             KbLeft => :left,
                             KbRight => :right},
-                          :color => 0xff99ff00)
+                          :color => 0xff99ff00,
+                          :factor_x => 0.5,
+                          :factor_y => 0.5)
     @cursor2.x = width*3/4
     @cursor2.y = height/2
 
@@ -68,19 +85,6 @@ class Example < Game
     @info.watch("@cursor2 data:", :size => 20)
     @info.watch(@cursor2, :color => 0xff99ff00)
     @info.text("Move @cursor1 with mouse and @cursor2 with arrow keys (click with space!)")
-  end
-
-  def setup_input
-    set_keys KbEscape => :close
-  end
-
-  def setup_events
-    @cursor1.on(:click) do |x,y|
-      @ruby.warp(x,y)
-    end
-    @cursor2.on(:click) do |x,y|
-      @ruby.warp(x,y)
-    end
   end
 
 end

@@ -2,7 +2,8 @@ module Lotu
   class Actor
     attr_accessor :parent, :x, :y, :systems,
     :z, :angle, :center_x, :center_y,
-    :factor_x, :factor_y, :color, :mode, :image
+    :factor_x, :factor_y, :color, :mode, :image,
+    :width, :height
 
     include SystemUser
     include Controllable
@@ -21,20 +22,11 @@ module Lotu
         :mode => :default,
         :parent => $lotu
       }
-      @opts = default_opts.merge!(opts)
-      @image = nil
-      @x = @opts[:x]
-      @y = @opts[:y]
-      @z = @opts[:z]
-      @angle = @opts[:angle]
-      @center_x = @opts[:center_x]
-      @center_y = @opts[:center_y]
-      @factor_x = @opts[:factor_x]
-      @factor_y = @opts[:factor_y]
-      @color = @opts[:color]
-      @mode = @opts[:mode]
-      @parent = @opts[:parent]
+      opts = default_opts.merge!(opts)
+      @parent = opts[:parent]
       @parent.manage_me(self)
+      set_image(opts[:image], opts) if opts[:image]
+      parse_options(opts)
       @systems = {}
 
       # Add extra functionality
@@ -48,12 +40,49 @@ module Lotu
       $lotu.dt
     end
 
-    def set_image(image)
-      @image = @parent.image(image)
+    def parse_options(opts)
+      @x = opts[:x] || @x
+      @y = opts[:y] || @y
+      @z = opts[:z] || @z
+      @angle = opts[:angle] || @angle
+      @center_x = opts[:center_x] || @center_x
+      @center_y = opts[:center_y] || @center_y
+      @factor_x = opts[:factor_x] || @factor_x
+      @factor_y = opts[:factor_y] || @factor_y
+      @color = opts[:color] || @color
+      @mode = opts[:mode] || @mode
     end
 
-    def unset_image
-      @image = nil
+    def set_image(image, opts={})
+      @image = @parent.image(image)
+      puts "Image \"#{image}\" not found".red if @image.nil?
+      parse_options(opts)
+      @width = opts[:width] || @image.width
+      @height = opts[:height] || @image.height
+      calc_zoom
+    end
+
+    def set_gosu_image(image, opts={})
+      @image = image
+      parse_options(opts)
+      @width = opts[:width] || @image.width
+      @height = opts[:height] || @image.height
+      calc_zoom
+    end
+
+    def width=(width)
+      @width = width
+      calc_zoom
+    end
+
+    def height=(height)
+      @height = height
+      calc_zoom
+    end
+
+    def calc_zoom
+      @zoom_x = Float(@width)/@image.width
+      @zoom_y = Float(@height)/@image.height
     end
 
     # Remove ourselves from the update queue
@@ -68,7 +97,20 @@ module Lotu
     end
 
     def draw
-      @image.draw_rot(@x, @y, @z, @angle, @center_x, @center_y, @factor_x, @factor_y, @color, @mode) unless @image.nil?
+      @image.draw_rot(@x, @y, @z, @angle, @center_x, @center_y, @factor_x*@zoom_x, @factor_y*@zoom_y, @color, @mode) unless @image.nil?
+      draw_debug if $lotu.debug? unless @image.nil?
+    end
+
+    def draw_debug
+      draw_box(@x-@image.width/2, @y-@image.height/2, @image.width, @image.height)
+      draw_box(@x-@width/2, @y-@height/2, @width, @height, 0xff00ff00)
+    end
+
+    def draw_box(x, y, w, h, c = 0xffff0000)
+      $lotu.draw_line(x, y, c, x+w, y, c)
+      $lotu.draw_line(x, y, c, x, y+h, c)
+      $lotu.draw_line(x+w, y+h, c, x+w, y, c)
+      $lotu.draw_line(x+w, y+h, c, x, y+h, c)
     end
 
   end
