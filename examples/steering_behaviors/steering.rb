@@ -1,31 +1,45 @@
 #!/usr/bin/env ruby
+
+# Here you will learn about:
+# * The steering system
+# * How to play animations
+# * How to attach a text box to an actor
+
 LIB_PATH = File.join(File.dirname(__FILE__), '..', '..', 'lib', 'lotu.rb')
 require File.expand_path(LIB_PATH)
 
 include Gosu::Button
 include Lotu
 
-class SteeringRuby < Actor
+# Let's define a Missile class that will use a Steering system to
+# control it's movement
+class Missile < Actor
   def initialize(opts={})
     super
+    # Activate the steering system and pass the opts, since they might
+    # have some config info for the system
     use(SteeringSystem, opts)
   end
 
-  def warp(x, y)
+  def teleport(x, y)
     @pos.x, @pos.y = x, y
   end
 end
 
-class Example < Game
+# The main app class
+class SteeringMissiles < Game
   def initialize
     # This will call the hooks:
-    # load_resources, setup_systems and setup_actors
+    # load_resources, setup_systems, setup_input and setup_actors
     # declared in the parent class
     super
     # Custom setup methods for this class
     setup_events
   end
 
+  # Let's load some images and animations, check out the animations
+  # directory, the animation there was created with:
+  # {Sprite Sheet Packer}[http://spritesheetpacker.codeplex.com/]
   def load_resources
     with_path_from_file(__FILE__) do
       load_images '../media/images'
@@ -35,7 +49,7 @@ class Example < Game
 
   def setup_input
     set_keys(KbEscape => :close,
-             MsRight => :reset_ruby,
+             MsRight => :teleport_big_missile_to_midscreen,
              KbD => [:debug!, false])
   end
 
@@ -43,44 +57,45 @@ class Example < Game
     # It's important to call super here to setup the InputSystem
     super
     use(FpsSystem)
-    use(StalkerSystem, :stalk => [Actor, Vector2d, Object])
+    use(StalkerSystem, :stalk => [Actor, Missile, Vector2d, Object])
   end
 
   def setup_actors
-    @ruby = SteeringRuby.new(:mass => 0.3, :max_speed => 100, :max_turn_rate => 140)
-    @ruby.warp(width/2, height/2)
-    @ruby.activate(:evade)
-    @ruby.play_animation('missile.png')
+    @big_missile = Missile.new(:mass => 0.3, :max_speed => 100, :max_turn_rate => 140)
+    @big_missile.teleport(width/2, height/2)
+    @big_missile.activate(:evade)
+    @big_missile.play_animation('missile.png')
 
-    @ruby2 = SteeringRuby.new
-    @ruby2.activate(:pursuit)
-    @ruby2.play_animation('missile.png', :factor_x => 0.5, :factor_y => 0.5, :fps => 60)
+    @little_missile = Missile.new
+    @little_missile.activate(:pursuit)
+    @little_missile.play_animation('missile.png', :factor_x => 0.5, :factor_y => 0.5, :fps => 60)
 
-    @cursor = Cursor.new(:image => 'crosshair-1.png',
+    @cursor = Cursor.new(:image => 'crosshair-3.png',
                          :keys => {MsLeft => [:click, false]})
 
     @window_info = TextBox.new(:size => 15)
-    @window_info.watch(@systems[FpsSystem])
+    @window_info.watch(@systems[FpsSystem], :size => 20)
     @window_info.watch(@systems[StalkerSystem])
     @window_info.watch(@cursor, :color => 0xffff0000)
-    @window_info.text("Click to start the simulation")
+    @window_info.text("Click to start the simulation", :color => 0xffffff00)
     @window_info.text("One will pursuit while the other evades, right click to center evader on screen")
 
-    @ruby_info = TextBox.new(:attach_to => @ruby, :size => 14)
-    @ruby_info.watch(@ruby)
+    @missile_info = TextBox.new(:attach_to => @big_missile, :size => 14)
+    @missile_info.watch(@big_missile)
   end
 
   def setup_events
     @cursor.on(:click) do |x,y|
-      @ruby.pursuer = @ruby2
-      @ruby2.evader = @ruby
+      @big_missile.pursuer = @little_missile
+      @little_missile.evader = @big_missile
     end
   end
 
-  def reset_ruby
-    @ruby.pos.x = width/2
-    @ruby.pos.y = height/2
+  def teleport_big_missile_to_midscreen
+    @big_missile.pos.x = width/2
+    @big_missile.pos.y = height/2
   end
 end
 
-Example.new.show
+# Create and start the application
+SteeringMissiles.new.show

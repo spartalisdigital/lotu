@@ -15,13 +15,10 @@ module Lotu
       @attached_to = opts[:attach_to]
     end
 
-    def text(text, opts={})
-      watch(text, opts)
-    end
-
     def watch(subject, opts={})
       @watch_list << [subject, opts]
     end
+    alias :text :watch
 
     def attach_to(actor)
       @attached_to = actor
