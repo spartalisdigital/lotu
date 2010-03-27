@@ -36,8 +36,9 @@ Gem::Specification.new do |s|
      "examples/media/images/lobo_tuerto.png",
      "examples/media/images/missile-med.png",
      "examples/media/images/silo.png",
-     "examples/screen_cursor/cursors.rb",
-     "examples/steering_behaviors/steering_missiles.rb",
+     "examples/screen_cursor/mouse_and_keyboard_cursors.rb",
+     "examples/steering_behaviors/pursuit_and_evade.rb",
+     "examples/steering_behaviors/pursuit_and_evade_multiple.rb",
      "lib/lotu.rb",
      "lib/lotu/actor.rb",
      "lib/lotu/behaviors/collidable.rb",
@@ -66,9 +67,10 @@ Gem::Specification.new do |s|
   s.summary = %q{A simple, agile Ruby game development framework.}
   s.test_files = [
     "test/actor_test.rb",
-     "examples/steering_behaviors/steering_missiles.rb",
+     "examples/steering_behaviors/pursuit_and_evade.rb",
+     "examples/steering_behaviors/pursuit_and_evade_multiple.rb",
      "examples/hello_world/moving_portraits.rb",
-     "examples/screen_cursor/cursors.rb"
+     "examples/screen_cursor/mouse_and_keyboard_cursors.rb"
   ]
 
   if s.respond_to? :specification_version then
