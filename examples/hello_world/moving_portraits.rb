@@ -10,7 +10,7 @@
 LIB_PATH = File.join(File.dirname(__FILE__), '..', '..', 'lib', 'lotu.rb')
 require File.expand_path(LIB_PATH)
 
-include Gosu::Button
+include Gosu
 include Lotu
 
 # We want to move something around the screen so we create a new Actor
@@ -28,21 +28,10 @@ class Lobo < Actor
   end
 
   # Let's define some basic movement methods
-  def move_right
-    @x += 1
-  end
-
-  def move_left
-    @x -= 1
-  end
-
-  def move_up
-    @y -= 1
-  end
-
-  def move_down
-    @y += 1
-  end
+  def move_right; @x += 1 end
+  def move_left;  @x -= 1 end
+  def move_up;    @y -= 1 end
+  def move_down;  @y += 1 end
 
 end
 

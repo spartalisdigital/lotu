@@ -9,7 +9,7 @@
 LIB_PATH = File.join(File.dirname(__FILE__), '..', '..', 'lib', 'lotu.rb')
 require File.expand_path(LIB_PATH)
 
-include Gosu::Button
+include Gosu
 include Lotu
 
 # Create a class for displaying something on screen
@@ -86,7 +86,8 @@ class Cursors < Game
     @cursor1 = Cursor.new(:image => 'crosshair-1.png',
                           :keys => {MsLeft => [:click, false]},
                           :width => 100,
-                          :rand_color => true)
+                          :rand_color => true,
+                          :mode => :additive)
 
     @cursor2 = Cursor.new(:image => 'crosshair-2.png',
                           :use_mouse => false,
@@ -97,7 +98,8 @@ class Cursors < Game
                             KbLeft => :left,
                             KbRight => :right},
                           :width => 100,
-                          :rand_color => true)
+                          :rand_color => true,
+                          :mode => :additive)
 
     # Center @cursor2 vertically and move it to the right 3/4 of the
     # screen

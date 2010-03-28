@@ -8,7 +8,7 @@
 LIB_PATH = File.join(File.dirname(__FILE__), '..', '..', 'lib', 'lotu.rb')
 require File.expand_path(LIB_PATH)
 
-include Gosu::Button
+include Gosu
 include Lotu
 
 # Let's define a Missile class that will use a Steering system to

@@ -30,6 +30,8 @@ module Lotu
       @color = rand_color if opts[:rand_color]
       @systems = {}
 
+      set_keys(opts[:keys]) unless opts[:keys].nil?
+
       # Add extra functionality
       self.extend Eventful
       self.extend Collidable
@@ -51,9 +53,13 @@ module Lotu
       @factor_x = opts[:factor_x] || @factor_x
       @factor_y = opts[:factor_y] || @factor_y
       @color = opts[:color] || @color
+      if @color.kind_of?(Integer)
+        @color = Gosu::Color.new(opts[:color])
+      end
       @mode = opts[:mode] || @mode
     end
 
+    # TODO: it seems easier with the HSV model
     def rand_color
       # Let's make some good looking random colors
       color_luck = [{:initial => 10, :color_range =>30}, # range: 10 - 39
@@ -87,28 +93,28 @@ module Lotu
     end
 
     def width=(width)
-      @width = width
+      @width = Float(width)
       calc_zoom
     end
 
     def height=(height)
-      @height = height
+      @height = Float(height)
       calc_zoom
     end
 
     def adjust_width_and_height(opts)
       if(opts[:width] && opts[:height])
-        @width = opts[:width]
-        @height = opts[:height]
+        @width = Float(opts[:width])
+        @height = Float(opts[:height])
       elsif(opts[:width])
-        @width = opts[:width]
+        @width = Float(opts[:width])
         @height = @width * @image.height / @image.width
       elsif(opts[:height])
-        @height = opts[:height]
+        @height = Float(opts[:height])
         @width = @height * @image.width / @image.height
       else
-        @width = @image.width
-        @height = @image.height
+        @width = Float(@image.width)
+        @height = Float(@image.height)
       end
     end
 

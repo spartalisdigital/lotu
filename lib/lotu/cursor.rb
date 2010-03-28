@@ -18,7 +18,6 @@ module Lotu
       @clicked_x = @clicked_y = 0
       @speed = opts[:speed]
       @use_mouse = opts[:use_mouse]
-      set_keys(opts[:keys]) unless opts[:keys].nil?
     end
 
     def update
