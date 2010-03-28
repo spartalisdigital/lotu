@@ -22,8 +22,8 @@ class Lobo < Actor
     # It's important to call super so we take advantage of automatic
     # management for this object (being added to draw and update queue)
     super
-    # Use the image which filename is "lobo_tuerto.png", and scale to
-    # half width and half height
+    # Use the image which filename is "lobo_tuerto.png", and scale
+    # it's appearance to half width and half height
     set_image 'lobo_tuerto.png', :factor_x => 0.5, :factor_y => 0.5
   end
 

@@ -7,7 +7,7 @@ module Lotu
     def initialize(opts={})
       default_opts = {
         :use_mouse => true,
-        :speed => 100,
+        :speed => 300,
         :x => $lotu.width/2,
         :y => $lotu.height/2
       }

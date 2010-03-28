@@ -51,7 +51,8 @@ class EvadeMultiple < Game
     set_keys(KbEscape => :close,
              MsRight => :teleport_big_missile_to_midscreen,
              KbD => [:debug!, false],
-             KbT => [:toggle_info, false])
+             KbT => [:toggle_info, false],
+             KbSpace => [:pause!, false])
   end
 
   def setup_systems

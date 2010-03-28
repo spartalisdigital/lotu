@@ -33,6 +33,14 @@ module Lotu
       setup_input
     end
 
+    def pause!
+      @pause = !@pause
+    end
+
+    def paused?
+      @pause
+    end
+
     def debug!
       @debug = !@debug
     end
@@ -81,7 +89,7 @@ module Lotu
       # Update each actor
       @update_queue.each do |actor|
         actor.update
-      end
+      end unless paused?
     end
 
     # Main draw loop
