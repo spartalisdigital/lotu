@@ -198,21 +198,10 @@ module Lotu
         @wander_target = Vector2d.new
         @pursuers = []
 
-        # Some colors for debugging
-        color_luck = [{:set => 10, :random =>30}, # range: 10 - 39
-                      {:set => 80,:random =>160}, # range: 80 - 239
-                      {:set => 220, :random => 36}] #range: 220 - 255
-        first = color_luck.delete_at(rand(color_luck.size))
-        red = rand(first[:random])+first[:set]
-        second = color_luck.delete_at(rand(color_luck.size))
-        green = rand(second[:random])+second[:set]
-        third = color_luck[0]
-        blue = rand(third[:random])+third[:set]
-        solid_color = Gosu::Color.new(255, red, green, blue)
         @colors = {
           :position => 0xff666666,
           :heading => 0xffff0000,
-          :target => solid_color
+          :target => rand_color
         }
       end
 

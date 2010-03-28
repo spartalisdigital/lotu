@@ -16,7 +16,7 @@ include Lotu
 class Lobo < Actor
   def initialize(opts={})
     super
-    set_image 'lobo_tuerto.png', :factor_x => 0.3, :factor_y => 0.3
+    set_image 'lobo_tuerto.png', :width => 100
   end
 
   # Define a method for teleporting our instances around
@@ -85,9 +85,8 @@ class Cursors < Game
     # setup_events
     @cursor1 = Cursor.new(:image => 'crosshair-1.png',
                           :keys => {MsLeft => [:click, false]},
-                          :color => 0xff0099ff,
                           :width => 100,
-                          :height => 100)
+                          :rand_color => true)
 
     @cursor2 = Cursor.new(:image => 'crosshair-2.png',
                           :use_mouse => false,
@@ -97,9 +96,8 @@ class Cursors < Game
                             KbDown => :down,
                             KbLeft => :left,
                             KbRight => :right},
-                          :color => 0xff99ff00,
-                          :factor_x => 0.5,
-                          :factor_y => 0.5)
+                          :width => 100,
+                          :rand_color => true)
 
     # Center @cursor2 vertically and move it to the right 3/4 of the
     # screen
@@ -110,8 +108,9 @@ class Cursors < Game
     # call the to_s method on the objects it's watching
     # Create a TextBox with default option :size => 15
     @info = TextBox.new(:size => 15)
+    @info.text("Press T to hide this text", :size => 24)
     # Watch the FPS, so we get a nice FPS report on the screen
-    @info.watch(@systems[FpsSystem])
+    @info.watch(@systems[FpsSystem], :size => 20)
     # Watch the Stalker system, so we know how many objects of the
     # classes we specified up in setup_systems are around
     @info.watch(@systems[StalkerSystem], :color => 0xff3ffccf)
@@ -119,10 +118,12 @@ class Cursors < Game
     @info.text("@cursor1 data:", :size => 20)
     @info.text("move with Mouse | click with LeftMouseButton")
     # And color
-    @info.watch(@cursor1, :color => 0xff0099ff)
+    @info.watch(@cursor1, :color => @cursor1.color)
+
+    # Lets watch @cursor2 too
     @info.text("@cursor2 data:", :size => 20)
     @info.text("move with Arrow keys | click with Space")
-    @info.watch(@cursor2, :color => 0xff99ff00)
+    @info.watch(@cursor2, :color => @cursor2.color)
     @info.text("click to teleport the portrait!")
   end
 

@@ -72,12 +72,14 @@ class SteeringMissiles < Game
     @little_missile.play_animation('missile.png', :fps => 60, :height => 20)
 
     @cursor = Cursor.new(:image => 'crosshair-3.png',
-                         :keys => {MsLeft => [:click, false]})
+                         :keys => {MsLeft => [:click, false]},
+                         :rand_color => true)
 
     @window_info = TextBox.new(:size => 15)
+    @window_info.text("Press T to hide this text", :size => 24)
     @window_info.watch(@systems[FpsSystem], :size => 20)
-    @window_info.watch(@systems[StalkerSystem])
-    @window_info.watch(@cursor, :color => 0xffff0000)
+    @window_info.watch(@systems[StalkerSystem], :color => 0xff33ccff)
+    @window_info.watch(@cursor, :color => @cursor.color)
     @window_info.text("Click to start the simulation", :color => 0xffffff00)
     @window_info.text("One will pursuit while the other evades, right click to center evader on screen")
 
@@ -99,6 +101,7 @@ class SteeringMissiles < Game
 
   def toggle_missile_info
     @missile_info.toggle!
+    @window_info.toggle!
   end
 end
 

@@ -27,6 +27,7 @@ module Lotu
       @parent.manage_me(self)
       set_image(opts[:image], opts) if opts[:image]
       parse_options(opts)
+      @color = rand_color if opts[:rand_color]
       @systems = {}
 
       # Add extra functionality
@@ -51,6 +52,20 @@ module Lotu
       @factor_y = opts[:factor_y] || @factor_y
       @color = opts[:color] || @color
       @mode = opts[:mode] || @mode
+    end
+
+    def rand_color
+      # Let's make some good looking random colors
+      color_luck = [{:initial => 10, :color_range =>30}, # range: 10 - 39
+                    {:initial => 80,:color_range =>160}, # range: 80 - 239
+                    {:initial => 220, :color_range => 36}] #range: 220 - 255
+      first = color_luck.delete(color_luck.sample)
+      red = first[:initial] + rand(first[:color_range])
+      second = color_luck.delete(color_luck.sample)
+      green = second[:initial] + rand(second[:color_range])
+      third = color_luck[0]
+      blue = third[:initial] + rand(third[:color_range])
+      Gosu::Color.new(255, red, green, blue)
     end
 
     def set_image(image, opts={})

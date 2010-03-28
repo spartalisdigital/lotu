@@ -8,7 +8,13 @@ module Lotu
     include SystemUser
 
     def initialize(opts={})
-      super(800, 600, false)
+      default_opts = {
+        :width => 1024,
+        :height => 768,
+        :fullscreen => false
+      }
+      opts = default_opts.merge!(opts)
+      super(opts[:width], opts[:height], opts[:fullscreen])
 
       # Handy global window variable
       $lotu = self

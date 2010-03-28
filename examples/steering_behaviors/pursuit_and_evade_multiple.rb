@@ -51,7 +51,7 @@ class EvadeMultiple < Game
     set_keys(KbEscape => :close,
              MsRight => :teleport_big_missile_to_midscreen,
              KbD => [:debug!, false],
-             KbT => [:toggle_missile_info, false])
+             KbT => [:toggle_info, false])
   end
 
   def setup_systems
@@ -69,18 +69,20 @@ class EvadeMultiple < Game
 
     @little_missiles = []
     5.times do |i|
-      @little_missiles << Missile.new(:x => 200 - rand(400), :y => 200 - rand(400))
+      @little_missiles << Missile.new(:x => 200 - rand(400), :y => 200 - rand(400), :rand_color => true)
       @little_missiles[i].activate(:pursuit)
-      @little_missiles[i].play_animation('missile.png', :fps => 60, :height => 20)
+      @little_missiles[i].play_animation('missile.png', :fps => 60+rand(60), :height => 10+rand(30))
     end
 
     @cursor = Cursor.new(:image => 'crosshair-3.png',
-                         :keys => {MsLeft => [:click, false]})
+                         :keys => {MsLeft => [:click, false]},
+                         :rand_color => true)
 
     @window_info = TextBox.new(:size => 15)
+    @window_info.text("Press T to hide this text", :size => 24)
     @window_info.watch(@systems[FpsSystem], :size => 20)
-    @window_info.watch(@systems[StalkerSystem])
-    @window_info.watch(@cursor, :color => 0xffff0000)
+    @window_info.watch(@systems[StalkerSystem], :color => 0xff33ccff)
+    @window_info.watch(@cursor, :color => @cursor.color)
     @window_info.text("Click to start the simulation", :color => 0xffffff00)
     @window_info.text("Little missiles will pursuit while the big one evades, right click to center big one on screen")
 
@@ -102,8 +104,9 @@ class EvadeMultiple < Game
     @big_missile.pos.y = height/2
   end
 
-  def toggle_missile_info
+  def toggle_info
     @missile_info.toggle!
+    @window_info.toggle!
   end
 
 end
