@@ -59,19 +59,8 @@ module Lotu
       @mode = opts[:mode] || @mode
     end
 
-    # TODO: it seems easier with the HSV model
     def rand_color
-      # Let's make some good looking random colors
-      color_luck = [{:initial => 10, :color_range =>30}, # range: 10 - 39
-                    {:initial => 80,:color_range =>160}, # range: 80 - 239
-                    {:initial => 220, :color_range => 36}] #range: 220 - 255
-      first = color_luck.delete(color_luck.sample)
-      red = first[:initial] + rand(first[:color_range])
-      second = color_luck.delete(color_luck.sample)
-      green = second[:initial] + rand(second[:color_range])
-      third = color_luck[0]
-      blue = third[:initial] + rand(third[:color_range])
-      Gosu::Color.new(255, red, green, blue)
+      Gosu::Color.from_hsv(rand(360), 1, 1)
     end
 
     def set_image(image, opts={})
