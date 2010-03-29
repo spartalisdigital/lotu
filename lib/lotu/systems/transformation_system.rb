@@ -75,12 +75,46 @@ module Lotu
         @systems[TransformationSystem].transform(object, property, opts)
       end
 
+      # Image helpers
       def transform_angle(opts)
         transform(self, :angle, opts)
       end
 
+      def transform_width(opts)
+        transform(self, :width, opts)
+      end
+
+      def transform_height(opts)
+        transform(self, :height, opts)
+      end
+
+      # Color helpers
       def transform_alpha(opts)
         transform(@color, :alpha, opts.merge!(:on_result => :to_i))
+      end
+
+      def transform_red(opts)
+        transform(@color, :red, opts.merge!(:on_result => :to_i))
+      end
+
+      def transform_green(opts)
+        transform(@color, :green, opts.merge!(:on_result => :to_i))
+      end
+
+      def transform_blue(opts)
+        transform(@color, :blue, opts.merge!(:on_result => :to_i))
+      end
+
+      def transform_hue(opts)
+        transform(@color, :hue, opts)
+      end
+
+      def transform_saturation(opts)
+        transform(@color, :saturation, opts)
+      end
+
+      def transform_value(opts)
+        transform(@color, :value, opts)
       end
     end
 
