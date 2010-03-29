@@ -80,7 +80,7 @@ module Lotu
       end
 
       def transform_alpha(opts)
-        transform(@color, :alpha, opts)
+        transform(@color, :alpha, opts.merge!(:on_result => :to_i))
       end
     end
 
