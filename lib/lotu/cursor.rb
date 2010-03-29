@@ -21,6 +21,7 @@ module Lotu
     end
 
     def update
+      super
       if @use_mouse
         @x = $lotu.mouse_x
         @y = $lotu.mouse_y
