@@ -33,35 +33,17 @@ module Lotu
         if t[:accum_time] > t[:start_in]
           step = (t[:end] - t[:init])/t[:duration] * dt
           t[:calc] += step
-          if step > 0
-            if t[:init] + t[:calc] > t[:end]
-              if t[:loop] || (t[:bounce] && !t[:bouncing_back])
-                t[:calc] = 0
-              else
-                t[:calc] = t[:end] - t[:init]
-                tag_for_deletion(t)
-              end
-              if t[:bounce]
-                t[:bouncing_back] = !t[:bouncing_back]
-                t[:init], t[:end] = t[:end], t[:init]
-              end
+          tag_for_deletion(t) if step == 0
+          if(t[:init] + t[:calc] > t[:end] && step > 0) || (t[:init] + t[:calc] < t[:end] && step < 0)
+            if t[:loop] || (t[:bounce] && !t[:bouncing_back])
+              t[:calc] = 0
+            else
+              t[:calc] = t[:end] - t[:init]
+              tag_for_deletion(t)
             end
-          else
-            if t[:init] + t[:calc] < t[:end]
-              if t[:loop] || (t[:bounce] && !t[:bouncing_back])
-                t[:calc] = 0
-                if t[:bounce] && !t[:bouncing_back]
-                  t[:bouncing_back] = true
-                  t[:init], t[:end] = t[:end], t[:init]
-                end
-              else
-                t[:calc] = t[:end] - t[:init]
-                tag_for_deletion(t)
-              end
-              if t[:bounce]
-                t[:bouncing_back] = !t[:bouncing_back]
-                t[:init], t[:end] = t[:end], t[:init]
-              end
+            if t[:bounce]
+              t[:bouncing_back] = !t[:bouncing_back]
+              t[:init], t[:end] = t[:end], t[:init]
             end
           end
           value = t[:init] + t[:calc]

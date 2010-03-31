@@ -57,9 +57,9 @@ class Cursors < Game
   # Setup some input handling for our Cursors app
   def setup_input
     set_keys(KbEscape => :close,
-             KbD => [:debug!, false],
-             KbT => [:toggle_text, false],
-             KbSpace => [:pause!, false])
+             KbF1 => [:toggle_text, false],
+             KbF2 => [:debug!, false],
+             KbF3 => [:pause!, false])
   end
 
   # Now onto define some events
@@ -93,7 +93,7 @@ class Cursors < Game
     # with an initial value of 0 degrees, to 359 degrees (full
     # circle), do it in a time frame of 10 seconds, and when done,
     # start over again
-    @cursor1.transform_angle(:init => 0, :end => 359, :duration => 5, :start_in => 3, :bounce => true, :loop => true)
+    @cursor1.transform_angle(:init => 0, :end => 359, :duration => 10, :start_in => 3, :bounce => true, :loop => true)
 
     @cursor2 = Cursor.new(:image => 'crosshair-2.png',
                           :use_mouse => false,
@@ -110,7 +110,7 @@ class Cursors < Game
     # with an initial value of 359 degrees, to 0 degrees (full
     # circle in reverse), do it in a time frame of 1 second, and
     # when done, start over again
-    @cursor2.transform_angle(:init => 359, :end => 0, :duration => 1, :loop => true)
+    @cursor2.transform_angle(:init => 359, :end => 0, :duration => 1, :loop => true, :start_in => 2)
 
     # Center @cursor2 vertically and move it to the right 3/4 of the
     # screen
@@ -121,7 +121,7 @@ class Cursors < Game
     # call the to_s method on the objects it's watching
     # Create a TextBox with default option :size => 15
     @info = TextBox.new(:size => 15)
-    @info.text("Press T to hide this text", :size => 24)
+    @info.text("Press F1 to hide this text", :size => 24)
     # Watch the FPS, so we get a nice FPS report on the screen
     @info.watch(@systems[FpsSystem], :size => 20)
     # Watch the Stalker system, so we know how many objects of the
@@ -132,7 +132,6 @@ class Cursors < Game
     @info.text("move with Mouse | click with LeftMouseButton")
     # And color
     @info.watch(@cursor1, :color => @cursor1.color)
-    @info.watch(@cursor1.systems[TransformationSystem])
 
     # Lets watch @cursor2 too
     @info.text("@cursor2 data:", :size => 20)
