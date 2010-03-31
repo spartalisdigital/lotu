@@ -50,8 +50,8 @@ class EvadeMultiple < Game
   def setup_input
     set_keys(KbEscape => :close,
              MsRight => :teleport_big_missile_to_midscreen,
-             KbD => [:debug!, false],
-             KbT => [:toggle_info, false],
+             KbF2 => [:debug!, false],
+             KbF1 => [:toggle_info, false],
              KbSpace => [:pause!, false])
   end
 
@@ -80,7 +80,7 @@ class EvadeMultiple < Game
                          :rand_color => true)
 
     @window_info = TextBox.new(:size => 15)
-    @window_info.text("Press T to hide this text", :size => 24)
+    @window_info.text("Press F1 to hide this text", :size => 24)
     @window_info.watch(@systems[FpsSystem], :size => 20)
     @window_info.watch(@systems[StalkerSystem], :color => 0xff33ccff)
     @window_info.watch(@cursor, :color => @cursor.color)
