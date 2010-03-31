@@ -20,7 +20,9 @@ module Lotu
         :duration => opts[:duration] || 1,
         :start_in => opts[:start_in] || 0,
         :on_result => opts[:on_result],
-        :loop => opts[:loop]
+        :loop => opts[:loop],
+        :bounce => opts[:bounce],
+        :bouncing_back => false
       }
       @transformations << transformation
     end
@@ -33,20 +35,32 @@ module Lotu
           t[:calc] += step
           if step > 0
             if t[:init] + t[:calc] > t[:end]
-              if t[:loop]
+              if t[:loop] || (t[:bounce] && !t[:bouncing_back])
                 t[:calc] = 0
               else
                 t[:calc] = t[:end] - t[:init]
                 tag_for_deletion(t)
               end
+              if t[:bounce]
+                t[:bouncing_back] = !t[:bouncing_back]
+                t[:init], t[:end] = t[:end], t[:init]
+              end
             end
           else
             if t[:init] + t[:calc] < t[:end]
-              if t[:loop]
+              if t[:loop] || (t[:bounce] && !t[:bouncing_back])
                 t[:calc] = 0
+                if t[:bounce] && !t[:bouncing_back]
+                  t[:bouncing_back] = true
+                  t[:init], t[:end] = t[:end], t[:init]
+                end
               else
                 t[:calc] = t[:end] - t[:init]
                 tag_for_deletion(t)
+              end
+              if t[:bounce]
+                t[:bouncing_back] = !t[:bouncing_back]
+                t[:init], t[:end] = t[:end], t[:init]
               end
             end
           end

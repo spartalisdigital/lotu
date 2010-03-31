@@ -58,7 +58,8 @@ class Cursors < Game
   def setup_input
     set_keys(KbEscape => :close,
              KbD => [:debug!, false],
-             KbT => [:toggle_text, false])
+             KbT => [:toggle_text, false],
+             KbSpace => [:pause!, false])
   end
 
   # Now onto define some events
@@ -92,7 +93,7 @@ class Cursors < Game
     # with an initial value of 0 degrees, to 359 degrees (full
     # circle), do it in a time frame of 10 seconds, and when done,
     # start over again
-    @cursor1.transform_angle(:init => 0, :end => 359, :duration => 10, :loop => true)
+    @cursor1.transform_angle(:init => 0, :end => 359, :duration => 5, :start_in => 3, :bounce => true, :loop => true)
 
     @cursor2 = Cursor.new(:image => 'crosshair-2.png',
                           :use_mouse => false,
@@ -131,6 +132,7 @@ class Cursors < Game
     @info.text("move with Mouse | click with LeftMouseButton")
     # And color
     @info.watch(@cursor1, :color => @cursor1.color)
+    @info.watch(@cursor1.systems[TransformationSystem])
 
     # Lets watch @cursor2 too
     @info.text("@cursor2 data:", :size => 20)
