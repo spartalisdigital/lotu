@@ -1,15 +1,16 @@
+# -*- coding: utf-8 -*-
 module Lotu
-  class TransformationSystem < System
+  class InterpolationSystem < System
 
     def initialize(user, opts={})
       super
       user.extend(UserMethods)
-      @transformations = []
+      @interpolations = []
       @tagged_for_deletion = []
     end
 
-    def transform(object, property, opts)
-      transformation = {
+    def interpolate(object, property, opts)
+      interpolation = {
         :object => object,
         :property_getter => property,
         :property_setter => "#{property}=",
@@ -24,11 +25,12 @@ module Lotu
         :bounce => opts[:bounce],
         :bouncing_back => false
       }
-      @transformations << transformation
+      @interpolations << interpolation
     end
 
+    # TODO: incluir código para :loop_for => n
     def update
-      @transformations.each do |t|
+      @interpolations.each do |t|
         t[:accum_time] += dt
         if t[:accum_time] > t[:start_in]
           step = (t[:end] - t[:init])/t[:duration] * dt
@@ -53,64 +55,64 @@ module Lotu
       end
 
       @tagged_for_deletion.each do |to_delete|
-        @transformations.delete(to_delete)
+        @interpolations.delete(to_delete)
       end.clear
     end
 
-    def tag_for_deletion(transform)
-      @tagged_for_deletion << transform
+    def tag_for_deletion(interpolation)
+      @tagged_for_deletion << interpolation
     end
 
     def to_s
-      ["@transformations.length #{@transformations.length}",
+      ["@interpolations.length #{@interpolations.length}",
        "@tagged_for_deletion.length #{@tagged_for_deletion.length}"]
     end
 
     module UserMethods
-      def transform(object, property, opts)
-        @systems[TransformationSystem].transform(object, property, opts)
+      def interpolate(object, property, opts)
+        @systems[InterpolationSystem].interpolate(object, property, opts)
       end
 
       # Image helpers
-      def transform_angle(opts)
-        transform(self, :angle, opts)
+      def interpolate_angle(opts)
+        interpolate(self, :angle, opts)
       end
 
-      def transform_width(opts)
-        transform(self, :width, opts)
+      def interpolate_width(opts)
+        interpolate(self, :width, opts)
       end
 
-      def transform_height(opts)
-        transform(self, :height, opts)
+      def interpolate_height(opts)
+        interpolate(self, :height, opts)
       end
 
       # Color helpers
-      def transform_alpha(opts)
-        transform(@color, :alpha, opts.merge!(:on_result => :to_i))
+      def interpolate_alpha(opts)
+        interpolate(@color, :alpha, opts.merge!(:on_result => :to_i))
       end
 
-      def transform_red(opts)
-        transform(@color, :red, opts.merge!(:on_result => :to_i))
+      def interpolate_red(opts)
+        interpolate(@color, :red, opts.merge!(:on_result => :to_i))
       end
 
-      def transform_green(opts)
-        transform(@color, :green, opts.merge!(:on_result => :to_i))
+      def interpolate_green(opts)
+        interpolate(@color, :green, opts.merge!(:on_result => :to_i))
       end
 
-      def transform_blue(opts)
-        transform(@color, :blue, opts.merge!(:on_result => :to_i))
+      def interpolate_blue(opts)
+        interpolate(@color, :blue, opts.merge!(:on_result => :to_i))
       end
 
-      def transform_hue(opts)
-        transform(@color, :hue, opts)
+      def interpolate_hue(opts)
+        interpolate(@color, :hue, opts)
       end
 
-      def transform_saturation(opts)
-        transform(@color, :saturation, opts)
+      def interpolate_saturation(opts)
+        interpolate(@color, :saturation, opts)
       end
 
-      def transform_value(opts)
-        transform(@color, :value, opts)
+      def interpolate_value(opts)
+        interpolate(@color, :value, opts)
       end
     end
 

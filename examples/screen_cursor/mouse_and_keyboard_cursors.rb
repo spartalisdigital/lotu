@@ -89,11 +89,11 @@ class Cursors < Game
                           :width => 100,
                           :rand_color => true,
                           :mode => :additive)
-    # Use the transformation system to change our angle over time,
-    # with an initial value of 0 degrees, to 359 degrees (full
+    # Use the interpolation system to change our angle over time,
+    # with an initial value of 0 degrees, up to 359 degrees (full
     # circle), do it in a time frame of 10 seconds, and when done,
     # start over again
-    @cursor1.transform_angle(:init => 0, :end => 359, :duration => 10, :start_in => 3, :bounce => true, :loop => true)
+    @cursor1.interpolate_angle(:init => 0, :end => 359, :duration => 10, :start_in => 3, :bounce => true, :loop => true)
 
     @cursor2 = Cursor.new(:image => 'crosshair-2.png',
                           :use_mouse => false,
@@ -107,10 +107,10 @@ class Cursors < Game
                           :rand_color => true,
                           :mode => :additive)
     # Use the transformation system to change our angle over time,
-    # with an initial value of 359 degrees, to 0 degrees (full
+    # with an initial value of 359 degrees, up to 0 degrees (full
     # circle in reverse), do it in a time frame of 1 second, and
     # when done, start over again
-    @cursor2.transform_angle(:init => 359, :end => 0, :duration => 1, :loop => true, :start_in => 2)
+    @cursor2.interpolate_angle(:init => 359, :end => 0, :duration => 1, :loop => true, :start_in => 2)
 
     # Center @cursor2 vertically and move it to the right 3/4 of the
     # screen

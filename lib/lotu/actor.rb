@@ -36,7 +36,7 @@ module Lotu
       self.extend Eventful
       self.extend Collidable
       use(AnimationSystem)
-      use(TransformationSystem)
+      use(InterpolationSystem)
     end
 
     # Easy access to delta-time

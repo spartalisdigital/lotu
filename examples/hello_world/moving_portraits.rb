@@ -16,7 +16,7 @@ include Lotu
 # We want to move something around the screen so we create a new Actor
 # subclass, set the image all instances of it are going to use and
 # define the movement methods
-class Lobo < Actor
+class Portrait < Actor
 
   def initialize(opts={})
     # It's important to call super so we take advantage of automatic
@@ -64,7 +64,7 @@ class Portraits < Game
   # This method is called when we call super inside initialize
   def setup_actors
     # Create a lobo in the middle of the screen
-    @lobo1 = Lobo.new(:x => width/2, :y => height/2)
+    @lobo1 = Portrait.new(:x => width/2, :y => height/2)
     # Map keys to some methods
     @lobo1.set_keys(KbRight => :move_right,
                     KbLeft => :move_left,
@@ -72,7 +72,7 @@ class Portraits < Game
                     KbDown => :move_down)
 
     # Rinse and repeat... but invert some keys
-    @lobo2 = Lobo.new(:x => width/2, :y => height/2)
+    @lobo2 = Portrait.new(:x => width/2, :y => height/2)
     @lobo2.set_keys(KbRight => :move_left,
                     KbLeft => :move_right,
                     KbUp => :move_up,
