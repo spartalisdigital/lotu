@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{lotu}
-  s.version = "0.1.13"
+  s.version = "0.1.14"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["lobo_tuerto"]
-  s.date = %q{2010-03-31}
+  s.date = %q{2010-04-05}
   s.description = %q{lotu aims to bring an agile and simple game development framework to life. It provides useful abstractions so you can concentrate on developing your game.}
   s.email = %q{dev@lobotuerto.com}
   s.extra_rdoc_files = [
@@ -54,9 +54,9 @@ Gem::Specification.new do |s|
      "lib/lotu/systems/collision_system.rb",
      "lib/lotu/systems/fps_system.rb",
      "lib/lotu/systems/input_system.rb",
+     "lib/lotu/systems/interpolation_system.rb",
      "lib/lotu/systems/stalker_system.rb",
      "lib/lotu/systems/steering_system.rb",
-     "lib/lotu/systems/transformation_system.rb",
      "lib/lotu/text_box.rb",
      "lotu.gemspec",
      "test/actor_test.rb"
