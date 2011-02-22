@@ -30,15 +30,3 @@ describe "Game" do
   end
 
 end
-
-%Q{
-1.upto(100) do |i|
-   if i % 3 == 0 || i % 5 == 0
-     print 'Fizz' if i % 3 == 0
-     print 'Buzz' if i % 5 == 0
-   else
-    print i
-   end
-   print "\n"
-end
-}.size
