@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 module Lotu
-  class SteeringSystem
+  class SteeringSystem < System
 
     def initialize(user, opts={})
+      super
       # Add new functionality to Actor
-      user.extend UserMethods
+      @user.extend UserMethods
 
       # Initialize attributes
       default_opts = {
@@ -17,20 +18,19 @@ module Lotu
       }
       opts = default_opts.merge!(opts)
 
-      user.mass = opts[:mass]
-      user.max_speed = opts[:max_speed]
-      user.max_turn_rate = opts[:max_turn_rate]
-      user.max_force = opts[:max_force]
-      user.wander_radius = opts[:wander_radius]
-      user.wander_distance = opts[:wander_distance]
+      @user.mass = opts[:mass]
+      @user.max_speed = opts[:max_speed]
+      @user.max_turn_rate = opts[:max_turn_rate]
+      @user.max_force = opts[:max_force]
+      @user.wander_radius = opts[:wander_radius]
+      @user.wander_distance = opts[:wander_distance]
 
       # More attributes
-      @user = user
       @behaviors = {}
       @force = Vector2d.new
       @zero = Vector2d.new
-      user.pos.x = user.x
-      user.pos.y = user.y
+      @user.pos.x = user.x
+      @user.pos.y = user.y
     end
 
     def update

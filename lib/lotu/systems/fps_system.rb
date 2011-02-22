@@ -1,7 +1,8 @@
 module Lotu
-  class FpsSystem
+  class FpsSystem < System
 
     def initialize(user, opts={})
+      super
       default_opts = {
         :ticks_per_update => 10
       }
@@ -25,8 +26,6 @@ module Lotu
     def to_s
       "Ticks per update: #{@ticks_per_update} | FPS: #{format("%.2f",@fps)}"
     end
-
-    def draw;end
 
   end
 end

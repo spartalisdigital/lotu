@@ -19,6 +19,7 @@ module Lotu
       # Handy global window variable
       $lotu = self
       @debug = opts[:debug] || false
+      @pause = false
       setup_containers
 
       # For timer initialization
@@ -60,9 +61,6 @@ module Lotu
 
     # Setup various containers
     def setup_containers
-      # For systems
-      @systems = {}
-
       # For queues
       @update_queue = []
       @draw_queue = []
@@ -155,7 +153,7 @@ module Lotu
 
     def load_images(path)
       count = 0
-      with_files(/\.png|\.jpg|\.bmp/, path) do |file_name, file_path|
+      with_files(/\.png$|\.jpg$|\.bmp$/, path) do |file_name, file_path|
         count += 1
         @images[file_name] = Gosu::Image.new($lotu, file_path)
       end
@@ -164,7 +162,7 @@ module Lotu
 
     def load_sounds(path)
       count = 0
-      with_files(/\.ogg|\.mp3|\.wav/, path) do |file_name, file_path|
+      with_files(/\.ogg$|\.mp3$|\.wav$/, path) do |file_name, file_path|
         count += 1
         @sounds[file_name] = Gosu::Sample.new($lotu, file_path)
       end
@@ -173,7 +171,7 @@ module Lotu
 
     def load_songs(path)
       count = 0
-      with_files(/\.ogg|\.mp3|\.wav/, path) do |file_name, file_path|
+      with_files(/\.ogg$|\.mp3$|\.wav$/, path) do |file_name, file_path|
         count += 1
         @songs[file_name] = Gosu::Song.new($lotu, file_path)
       end
@@ -184,7 +182,7 @@ module Lotu
       count = 0
       coords = Hash.new{|h,k| h[k] = []}
 
-      with_files(/\.txt/, path) do |file_name, file_path|
+      with_files(/\.txt$/, path) do |file_name, file_path|
         name = File.basename(file_name, '.txt')
         File.open(file_path) do |file|
           file.lines.each do |line|
@@ -194,7 +192,7 @@ module Lotu
         false
       end
 
-      with_files(/\.png|\.jpg|\.bmp/, path) do |file_name, file_path|
+      with_files(/\.png$|\.jpg$|\.bmp$/, path) do |file_name, file_path|
         name, extension = file_name.split('.')
         count += 1 if coords[name]
         coords[name].each do |index, x, y, width, height|

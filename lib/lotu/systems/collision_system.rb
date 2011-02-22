@@ -1,8 +1,9 @@
 module Lotu
-  class CollisionSystem
+  class CollisionSystem < System
 
     def initialize(user, opts={})
-      user.extend UserMethods
+      super
+      @user.extend UserMethods
       @entities = Hash.new{ |h,k| h[k] = [] }
       @actions = {}
     end
@@ -28,8 +29,6 @@ module Lotu
         end
       end
     end
-
-    def draw;end
 
     module UserMethods
       def when_colliding(*args, &blk)

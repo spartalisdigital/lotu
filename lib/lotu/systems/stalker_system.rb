@@ -1,7 +1,8 @@
 module Lotu
-  class StalkerSystem
+  class StalkerSystem < System
 
     def initialize(user, opts={})
+      super
       default_opts = {
         :stalk => [Actor],
         :ticks_per_update => 30
@@ -30,8 +31,6 @@ module Lotu
         "#{type}: #{count}"
       end
     end
-
-    def draw;end
 
   end
 end

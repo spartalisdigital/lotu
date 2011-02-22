@@ -33,11 +33,11 @@ module Lotu
       @interpolations.each do |t|
         t[:accum_time] += dt
         if t[:accum_time] > t[:start_in]
-          step = (t[:end] - t[:init])/t[:duration] * dt
+          step = ( t[:end] - t[:init] )/t[:duration] * dt
           t[:calc] += step
-          tag_for_deletion(t) if step == 0
-          if(t[:init] + t[:calc] > t[:end] && step > 0) || (t[:init] + t[:calc] < t[:end] && step < 0)
-            if t[:loop] || (t[:bounce] && !t[:bouncing_back])
+          tag_for_deletion( t ) if step == 0
+          if( t[:init] + t[:calc] > t[:end] && step > 0 ) || ( t[:init] + t[:calc] < t[:end] && step < 0 )
+            if t[:loop] || ( t[:bounce] && !t[:bouncing_back] )
               t[:calc] = 0
             else
               t[:calc] = t[:end] - t[:init]
@@ -50,12 +50,13 @@ module Lotu
           end
           value = t[:init] + t[:calc]
           value = value.send(t[:on_result]) if t[:on_result]
-          t[:object].send(t[:property_setter], value)
+          t[:object].send( t[:property_setter], value )
         end
       end
 
       @tagged_for_deletion.each do |to_delete|
-        @interpolations.delete(to_delete)
+        #@interpolations.delete( to_delete )
+        @interpolations.delete_if{ |i| i.object_id == to_delete.object_id }
       end.clear
     end
 

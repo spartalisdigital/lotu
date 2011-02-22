@@ -28,7 +28,6 @@ module Lotu
       set_image(opts[:image], opts) if opts[:image]
       parse_options(opts)
       @color = rand_color if opts[:rand_color]
-      @systems = {}
 
       set_keys(opts[:keys]) unless opts[:keys].nil?
 

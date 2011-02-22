@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'rake'
+require 'psych' if RUBY_VERSION.include?( '1.9' )
 
 begin
   require 'jeweler'
@@ -10,7 +11,8 @@ begin
     gem.email = "dev@lobotuerto.com"
     gem.homepage = "http://github.com/lobo-tuerto/lotu"
     gem.authors = ["lobo_tuerto"]
-    gem.add_dependency "gosu", ">= 0.7.18"
+    gem.add_dependency "gosu", ">= 0.7.27.1"
+    gem.add_development_dependency "rspec", ">= 2.5.0"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
@@ -27,3 +29,12 @@ Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
+
+# rspec rake task stuff
+require 'rspec/core/rake_task'
+desc "Run the tests under spec"
+RSpec::Core::RakeTask.new do |t|
+end
+
+# default rake task
+task :default => :spec

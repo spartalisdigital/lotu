@@ -1,8 +1,9 @@
 module Lotu
-  class InputSystem
+  class InputSystem < System
 
     def initialize(user, opts={})
-      user.extend UserMethods
+      super
+      @user.extend UserMethods
       # Current ongoing actions (button is being pushed)
       @actions = []
       @unique_actions = []
@@ -55,8 +56,6 @@ module Lotu
         @actions.delete [client, action_name, rate]
       end
     end
-
-    def draw;end
 
     module UserMethods
       def set_keys(keys)
