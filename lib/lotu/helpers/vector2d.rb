@@ -4,7 +4,7 @@ module Lotu
     attr_reader :x, :y
 
     def self.up
-      new(0, -1)
+      @up ||= new(0, -1)
     end
 
     def initialize(x=0, y=0)

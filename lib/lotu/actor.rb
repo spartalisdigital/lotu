@@ -1,7 +1,13 @@
 module Lotu
   class Actor
     extend Behavior
-    behave_like SystemUser, :use => {AnimationSystem=>nil, InterpolationSystem=>nil}
+
+    behave_like SystemUser
+    use AnimationSystem
+    use InterpolationSystem
+
+    behave_like Eventful
+    behave_like Collidable
     behave_like Controllable
 
     attr_accessor :parent, :x, :y,
@@ -23,8 +29,6 @@ module Lotu
         :mode => :default,
         :parent => $lotu
       }
-      # so it can start behaving
-      setup_behavior
 
       opts = default_opts.merge!(opts)
       @parent = opts[:parent]
@@ -32,12 +36,10 @@ module Lotu
       set_image(opts[:image], opts) if opts[:image]
       parse_options(opts)
       @color = rand_color if opts[:rand_color]
-
       set_keys(opts[:keys]) unless opts[:keys].nil?
 
-      # Add extra functionality
-      self.extend Eventful
-      self.extend Collidable
+      # so it can start behaving
+      init_behavior opts
     end
 
     # Easy access to delta-time

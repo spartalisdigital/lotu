@@ -2,7 +2,7 @@ require 'lotu'
 
 describe "Game" do
   it_should_behave_like "system user"
-  it_should_behave_like "resource user"
+  it_should_behave_like "resource manager"
 
   before :all do
     @game = Lotu::Game.new #:debug => true

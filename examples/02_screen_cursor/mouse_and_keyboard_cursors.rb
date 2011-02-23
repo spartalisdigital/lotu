@@ -14,43 +14,24 @@ include Lotu
 
 # Create a class for displaying something on screen
 class Lobo < Actor
-  def initialize(opts={})
+  def initialize( opts={} )
     super
     set_image 'lobo_tuerto.png', :width => 100
   end
 
   # Define a method for teleporting our instances around
-  def teleport(x, y)
+  def teleport( x, y )
     @x, @y = x, y
   end
 end
 
 class Cursors < Game
-  behave_like SystemUser, :use => {StalkerSystem => [Actor, Cursor, TextBox, Lobo, Object]}
-
-  def initialize
-    # This will call the hooks:
-    # load_resources, setup_systems, setup_input and setup_actors
-    # declared in the parent class
-    super
-    # Custom setup methods for this class
-    setup_events
-  end
+  use StalkerSystem, :stalk => [Actor, Cursor, TextBox, Lobo, Object]
 
   def load_resources
     with_path_from_file(__FILE__) do
       load_images '../media/images'
     end
-  end
-
-  def setup_systems
-    # It's important to call super here to setup the InputManagerSystem in
-    # the parent class
-    super
-    # To use the systems lotu provides, you just "use" them
-    # Activate the stalker system to track how many objects of these
-    # classes are around
-    #use(StalkerSystem, :stalk => [Actor, Cursor, TextBox, Lobo, Object])
   end
 
   # Setup some input handling for our Cursors app
@@ -124,7 +105,7 @@ class Cursors < Game
     # Watch the FPS, so we get a nice FPS report on the screen
     @info.watch(lambda{ "FPS: #{ fps }" }, :size => 20)
     # Watch the Stalker system, so we know how many objects of the
-    # classes we specified up in setup_systems are around
+    # classes we specified up in "use StalkerSystem" are around
     @info.watch( @systems[StalkerSystem], :color => 0xff3ffccf )
     # We can change the size for a specific line of text
     @info.text("@cursor1 data:", :size => 20)

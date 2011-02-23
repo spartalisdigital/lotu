@@ -3,13 +3,18 @@ module Lotu
 
     attr_accessor :systems
 
-    def setup_behavior
+    def self.included base
+      base.extend ClassMethods
+    end
+
+    def init_behavior opts
       super if defined? super
       @systems ||= Hash.new
 
-      self.class.options[SystemUser][:use] &&
-        self.class.options[SystemUser][:use].each do |k,v|
-        use(k,v)
+      self.class.behavior_options[SystemUser] &&
+        self.class.behavior_options[SystemUser].each do |klass, options|
+        @systems[klass] = klass.new( self, options.empty?? opts : options )
+        #@systems[klass]
       end
     end
 
@@ -29,9 +34,10 @@ module Lotu
     end
 
     # Allows to activate a system in the host
-    def use( klass, opts={} )
-      @systems[klass] = klass.new( self, opts )
-      @systems[klass]
+    module ClassMethods
+      def use( klass, opts={} )
+        behavior_options[SystemUser][klass] = opts
+      end
     end
 
   end

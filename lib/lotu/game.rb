@@ -1,8 +1,11 @@
 module Lotu
   class Game < Gosu::Window
     extend Behavior
-    behave_like SystemUser, :use => {InputManagerSystem => nil}
-    behave_like ResourceUser
+
+    behave_like SystemUser
+    use InputManagerSystem
+
+    behave_like ResourceManager
 
     # Accessors for elapsed time since last update (time delta) and fonts
     attr_reader :dt
@@ -28,13 +31,13 @@ module Lotu
       @last_time = Gosu::milliseconds
 
       # so it can start behaving
-      setup_behavior
+      init_behavior opts
 
       # Call hook methods
       load_resources
       setup_actors
       setup_input
-      setup_systems
+      setup_events
     end
 
     def fps
@@ -61,7 +64,7 @@ module Lotu
     def load_resources; end
     def setup_actors; end
     def setup_input; end
-    def setup_systems; end
+    def setup_events; end
 
     # Setup various containers
     def setup_containers

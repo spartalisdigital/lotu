@@ -14,12 +14,7 @@ include Lotu
 # Let's define a Missile class that will use a Steering system to
 # control it's movement
 class Missile < Actor
-  def initialize(opts={})
-    super
-    # Activate the steering system and pass the opts, since they might
-    # have some config info for the system
-    use(SteeringSystem, opts)
-  end
+  use SteeringSystem
 
   def teleport(x, y)
     @pos.x, @pos.y = x, y
@@ -28,16 +23,7 @@ end
 
 # The main app class
 class SteeringMissiles < Game
-  behave_like SystemUser, :use => {StalkerSystem => [Actor, Missile, Vector2d, Object]}
-  def initialize
-    # This will call the hooks:
-    # load_resources, setup_systems, setup_input and setup_actors
-    # declared in the parent class
-    super
-    # Custom setup methods for this class
-    setup_events
-    #use(StalkerSystem, :stalk => [Actor, Missile, Vector2d, Object])
-  end
+  use StalkerSystem, :stalk => [Actor, Missile, Vector2d, Object]
 
   # Let's load some images and animations, check out the animations
   # directory, the animation there was created with:

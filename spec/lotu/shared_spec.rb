@@ -1,10 +1,12 @@
 shared_examples_for "system user" do
   it{ @user.should be_kind_of Lotu::SystemUser }
-  it{ @user.should respond_to :use }
+  describe "the user class" do
+    it{ @user.class.should respond_to :use }
+  end
 end
 
-shared_examples_for "resource user" do
-  it{ @user.should be_kind_of Lotu::ResourceUser }
+shared_examples_for "resource manager" do
+  it{ @user.should be_kind_of Lotu::ResourceManager }
   it{ @user.should respond_to :image }
   it{ @user.should respond_to :images }
   it{ @user.should respond_to :sound }

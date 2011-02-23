@@ -1,9 +1,9 @@
 module Lotu
-  module ResourceUser
+  module ResourceManager
 
     attr_accessor :images, :sounds, :songs, :animations, :default_font
 
-    def setup_behavior
+    def init_behavior opts
       super if defined? super
       @images = {}
       @sounds = {}
@@ -37,8 +37,8 @@ module Lotu
     def load_images( path )
       count = 0
       with_files(/\.png$|\.jpg$|\.bmp$/, path) do |file_name, file_path|
-        count += 1
         @images[file_name] = Gosu::Image.new($lotu, file_path)
+        count += 1
       end
       puts "\n#{count} image(s) loaded."
     end
@@ -46,8 +46,8 @@ module Lotu
     def load_sounds(path)
       count = 0
       with_files(/\.ogg$|\.mp3$|\.wav$/, path) do |file_name, file_path|
-        count += 1
         @sounds[file_name] = Gosu::Sample.new($lotu, file_path)
+        count += 1
       end
       puts "\n#{count} sounds(s) loaded."
     end
@@ -55,8 +55,8 @@ module Lotu
     def load_songs(path)
       count = 0
       with_files(/\.ogg$|\.mp3$|\.wav$/, path) do |file_name, file_path|
-        count += 1
         @songs[file_name] = Gosu::Song.new($lotu, file_path)
+        count += 1
       end
       puts "\n#{count} song(s) loaded."
     end
@@ -77,10 +77,10 @@ module Lotu
 
       with_files(/\.png$|\.jpg$|\.bmp$/, path) do |file_name, file_path|
         name, extension = file_name.split('.')
-        count += 1 if coords[name]
         coords[name].each do |index, x, y, width, height|
           @animations[file_name] << Gosu::Image.new($lotu, file_path, true, x, y, width, height)
         end
+        count += 1 if coords[name]
       end
       puts "\n#{count} animation(s) loaded."
     end

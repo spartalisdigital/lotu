@@ -4,6 +4,7 @@ module Lotu
 
     def initialize(user, opts={})
       super
+
       # Add new functionality to Actor
       @user.extend UserMethods
 
@@ -17,7 +18,6 @@ module Lotu
         :wander_distance => 240.0
       }
       opts = default_opts.merge!(opts)
-
       @user.mass = opts[:mass]
       @user.max_speed = opts[:max_speed]
       @user.max_turn_rate = opts[:max_turn_rate]

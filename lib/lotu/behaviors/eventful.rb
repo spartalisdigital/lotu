@@ -18,11 +18,8 @@
 module Lotu
   module Eventful
 
-    def self.extended(instance)
-      instance.init_behavior
-    end
-
-    def init_behavior
+    def init_behavior opts
+      super if defined? super
       @events = {}
     end
 

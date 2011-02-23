@@ -5,7 +5,8 @@ module Lotu
       instance.init_behavior
     end
 
-    def init_behavior
+    def init_behavior opts
+      super if defined? super
       @collision_tag = nil
     end
 

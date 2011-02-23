@@ -38,11 +38,11 @@ end
 
 # Let's subclass the Game class and write some code!
 class MyPortraits < Game
-  behave_like SystemUser, :use => {StalkerSystem => [Actor, TextBox, Portrait, Object]}
+  use StalkerSystem, :stalk => [Actor, TextBox, Portrait, Object]
 
   def initialize
     # This will call the hooks:
-    # load_resources, setup_systems, setup_input and setup_actors
+    # load_resources, setup_actors, setup_input and setup_events
     # declared in the parent class
     super
     # When the Escape key is pressed, call the close method on our
@@ -52,8 +52,6 @@ class MyPortraits < Game
     # (zero and no array is the same)
     set_keys(KbEscape => :close,
              KbD => [:debug!, false])
-    # TODO: Hacer que esto funcione aquí
-    #use( StalkerSystem, :stalk => [Actor, TextBox, Portrait, Object])
   end
 
   # This method is called when we call super inside initialize
