@@ -1,9 +1,12 @@
 require 'lotu'
 
 describe "Actor" do
+  it_should_behave_like "system user"
+
   before :each do
     @game = Lotu::Game.new
     @actor = Lotu::Actor.new
+    @user = @actor
   end
 
   after :each do

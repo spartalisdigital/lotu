@@ -46,9 +46,6 @@ class Cursors < Game
     # the parent class
     super
     # To use the systems lotu provides, you just "use" them
-    # Let's activate the FPS system, so we can track the frames per
-    #second our app is pushing out
-    use(FpsSystem)
     # Activate the stalker system to track how many objects of these
     # classes are around
     use(StalkerSystem, :stalk => [Actor, Cursor, TextBox, Lobo, Object])
@@ -123,7 +120,7 @@ class Cursors < Game
     @info = TextBox.new(:size => 15)
     @info.text("Press F1 to hide this text", :size => 24)
     # Watch the FPS, so we get a nice FPS report on the screen
-    @info.watch(@systems[FpsSystem], :size => 20)
+    @info.watch(lambda{ "FPS: #{ fps }" }, :size => 20)
     # Watch the Stalker system, so we know how many objects of the
     # classes we specified up in setup_systems are around
     @info.watch(@systems[StalkerSystem], :color => 0xff3ffccf)

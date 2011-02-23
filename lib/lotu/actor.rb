@@ -1,6 +1,6 @@
 module Lotu
   class Actor
-    attr_accessor :parent, :x, :y, :systems,
+    attr_accessor :parent, :x, :y,
     :z, :angle, :center_x, :center_y,
     :factor_x, :factor_y, :color, :mode, :image,
     :width, :height

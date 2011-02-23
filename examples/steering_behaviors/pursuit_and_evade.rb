@@ -57,7 +57,6 @@ class SteeringMissiles < Game
   def setup_systems
     # It's important to call super here to setup the InputSystem
     super
-    use(FpsSystem)
     use(StalkerSystem, :stalk => [Actor, Missile, Vector2d, Object])
   end
 
@@ -77,7 +76,7 @@ class SteeringMissiles < Game
 
     @window_info = TextBox.new(:size => 15)
     @window_info.text("Press F1 to hide this text", :size => 24)
-    @window_info.watch(@systems[FpsSystem], :size => 20)
+    @window_info.watch(lambda{ "FPS: #{fps}" }, :size => 20)
     @window_info.watch(@systems[StalkerSystem], :color => 0xff33ccff)
     @window_info.watch(@cursor, :color => @cursor.color)
     @window_info.text("Click to start the simulation", :color => 0xffffff00)

@@ -82,6 +82,7 @@ class MyPortraits < Game
     @info = TextBox.new
     # Add some text
     @info.text("Hello world!")
+    @info.watch lambda{ "FPS: #{ fps }" }
     # Add more text, but specify the color and size in pixels
     @info.text("Move the portraits around with arrow keys", :size => 16, :color => 0xff33ccff)
   end

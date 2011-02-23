@@ -51,13 +51,17 @@ module Lotu
       @watch_list.each do |watched, opts|
         my_size = opts[:size] || @size
         my_color = opts[:color] || @color
-        my_text = watched.to_s
+        if watched.kind_of?(Proc)
+          my_text = watched.call.to_s
+        else
+          my_text = watched.to_s
+        end
         if my_text.is_a?(String)
-          $lotu.fonts[my_size].draw(my_text, @x, @y + pos_y, @z, @factor_x, @factor_y, my_color)
+          $lotu.default_font[my_size].draw(my_text, @x, @y + pos_y, @z, @factor_x, @factor_y, my_color)
           pos_y += my_size
         else
           my_text.each do |line|
-            $lotu.fonts[my_size].draw(line, @x, @y + pos_y, @z, @factor_x, @factor_y, my_color)
+            $lotu.default_font[my_size].draw(line, @x, @y + pos_y, @z, @factor_x, @factor_y, my_color)
             pos_y += my_size
           end
         end
