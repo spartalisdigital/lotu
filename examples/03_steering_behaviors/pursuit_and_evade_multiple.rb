@@ -28,6 +28,7 @@ end
 
 # The main app class
 class EvadeMultiple < Game
+  behave_like SystemUser, :use => {StalkerSystem => [Actor, Missile, Vector2d, Object]}
   def initialize
     # This will call the hooks:
     # load_resources, setup_systems, setup_input and setup_actors
@@ -35,6 +36,7 @@ class EvadeMultiple < Game
     super
     # Custom setup methods for this class
     setup_events
+    #use(StalkerSystem, :stalk => [Actor, Missile, Vector2d, Object])
   end
 
   # Let's load some images and animations, check out the animations
@@ -53,12 +55,6 @@ class EvadeMultiple < Game
              KbF2 => [:debug!, false],
              KbF1 => [:toggle_info, false],
              KbSpace => [:pause!, false])
-  end
-
-  def setup_systems
-    # It's important to call super here to setup the InputSystem
-    super
-    use(StalkerSystem, :stalk => [Actor, Missile, Vector2d, Object])
   end
 
   def setup_actors
@@ -81,7 +77,7 @@ class EvadeMultiple < Game
     @window_info = TextBox.new(:size => 15)
     @window_info.text("Press F1 to hide this text", :size => 24)
     @window_info.watch(lambda{ "FPS: #{fps}" }, :size => 20)
-    @window_info.watch(@systems[StalkerSystem], :color => 0xff33ccff)
+    @window_info.watch( @systems[StalkerSystem], :color => 0xff33ccff)
     @window_info.watch(@cursor, :color => @cursor.color)
     @window_info.text("Click to start the simulation", :color => 0xffffff00)
     @window_info.text("Little missiles will pursuit while the big one evades, right click to center big one on screen")

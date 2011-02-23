@@ -13,7 +13,7 @@ module Lotu
     # This will call #go_up every 50ms
     # Gosu::Button::KbUp => [:go_up, 50]
     def set_keys(keys)
-      @parent.systems[InputSystem].set_keys(self, keys)
+      @parent.systems[InputManagerSystem].set_keys(self, keys)
     end
 
   end

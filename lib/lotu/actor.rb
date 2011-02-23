@@ -1,12 +1,13 @@
 module Lotu
   class Actor
+    extend Behavior
+    behave_like SystemUser, :use => {AnimationSystem=>nil, InterpolationSystem=>nil}
+    behave_like Controllable
+
     attr_accessor :parent, :x, :y,
     :z, :angle, :center_x, :center_y,
     :factor_x, :factor_y, :color, :mode, :image,
     :width, :height
-
-    include SystemUser
-    include Controllable
 
     def initialize(opts={})
       default_opts = {
@@ -22,6 +23,9 @@ module Lotu
         :mode => :default,
         :parent => $lotu
       }
+      # so it can start behaving
+      setup_behavior
+
       opts = default_opts.merge!(opts)
       @parent = opts[:parent]
       @parent.manage_me(self)
@@ -34,8 +38,6 @@ module Lotu
       # Add extra functionality
       self.extend Eventful
       self.extend Collidable
-      use(AnimationSystem)
-      use(InterpolationSystem)
     end
 
     # Easy access to delta-time
@@ -118,9 +120,7 @@ module Lotu
     end
 
     def update
-      @systems.each_pair do |klass, system|
-        system.update
-      end
+      update_systems
     end
 
     def draw
@@ -128,6 +128,7 @@ module Lotu
         @image.draw_rot(@x, @y, @z, @angle, @center_x, @center_y, @factor_x*@zoom_x, @factor_y*@zoom_y, @color, @mode)
         draw_debug if $lotu.debug?
       end
+      draw_systems
     end
 
     def draw_debug

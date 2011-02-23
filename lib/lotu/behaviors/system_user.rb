@@ -3,11 +3,14 @@ module Lotu
 
     attr_accessor :systems
 
-    # Allows to activate a system in the host
-    def use( klass, opts={} )
+    def setup_behavior
+      super if defined? super
       @systems ||= Hash.new
-      @systems[klass] = klass.new( self, opts )
-      @systems[klass]
+
+      self.class.options[SystemUser][:use] &&
+        self.class.options[SystemUser][:use].each do |k,v|
+        use(k,v)
+      end
     end
 
     # Need to call this inside update
@@ -23,6 +26,12 @@ module Lotu
       @systems.each_value do |system|
         system.draw
       end
+    end
+
+    # Allows to activate a system in the host
+    def use( klass, opts={} )
+      @systems[klass] = klass.new( self, opts )
+      @systems[klass]
     end
 
   end

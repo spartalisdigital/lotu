@@ -28,6 +28,7 @@ end
 
 # The main app class
 class SteeringMissiles < Game
+  behave_like SystemUser, :use => {StalkerSystem => [Actor, Missile, Vector2d, Object]}
   def initialize
     # This will call the hooks:
     # load_resources, setup_systems, setup_input and setup_actors
@@ -35,6 +36,7 @@ class SteeringMissiles < Game
     super
     # Custom setup methods for this class
     setup_events
+    #use(StalkerSystem, :stalk => [Actor, Missile, Vector2d, Object])
   end
 
   # Let's load some images and animations, check out the animations
@@ -54,12 +56,6 @@ class SteeringMissiles < Game
              KbF1 => [:toggle_missile_info, false])
   end
 
-  def setup_systems
-    # It's important to call super here to setup the InputSystem
-    super
-    use(StalkerSystem, :stalk => [Actor, Missile, Vector2d, Object])
-  end
-
   def setup_actors
     @big_missile = Missile.new(:mass => 0.3, :max_speed => 100, :max_turn_rate => 140)
     @big_missile.teleport(width/2, height/2)
@@ -77,7 +73,7 @@ class SteeringMissiles < Game
     @window_info = TextBox.new(:size => 15)
     @window_info.text("Press F1 to hide this text", :size => 24)
     @window_info.watch(lambda{ "FPS: #{fps}" }, :size => 20)
-    @window_info.watch(@systems[StalkerSystem], :color => 0xff33ccff)
+    @window_info.watch( @systems[StalkerSystem], :color => 0xff33ccff)
     @window_info.watch(@cursor, :color => @cursor.color)
     @window_info.text("Click to start the simulation", :color => 0xffffff00)
     @window_info.text("One will pursuit while the other evades, right click to center evader on screen")

@@ -1,5 +1,5 @@
 module Lotu
-  class System
+  class BaseSystem
 
     def initialize(user, opts={})
       @user = user
@@ -9,7 +9,8 @@ module Lotu
       $lotu.dt
     end
 
-    def draw;end
+    def draw; end
+    def update; end
 
   end
 end

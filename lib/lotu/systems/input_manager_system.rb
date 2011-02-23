@@ -1,5 +1,5 @@
 module Lotu
-  class InputSystem < System
+  class InputManagerSystem < BaseSystem
 
     def initialize(user, opts={})
       super
@@ -59,15 +59,15 @@ module Lotu
 
     module UserMethods
       def set_keys(keys)
-        systems[InputSystem].set_keys(self, keys)
+        systems[InputManagerSystem].set_keys(self, keys)
       end
 
       def button_down(key)
-        systems[InputSystem].button_down(key)
+        systems[InputManagerSystem].button_down(key)
       end
 
       def button_up(key)
-        systems[InputSystem].button_up(key)
+        systems[InputManagerSystem].button_up(key)
       end
     end
 

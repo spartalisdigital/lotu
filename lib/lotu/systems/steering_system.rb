@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 module Lotu
-  class SteeringSystem < System
+  class SteeringSystem < BaseSystem
 
     def initialize(user, opts={})
       super

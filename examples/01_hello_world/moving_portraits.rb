@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# -*- coding: utf-8 -*-
 
 # Hello world for lotu
 # Here you will learn about:
@@ -37,6 +38,7 @@ end
 
 # Let's subclass the Game class and write some code!
 class MyPortraits < Game
+  behave_like SystemUser, :use => {StalkerSystem => [Actor, TextBox, Portrait, Object]}
 
   def initialize
     # This will call the hooks:
@@ -50,6 +52,8 @@ class MyPortraits < Game
     # (zero and no array is the same)
     set_keys(KbEscape => :close,
              KbD => [:debug!, false])
+    # TODO: Hacer que esto funcione aquí
+    #use( StalkerSystem, :stalk => [Actor, TextBox, Portrait, Object])
   end
 
   # This method is called when we call super inside initialize
@@ -83,6 +87,7 @@ class MyPortraits < Game
     # Add some text
     @info.text("Hello world!")
     @info.watch lambda{ "FPS: #{ fps }" }
+    @info.watch( @systems[StalkerSystem] )
     # Add more text, but specify the color and size in pixels
     @info.text("Move the portraits around with arrow keys", :size => 16, :color => 0xff33ccff)
   end

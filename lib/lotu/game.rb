@@ -1,12 +1,13 @@
 module Lotu
   class Game < Gosu::Window
+    extend Behavior
+    behave_like SystemUser, :use => {InputManagerSystem => nil}
+    behave_like ResourceUser
+
     # Accessors for elapsed time since last update (time delta) and fonts
     attr_reader :dt
     # Accessors for queues
     attr_accessor :update_queue, :draw_queue, :input_listeners
-
-    include SystemUser
-    include ResourceUser
 
     def initialize(opts={})
       default_opts = {
@@ -26,11 +27,14 @@ module Lotu
       # For timer initialization
       @last_time = Gosu::milliseconds
 
+      # so it can start behaving
+      setup_behavior
+
       # Call hook methods
       load_resources
-      setup_systems
       setup_actors
       setup_input
+      setup_systems
     end
 
     def fps
@@ -54,13 +58,10 @@ module Lotu
     end
 
     # Hook methods, these are meant to be replaced by subclasses
-    def load_resources;end
-    def setup_actors;end
-    def setup_input;end
-
-    def setup_systems
-      use(InputSystem)
-    end
+    def load_resources; end
+    def setup_actors; end
+    def setup_input; end
+    def setup_systems; end
 
     # Setup various containers
     def setup_containers

@@ -1,5 +1,5 @@
 module Lotu
-  class StalkerSystem < System
+  class StalkerSystem < BaseSystem
 
     def initialize(user, opts={})
       super
@@ -7,7 +7,7 @@ module Lotu
         :stalk => [Actor],
         :ticks_per_update => 30
       }
-      opts = default_opts.merge!(opts)
+      opts = default_opts.merge!(:stalk => opts)
       @ticks = 0
       @ticks_per_update = opts[:ticks_per_update]
       @stalked = {}

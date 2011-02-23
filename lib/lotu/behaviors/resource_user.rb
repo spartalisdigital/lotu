@@ -1,29 +1,30 @@
 module Lotu
   module ResourceUser
 
-    attr_accessor :images, :sounds, :songs, :animations
+    attr_accessor :images, :sounds, :songs, :animations, :default_font
 
-    def image(name)
-      @images ||= {}
+    def setup_behavior
+      super if defined? super
+      @images = {}
+      @sounds = {}
+      @songs = {}
+      @animations = Hash.new{ |h,k| h[k] = [] }
+      @default_font = Hash.new{ |h,k| h[k] = Gosu::Font.new( self, Gosu::default_font_name, k ) }
+    end
+
+    def image( name )
       @images[name]
     end
 
-    def sound(name)
-      @sounds ||= {}
+    def sound( name )
       @sounds[name]
     end
 
-    def song(name)
-      @songs ||= {}
+    def song( name )
       @songs[name]
     end
 
-    def default_font
-      @default_font ||= Hash.new{|h,k| h[k] = Gosu::Font.new(self, Gosu::default_font_name, k)}
-    end
-
     def animation(name)
-      @animations ||= Hash.new{ |h,k| h[k] = [] }
       @animations[name]
     end
 
@@ -33,8 +34,7 @@ module Lotu
     end
 
     protected
-    def load_images(path)
-      @images ||= {}
+    def load_images( path )
       count = 0
       with_files(/\.png$|\.jpg$|\.bmp$/, path) do |file_name, file_path|
         count += 1
@@ -44,7 +44,6 @@ module Lotu
     end
 
     def load_sounds(path)
-      @sounds ||= {}
       count = 0
       with_files(/\.ogg$|\.mp3$|\.wav$/, path) do |file_name, file_path|
         count += 1
@@ -54,7 +53,6 @@ module Lotu
     end
 
     def load_songs(path)
-      @songs ||= {}
       count = 0
       with_files(/\.ogg$|\.mp3$|\.wav$/, path) do |file_name, file_path|
         count += 1
@@ -64,7 +62,6 @@ module Lotu
     end
 
     def load_animations(path)
-      @animations ||= Hash.new{ |h,k| h[k] = [] }
       count = 0
       coords = Hash.new{|h,k| h[k] = []}
 

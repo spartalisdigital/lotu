@@ -1,5 +1,5 @@
 module Lotu
-  class CollisionSystem < System
+  class CollisionSystem < BaseSystem
 
     def initialize(user, opts={})
       super

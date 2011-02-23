@@ -56,6 +56,7 @@ module Lotu
         else
           my_text = watched.to_s
         end
+
         if my_text.is_a?(String)
           $lotu.default_font[my_size].draw(my_text, @x, @y + pos_y, @z, @factor_x, @factor_y, my_color)
           pos_y += my_size

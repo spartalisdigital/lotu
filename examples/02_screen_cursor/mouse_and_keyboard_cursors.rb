@@ -26,6 +26,8 @@ class Lobo < Actor
 end
 
 class Cursors < Game
+  behave_like SystemUser, :use => {StalkerSystem => [Actor, Cursor, TextBox, Lobo, Object]}
+
   def initialize
     # This will call the hooks:
     # load_resources, setup_systems, setup_input and setup_actors
@@ -42,13 +44,13 @@ class Cursors < Game
   end
 
   def setup_systems
-    # It's important to call super here to setup the InputSystem in
+    # It's important to call super here to setup the InputManagerSystem in
     # the parent class
     super
     # To use the systems lotu provides, you just "use" them
     # Activate the stalker system to track how many objects of these
     # classes are around
-    use(StalkerSystem, :stalk => [Actor, Cursor, TextBox, Lobo, Object])
+    #use(StalkerSystem, :stalk => [Actor, Cursor, TextBox, Lobo, Object])
   end
 
   # Setup some input handling for our Cursors app
@@ -123,7 +125,7 @@ class Cursors < Game
     @info.watch(lambda{ "FPS: #{ fps }" }, :size => 20)
     # Watch the Stalker system, so we know how many objects of the
     # classes we specified up in setup_systems are around
-    @info.watch(@systems[StalkerSystem], :color => 0xff3ffccf)
+    @info.watch( @systems[StalkerSystem], :color => 0xff3ffccf )
     # We can change the size for a specific line of text
     @info.text("@cursor1 data:", :size => 20)
     @info.text("move with Mouse | click with LeftMouseButton")

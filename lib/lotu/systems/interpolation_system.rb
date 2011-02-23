@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 module Lotu
-  class InterpolationSystem < System
+  class InterpolationSystem < BaseSystem
 
     def initialize(user, opts={})
       super

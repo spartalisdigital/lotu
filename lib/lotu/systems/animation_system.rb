@@ -1,5 +1,5 @@
 module Lotu
-  class AnimationSystem < System
+  class AnimationSystem < BaseSystem
 
     def initialize(user, opts={})
       super
@@ -40,8 +40,8 @@ module Lotu
     def to_s
       ["Name: #{@name}",
        "Current frame: #{@current_frame}",
-       "Accumulated time: #{format('%.2f', @accum_time)}",
-       "Time per frame: #{format('%.2f', @time_per_frame)}",
+       "Accumulated time: #{format('%.2f', @accum_time || 0)}",
+       "Time per frame: #{format('%.2f', @time_per_frame || 0)}",
        "Length: #{@length}"]
     end
 
