@@ -24,14 +24,16 @@ module Lotu
     end
 
     # Need to call this inside update
-    def update_systems
+    def update
+      super if defined? super
       @systems.each_value do |system|
         system.update
       end
     end
 
     # Need to call this inside draw
-    def draw_systems
+    def draw
+      super if defined? super
       # Systems may report interesting stuff
       @systems.each_value do |system|
         system.draw

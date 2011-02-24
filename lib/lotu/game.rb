@@ -85,8 +85,9 @@ module Lotu
         actor.update
       end unless paused?
 
-      # to update the systems
-      update_systems
+      # to call update on behaviors (that in turn wil call
+      # update on systems, for example)
+      super
     end
 
     # Main draw loop
@@ -96,8 +97,9 @@ module Lotu
         actor.draw
       end
 
-      # to call draw in the systems
-      draw_systems
+      # to call draw on behaviors (that in turn will call
+      # draw on systems, for example)
+      super
     end
 
     # For actor management

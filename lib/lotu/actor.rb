@@ -122,7 +122,9 @@ module Lotu
     end
 
     def update
-      update_systems
+      # to call update on behaviors (that in turn wil call
+      # update on systems, for example)
+      super
     end
 
     def draw
@@ -130,7 +132,9 @@ module Lotu
         @image.draw_rot(@x, @y, @z, @angle, @center_x, @center_y, @factor_x*@zoom_x, @factor_y*@zoom_y, @color, @mode)
         draw_debug if $lotu.debug?
       end
-      draw_systems
+      # to call draw on behaviors (that in turn will call
+      # draw on systems, for example)
+      super
     end
 
     def draw_debug
