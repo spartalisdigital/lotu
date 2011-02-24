@@ -2,11 +2,10 @@ module Lotu
   module Behavior
 
     def behave_like something
+      include something
       class << self
         attr_accessor :behavior_options
       end
-      include something
-
       @behavior_options ||= Hash.new{ |h,k| h[k] = {} }
     end
 

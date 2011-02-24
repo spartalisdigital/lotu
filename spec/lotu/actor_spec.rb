@@ -4,6 +4,10 @@ class Actress < Lotu::Actor
   use Lotu::SteeringSystem
 end
 
+class Fan < Lotu::Actor
+  use Lotu::StalkerSystem
+end
+
 describe "Actor" do
 
   before :each do
@@ -26,32 +30,34 @@ describe "Actor" do
 
   describe "Descendants" do
     it "should have a different object hash for behavior_options" do
-      @actress.class.behavior_options[Actress].should_not be @actor.class.behavior_options[Lotu::Actor]
+      @actress.class.behavior_options.should_not be @actor.class.behavior_options
     end
 
     it "should have different values in behavior_options" do
-      @actress.class.behavior_options[Actress].should_not == @actor.class.behavior_options[Lotu::Actor]
+      @actress.class.behavior_options.should_not == @actor.class.behavior_options
     end
   end
 
-  it "should have the appropiate number of systems" do
-    @actor.systems.length.should be 2
+  describe "Basic methods and properties" do
+    it{ @actor.should respond_to :x }
+    it{ @actor.should respond_to :y }
+    it{ @actor.should respond_to :parent }
+    it{ @actor.should respond_to :color }
   end
 
-  it "should have the appropiate type of systems" do
-    @actor.systems.keys.should == [Lotu::AnimationSystem, Lotu::InterpolationSystem]
-  end
+  describe "When just created" do
+    it "should have the appropiate number of systems" do
+      @actor.systems.length.should be 2
+    end
 
-  it "should have the appropiate behavior options set" do
-    @actor.class.behavior_options.should == {Lotu::SystemUser=>{Lotu::AnimationSystem=>{}, Lotu::InterpolationSystem=>{}}, Lotu::Collidable=>{}}
-  end
+    it "should have the appropiate type of systems" do
+      @actor.systems.keys.should == [Lotu::AnimationSystem, Lotu::InterpolationSystem]
+    end
 
-  it{ @actor.should respond_to :x }
-  it{ @actor.should respond_to :y }
-  it{ @actor.should respond_to :parent }
-  it{ @actor.should respond_to :color }
+    it "should have the appropiate behavior options set" do
+      @actor.class.behavior_options.should == {Lotu::SystemUser=>{Lotu::AnimationSystem=>{}, Lotu::InterpolationSystem=>{}}, Lotu::Collidable=>{}}
+    end
 
-  describe "at creation" do
     it "#x == 0" do
       @actor.x.should == 0
     end
