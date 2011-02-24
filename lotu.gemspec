@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["lobo_tuerto"]
-  s.date = %q{2011-02-22}
+  s.date = %q{2011-02-24}
   s.description = %q{lotu aims to bring an agile and simple game development framework to life. It provides useful abstractions so you can concentrate on developing your game.}
   s.email = %q{dev@lobotuerto.com}
   s.extra_rdoc_files = [
@@ -24,7 +24,11 @@ Gem::Specification.new do |s|
     "README.rdoc",
     "Rakefile",
     "VERSION",
-    "examples/hello_world/moving_portraits.rb",
+    "examples/01_hello_world/moving_portraits.rb",
+    "examples/02_screen_cursor/mouse_and_keyboard_cursors.rb",
+    "examples/03_collisions/box.rb",
+    "examples/04_steering_behaviors/pursuit_and_evade.rb",
+    "examples/04_steering_behaviors/pursuit_and_evade_multiple.rb",
     "examples/media/animations/missile.png",
     "examples/media/animations/missile.txt",
     "examples/media/images/cohete-big.png",
@@ -36,24 +40,23 @@ Gem::Specification.new do |s|
     "examples/media/images/lobo_tuerto.png",
     "examples/media/images/missile-med.png",
     "examples/media/images/silo.png",
-    "examples/screen_cursor/mouse_and_keyboard_cursors.rb",
-    "examples/steering_behaviors/pursuit_and_evade.rb",
-    "examples/steering_behaviors/pursuit_and_evade_multiple.rb",
     "lib/lotu.rb",
     "lib/lotu/actor.rb",
+    "lib/lotu/behavior.rb",
     "lib/lotu/behaviors/collidable.rb",
     "lib/lotu/behaviors/controllable.rb",
     "lib/lotu/behaviors/eventful.rb",
+    "lib/lotu/behaviors/resource_manager.rb",
     "lib/lotu/behaviors/system_user.rb",
     "lib/lotu/cursor.rb",
     "lib/lotu/game.rb",
-    "lib/lotu/misc/string.rb",
-    "lib/lotu/misc/vector2d.rb",
-    "lib/lotu/system.rb",
+    "lib/lotu/helpers/kernel.rb",
+    "lib/lotu/helpers/string.rb",
+    "lib/lotu/helpers/vector2d.rb",
     "lib/lotu/systems/animation_system.rb",
+    "lib/lotu/systems/base_system.rb",
     "lib/lotu/systems/collision_system.rb",
-    "lib/lotu/systems/fps_system.rb",
-    "lib/lotu/systems/input_system.rb",
+    "lib/lotu/systems/input_manager_system.rb",
     "lib/lotu/systems/interpolation_system.rb",
     "lib/lotu/systems/stalker_system.rb",
     "lib/lotu/systems/steering_system.rb",
@@ -61,6 +64,7 @@ Gem::Specification.new do |s|
     "lotu.gemspec",
     "spec/lotu/actor_spec.rb",
     "spec/lotu/game_spec.rb",
+    "spec/lotu/shared_spec.rb",
     "test/actor_test.rb"
   ]
   s.homepage = %q{http://github.com/lobo-tuerto/lotu}
@@ -68,12 +72,14 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.5.0}
   s.summary = %q{A simple, agile Ruby game development framework.}
   s.test_files = [
-    "examples/hello_world/moving_portraits.rb",
-    "examples/screen_cursor/mouse_and_keyboard_cursors.rb",
-    "examples/steering_behaviors/pursuit_and_evade.rb",
-    "examples/steering_behaviors/pursuit_and_evade_multiple.rb",
+    "examples/01_hello_world/moving_portraits.rb",
+    "examples/02_screen_cursor/mouse_and_keyboard_cursors.rb",
+    "examples/03_collisions/box.rb",
+    "examples/04_steering_behaviors/pursuit_and_evade.rb",
+    "examples/04_steering_behaviors/pursuit_and_evade_multiple.rb",
     "spec/lotu/actor_spec.rb",
     "spec/lotu/game_spec.rb",
+    "spec/lotu/shared_spec.rb",
     "test/actor_test.rb"
   ]
 
