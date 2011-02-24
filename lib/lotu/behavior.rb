@@ -1,16 +1,18 @@
 module Lotu
   module Behavior
-    include ClassLevelInheritableAttributes
 
-    def behave_like something, opts={}
-      cattr_inheritable :behavior_options
+    def behave_like something
+      class << self
+        attr_accessor :behavior_options
+      end
       include something
 
       @behavior_options ||= Hash.new{ |h,k| h[k] = {} }
-      @behavior_options[something].merge!(opts)
-      #opts.each do |k,v|
-      #  @behavior_options[something][k].merge!(opts[k])
-      #end
+    end
+
+    def inherited subclass
+      subclass.behavior_options =
+        behavior_options.inject({}){ |hash, opts| hash[opts[0]] = opts[1].deep_copy; hash }
     end
 
   end

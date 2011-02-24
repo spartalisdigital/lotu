@@ -18,7 +18,6 @@ include Lotu
 # subclass, set the image for all the instances of that class and
 # define the movement methods
 class Portrait < Actor
-
   def initialize( opts )
     # It's important to call super so we take advantage of automatic
     # management for this object (being added to draw and update queues)
@@ -33,7 +32,6 @@ class Portrait < Actor
   def move_left;  @x -= 1 end
   def move_up;    @y -= 1 end
   def move_down;  @y += 1 end
-
 end
 
 # Let's subclass the Game class and write some code!

@@ -5,10 +5,6 @@ module Lotu
       base.extend ClassMethods
     end
 
-    def options_for klass
-      self.class.behavior_options[klass]
-    end
-
     def calc_radius
       if @width
         @collision_radius = @width/2.0 * @factor_x
@@ -27,7 +23,7 @@ module Lotu
         attr_accessor :collision_radius
       end
 
-      @collision_tag = options_for(Collidable)
+      @collision_tag = self.class.behavior_options[Collidable]
       # TODO: Change @parent for @manager (could be a Game or a Scene)
       @parent.systems[CollisionSystem].add_entity(self, @collision_tag) if @parent.systems[CollisionSystem]
     end
