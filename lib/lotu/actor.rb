@@ -128,13 +128,14 @@ module Lotu
     end
 
     def draw
+      # to call draw on behaviors (that in turn will call
+      # draw on systems, for example)
+      super
+
       unless @image.nil?
         @image.draw_rot(@x, @y, @z, @angle, @center_x, @center_y, @factor_x*@zoom_x, @factor_y*@zoom_y, @color, @mode)
         draw_debug if $lotu.debug?
       end
-      # to call draw on behaviors (that in turn will call
-      # draw on systems, for example)
-      super
     end
 
     def draw_debug

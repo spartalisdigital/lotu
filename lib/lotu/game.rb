@@ -80,26 +80,26 @@ module Lotu
       @dt = (new_time - @last_time)/1000.0
       @last_time = new_time
 
+      # to call update on behaviors (that in turn wil call
+      # update on systems, for example)
+      super
+
       # Update each actor
       @update_queue.each do |actor|
         actor.update
       end unless paused?
-
-      # to call update on behaviors (that in turn wil call
-      # update on systems, for example)
-      super
     end
 
     # Main draw loop
     def draw
+      # to call draw on behaviors (that in turn will call
+      # draw on systems, for example)
+      super
+
       # Draw each actor in queue
       @draw_queue.each do |actor|
         actor.draw
       end
-
-      # to call draw on behaviors (that in turn will call
-      # draw on systems, for example)
-      super
     end
 
     # For actor management
