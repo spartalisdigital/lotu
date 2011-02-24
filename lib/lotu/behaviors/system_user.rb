@@ -7,14 +7,19 @@ module Lotu
       base.extend ClassMethods
     end
 
-    def init_behavior opts
+    def options_for_me
+      self.class.behavior_options[SystemUser]
+    end
+
+    def init_behavior user_opts
       super if defined? super
       @systems ||= Hash.new
 
-      self.class.behavior_options[SystemUser] &&
-        self.class.behavior_options[SystemUser].each do |klass, options|
-        @systems[klass] = klass.new( self, options.empty?? opts : options )
-        #@systems[klass]
+      options_for_me && options_for_me.each do |klass, options|
+        # add the behavior options to the user_opts hash
+        # in case we need access to some level class config param
+        user_opts.merge!(options)
+        @systems[klass] = klass.new( self, user_opts )
       end
     end
 
