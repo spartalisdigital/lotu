@@ -1,14 +1,15 @@
 module Lotu
   class Actor
-    extend Behavior
+    include Lotu::Helpers::Util
+    extend Lotu::Behavior
 
-    behave_like SystemUser
-    use AnimationSystem
-    use InterpolationSystem
+    behave_like Lotu::SystemUser
+    use Lotu::AnimationSystem
+    use Lotu::InterpolationSystem
 
-    behave_like Eventful
-    behave_like Collidable
-    behave_like Controllable
+    behave_like Lotu::Eventful
+    behave_like Lotu::Collidable
+    behave_like Lotu::Controllable
 
     attr_accessor :parent, :x, :y,
     :z, :angle, :center_x, :center_y,
@@ -16,6 +17,9 @@ module Lotu
     :width, :height
 
     def initialize(opts={})
+      # if debug is set, print out class info
+      class_debug_info
+
       default_opts = {
         :x => 0,
         :y => 0,
@@ -38,8 +42,11 @@ module Lotu
       @color = rand_color if opts[:rand_color]
       set_keys(opts[:keys]) unless opts[:keys].nil?
 
-      # so it can start behaving
+      # start behaving as
       init_behavior opts
+
+      # if debug is set, print out instance info
+      instance_debug_info
     end
 
     # Easy access to delta-time

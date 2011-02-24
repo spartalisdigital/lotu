@@ -1,36 +1,52 @@
 module Lotu
   class Game < Gosu::Window
-    extend Behavior
+    include Lotu::Helpers::Util
+    extend Lotu::Behavior
 
-    behave_like SystemUser
-    use InputManagerSystem
+    behave_like Lotu::SystemUser
+    use Lotu::InputManagerSystem
 
-    behave_like ResourceManager
+    behave_like Lotu::ResourceManager
 
-    # Accessors for elapsed time since last update (time delta) and fonts
-    attr_reader :dt
+    # Accessors for elapsed time since last update (time delta) and debug
+    attr_reader :dt, :debug
     # Accessors for queues
     attr_accessor :update_queue, :draw_queue, :input_listeners
 
     def initialize(opts={})
+      # parse and merge options passed from
+      # the CLI (Command Line Interface)
+      # CLI options have the greatest precedence
+      opts.merge!(parse_cli_options)
+
+      # set some sane default opts
       default_opts = {
         :width => 1024,
         :height => 768,
-        :fullscreen => false
+        :fullscreen => false,
+        :debug => false
       }
+      # fill in any missing options using the defaults
       opts = default_opts.merge!(opts)
-      super(opts[:width], opts[:height], opts[:fullscreen])
 
       # Handy global window variable
       $lotu = self
-      @debug = opts[:debug] || false
+
+      # Game setup
+      @debug = opts[:debug]
       @pause = false
       setup_containers
+
+      # if debug is set, print out class info
+      class_debug_info
+
+      # call the Gosu::Window constructor
+      super(opts[:width], opts[:height], opts[:fullscreen])
 
       # For timer initialization
       @last_time = Gosu::milliseconds
 
-      # so it can start behaving
+      # start behaving as
       init_behavior opts
 
       # Call hook methods
@@ -38,6 +54,9 @@ module Lotu
       setup_actors
       setup_input
       setup_events
+
+      # if debug is set, print out instance info
+      instance_debug_info
     end
 
     def fps
