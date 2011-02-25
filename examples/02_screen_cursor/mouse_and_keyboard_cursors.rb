@@ -26,7 +26,7 @@ class Lobo < Actor
 end
 
 class Cursors < Game
-  use StalkerSystem, :stalk => [Actor, Cursor, TextBox, Lobo, Object]
+  #use StalkerSystem, :stalk => [Actor, Cursor, TextBox, Lobo, Object]
 
   def load_resources
     with_path_from_file(__FILE__) do

@@ -5,7 +5,7 @@ describe "Game" do
   it_should_behave_like "resource manager"
 
   before :all do
-    @game = Lotu::Game.new #:debug => true
+    @game = Lotu::Game.new(:parse_cli_options => false)
     @game.with_path_from_file(__FILE__) do |g|
       load_images '../../examples/media/images'
     end

@@ -17,7 +17,9 @@ module Lotu
       # parse and merge options passed from
       # the CLI (Command Line Interface)
       # CLI options have the greatest precedence
-      opts.merge!(parse_cli_options)
+      if opts[:parse_cli_options] || opts[:parse_cli_options].nil?
+        opts.merge!(parse_cli_options)
+      end
 
       # set some sane default opts
       default_opts = {

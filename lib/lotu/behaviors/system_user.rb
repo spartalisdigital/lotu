@@ -41,6 +41,7 @@ module Lotu
     # Allows to activate a system in the host
     module ClassMethods
       def use( klass, opts={} )
+        behavior_options[SystemUser] ||= Hash.new
         behavior_options[SystemUser][klass] = opts
       end
     end

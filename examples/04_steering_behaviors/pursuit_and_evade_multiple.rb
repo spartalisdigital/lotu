@@ -15,6 +15,7 @@ include Lotu
 # control it's movement
 class Missile < Actor
   use SteeringSystem
+  use AnimationSystem
 
   def teleport(x, y)
     @pos.x, @pos.y = x, y
@@ -23,7 +24,7 @@ end
 
 # The main app class
 class EvadeMultiple < Game
-  use StalkerSystem, :stalk => [Actor, Missile, Vector2d, Object]
+  #use StalkerSystem, :stalk => [Actor, Missile, Vector2d, Object]
 
   # Let's load some images and animations, check out the animations
   # directory, the animation there was created with:

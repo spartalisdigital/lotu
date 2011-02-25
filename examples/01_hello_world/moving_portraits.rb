@@ -36,7 +36,7 @@ end
 
 # Let's subclass the Game class and write some code!
 class MyPortraits < Game
-  use StalkerSystem, :stalk => [Actor, TextBox, Portrait, Object]
+  #use StalkerSystem, :stalk => [Actor, TextBox, Portrait, Object]
 
   def initialize
     # This will call the hooks:

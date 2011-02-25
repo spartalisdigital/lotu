@@ -1,6 +1,8 @@
 # Provides a mouse pointer usable through mouse or keyboard
 module Lotu
   class Cursor < Actor
+    use InterpolationSystem
+
     attr_reader :clicked_x, :clicked_y
     attr_accessor :speed, :use_mouse
 

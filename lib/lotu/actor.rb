@@ -4,9 +4,6 @@ module Lotu
     extend Lotu::Behavior
 
     behave_like Lotu::SystemUser
-    use Lotu::AnimationSystem
-    use Lotu::InterpolationSystem
-
     behave_like Lotu::Eventful
     behave_like Lotu::Collidable
     behave_like Lotu::Controllable
@@ -125,6 +122,9 @@ module Lotu
 
     # Remove ourselves from the update queue
     def die
+      # to call die on behaviors (that in turn wil call
+      # die on systems, for example)
+      super
       @parent.kill_me(self)
     end
 

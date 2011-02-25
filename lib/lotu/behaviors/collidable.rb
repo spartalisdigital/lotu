@@ -1,6 +1,8 @@
 module Lotu
   module Collidable
 
+    attr_accessor :collision_tags
+
     def self.included base
       base.extend ClassMethods
     end
@@ -17,30 +19,33 @@ module Lotu
 
     def init_behavior opts
       super if defined? super
+      @collision_tags = self.class.behavior_options[Collidable]
+      setup_tags
+    end
 
-      calc_radius
-      class << self
-        attr_accessor :collision_radius
-      end
-
-      @collision_tag = self.class.behavior_options[Collidable]
+    def setup_tags
       # TODO: Change @parent for @manager (could be a Game or a Scene)
-      @parent.systems[CollisionSystem].add_entity(self, @collision_tag) if @parent.systems[CollisionSystem]
+      @collision_tags.each do |tag, o|
+        @parent.systems[CollisionSystem].add_entity(self, tag) if @parent.systems[CollisionSystem]
+      end if @collision_tags
     end
 
     def collides_with(other)
       return false if self.equal? other
-      Gosu.distance(@x, @y, other.x, other.y) < @collision_radius + other.collision_radius
+      Gosu.distance(@x, @y, other.x, other.y) < collision_radius + other.collision_radius
     end
 
     def die
-      super
-      @parent.systems[CollisionSystem].remove_entity(self, @collision_tag) if @parent.systems[CollisionSystem]
+      super if defined? super
+      @collision_tags.each do |tag, options|
+        @parent.systems[CollisionSystem].remove_entity(self, tag) if @parent.systems[CollisionSystem]
+      end if @collision_tags
     end
 
     module ClassMethods
-      def collides_as tag
-        behavior_options[Collidable] = tag
+      def collides_as tag, opts={}
+        behavior_options[Collidable] ||= Hash.new
+        behavior_options[Collidable][tag] = opts
       end
     end
 

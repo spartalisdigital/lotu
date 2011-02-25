@@ -7,7 +7,7 @@ include Lotu
 include Gosu
 
 class Box < Actor
-  collides_as :box
+  collides_as :box #, :strategy => :circle, :box, :pixel
 
   def initialize( opts )
     # It's important to call super so we take advantage of automatic
@@ -16,7 +16,10 @@ class Box < Actor
     # Use the image which filename is "lobo_tuerto.png", and scale
     # it's size to half width and half height
     set_image 'lobo_tuerto.png', :factor_x => 0.5, :factor_y => 0.5
-    calc_radius
+  end
+
+  def collision_radius
+    @width/2.0*@factor_x
   end
 
   # Let's define some basic movement methods
@@ -28,7 +31,7 @@ end
 
 class Example < Game
   use CollisionSystem
-  use StalkerSystem, :stalk => [Game, Box, Actor, BaseSystem, Object]
+  #use StalkerSystem, :stalk => [Game, Box, Actor, BaseSystem, Object]
 
   def initialize
     super
@@ -66,8 +69,8 @@ class Example < Game
     @lobo2 = Box.new(:x => width/2 + 100, :y => height/2)
     @lobo2.set_keys(KbRight => :move_left,
                     KbLeft => :move_right,
-                    KbUp => :move_up,
-                    KbDown => :move_down)
+                    KbUp => :move_down,
+                    KbDown => :move_up)
 
     # Create a TextBox so we can display a message on screen
     @info = TextBox.new
