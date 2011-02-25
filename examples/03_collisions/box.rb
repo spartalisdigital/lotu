@@ -6,8 +6,10 @@ require File.expand_path(LIB_PATH)
 include Lotu
 include Gosu
 
-class Box < Actor
-  collides_as :box #, :strategy => :circle, :box, :pixel
+class Painting < Actor
+  # available collision shapes include :circle and :box
+  # if no :shape is specified, :circle is assumed
+  collides_as :canvas, :shape => :box
 
   def initialize( opts )
     # It's important to call super so we take advantage of automatic
@@ -18,8 +20,12 @@ class Box < Actor
     set_image 'lobo_tuerto.png', :factor_x => 0.5, :factor_y => 0.5
   end
 
+  # if you want to try the :shape => :circle thing
+  # you are going to need a function that specifies
+  # the collision radius called:
+
   def collision_radius
-    @width/2.0*@factor_x
+    @width / 2.0 * @factor_x
   end
 
   # Let's define some basic movement methods
@@ -31,12 +37,10 @@ end
 
 class Example < Game
   use CollisionSystem
-  #use StalkerSystem, :stalk => [Game, Box, Actor, BaseSystem, Object]
 
   def initialize
     super
-    set_keys(KbEscape => :close,
-             KbD => [:debug!, false])
+    set_keys(KbEscape => :close, KbD => [:debug!, false])
   end
 
   # This method is called when we call super inside initialize
@@ -49,7 +53,7 @@ class Example < Game
   end
 
   def setup_events
-    when_colliding( :box, :box ) do |b1, b2|
+    when_colliding( :canvas, :canvas ) do |b1, b2|
       b1.color = Gosu::Color.from_hsv(rand(360), 1, 1)
       b2.color = Gosu::Color.from_hsv(rand(360), 1, 1)
     end
@@ -58,7 +62,7 @@ class Example < Game
   # This method is called when we call super inside initialize
   def setup_actors
     # Create a portrait in the middle of the screen
-    @lobo1 = Box.new(:x => width/2 - 100, :y => height/2)
+    @lobo1 = Painting.new(:x => width/2 - 100, :y => height/2)
     # Map keys to some methods
     @lobo1.set_keys(KbRight => :move_right,
                     KbLeft => :move_left,
@@ -66,7 +70,7 @@ class Example < Game
                     KbDown => :move_down)
 
     # Rinse and repeat... but invert some keys
-    @lobo2 = Box.new(:x => width/2 + 100, :y => height/2)
+    @lobo2 = Painting.new(:x => width/2 + 100, :y => height/2)
     @lobo2.set_keys(KbRight => :move_left,
                     KbLeft => :move_right,
                     KbUp => :move_down,
@@ -74,10 +78,11 @@ class Example < Game
 
     # Create a TextBox so we can display a message on screen
     @info = TextBox.new
+
     # Add some text
     @info.text("Hello world!")
     @info.watch lambda{ "FPS: #{ fps }" }
-    @info.watch( @systems[StalkerSystem] )
+
     # Add more text, but specify the color and size in pixels
     @info.text("Move the portraits around with arrow keys", :size => 16, :color => 0xff33ccff)
   end

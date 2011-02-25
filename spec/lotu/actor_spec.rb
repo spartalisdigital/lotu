@@ -88,7 +88,7 @@ describe "Actor" do
       end
 
       it "should have the appropiate behavior options set" do
-        @user.class.behavior_options.should == {Lotu::Collidable=>{:actress_in_distress=>{}},
+        @user.class.behavior_options.should == {Lotu::Collidable=>{:actress_in_distress=>{:shape=>:circle}},
           Lotu::SystemUser=>{Lotu::SteeringSystem=>{}}}
       end
 

@@ -24,7 +24,7 @@ module Lotu
       @actions.each do |tags, blk|
         @entities[tags[0]].each do |ent1|
           @entities[tags[1]].each do |ent2|
-            blk.call(ent1, ent2) if ent1.collides_with(ent2)
+            blk.call(ent1, ent2) if ent1.collides_with?(ent2, tags[0])
           end
         end
       end

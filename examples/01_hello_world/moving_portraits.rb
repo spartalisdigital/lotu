@@ -36,7 +36,6 @@ end
 
 # Let's subclass the Game class and write some code!
 class MyPortraits < Game
-  #use StalkerSystem, :stalk => [Actor, TextBox, Portrait, Object]
 
   def initialize
     # This will call the hooks:
@@ -80,10 +79,11 @@ class MyPortraits < Game
 
     # Create a TextBox so we can display a message on screen
     @info = TextBox.new
+
     # Add some text
     @info.text("Hello world!")
     @info.watch lambda{ "FPS: #{ fps }" }
-    @info.watch( @systems[StalkerSystem] )
+
     # Add more text, but specify the color and size in pixels
     @info.text("Move the portraits around with arrow keys", :size => 16, :color => 0xff33ccff)
   end

@@ -25,13 +25,26 @@ module Lotu
 
     def setup_tags
       # TODO: Change @parent for @manager (could be a Game or a Scene)
-      @collision_tags.each do |tag, o|
+      @collision_tags.each do |tag, opts|
         @parent.systems[CollisionSystem].add_entity(self, tag) if @parent.systems[CollisionSystem]
       end if @collision_tags
     end
 
-    def collides_with(other)
+    def collides_with?(other, tag)
       return false if self.equal? other
+      strategy = self.class.behavior_options[Collidable][tag][:shape]
+      send(strategy, other)
+    end
+
+    def box other
+      return false if @x > other.x + other.width * other.factor_x
+      return false if @x + width * @factor_x < other.x
+      return false if @y > other.y + other.height * other.factor_y
+      return false if @y + height * @factor_y < other.y
+      true
+    end
+
+    def circle other
       Gosu.distance(@x, @y, other.x, other.y) < collision_radius + other.collision_radius
     end
 
@@ -44,6 +57,8 @@ module Lotu
 
     module ClassMethods
       def collides_as tag, opts={}
+        default_opts = { :shape => :circle }
+        opts = default_opts.merge!(opts)
         behavior_options[Collidable] ||= Hash.new
         behavior_options[Collidable][tag] = opts
       end

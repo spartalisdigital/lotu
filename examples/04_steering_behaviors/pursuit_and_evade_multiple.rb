@@ -24,7 +24,6 @@ end
 
 # The main app class
 class EvadeMultiple < Game
-  #use StalkerSystem, :stalk => [Actor, Missile, Vector2d, Object]
 
   # Let's load some images and animations, check out the animations
   # directory, the animation there was created with:
@@ -64,7 +63,6 @@ class EvadeMultiple < Game
     @window_info = TextBox.new(:size => 15)
     @window_info.text("Press F1 to hide this text", :size => 24)
     @window_info.watch(lambda{ "FPS: #{fps}" }, :size => 20)
-    @window_info.watch( @systems[StalkerSystem], :color => 0xff33ccff)
     @window_info.watch(@cursor, :color => @cursor.color)
     @window_info.text("Click to start the simulation", :color => 0xffffff00)
     @window_info.text("Little missiles will pursuit while the big one evades, right click to center big one on screen")

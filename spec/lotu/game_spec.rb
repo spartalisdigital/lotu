@@ -9,9 +9,10 @@ describe "Game" do
     @game.with_path_from_file(__FILE__) do |g|
       load_images '../../examples/media/images'
     end
-
     @user = @game
   end
+
+  it "should spec the collision system"
 
   it{ @game.should respond_to :update }
   it{ @game.should respond_to :draw }

@@ -13,7 +13,7 @@ end
 
 shared_examples_for "collidable" do
   it{ @user.should be_kind_of Lotu::Collidable }
-  it{ @user.should respond_to :collides_with }
+  it{ @user.should respond_to :collides_with? }
   describe "the user class" do
     it{ @user.class.should respond_to :collides_as }
   end

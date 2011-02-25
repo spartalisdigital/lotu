@@ -26,7 +26,6 @@ class Lobo < Actor
 end
 
 class Cursors < Game
-  #use StalkerSystem, :stalk => [Actor, Cursor, TextBox, Lobo, Object]
 
   def load_resources
     with_path_from_file(__FILE__) do
@@ -102,14 +101,14 @@ class Cursors < Game
     # Create a TextBox with default option :size => 15
     @info = TextBox.new(:size => 15)
     @info.text("Press F1 to hide this text", :size => 24)
+
     # Watch the FPS, so we get a nice FPS report on the screen
     @info.watch(lambda{ "FPS: #{ fps }" }, :size => 20)
-    # Watch the Stalker system, so we know how many objects of the
-    # classes we specified up in "use StalkerSystem" are around
-    @info.watch( @systems[StalkerSystem], :color => 0xff3ffccf )
+
     # We can change the size for a specific line of text
     @info.text("@cursor1 data:", :size => 20)
     @info.text("move with Mouse | click with LeftMouseButton")
+
     # And color
     @info.watch(@cursor1, :color => @cursor1.color)
 
