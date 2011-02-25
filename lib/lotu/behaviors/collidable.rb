@@ -37,14 +37,18 @@ module Lotu
     end
 
     def box other
+      # horizontal checks
       return false if @x > other.x + other.width * other.factor_x
       return false if @x + width * @factor_x < other.x
+
+      # vertical checks
       return false if @y > other.y + other.height * other.factor_y
       return false if @y + height * @factor_y < other.y
       true
     end
 
     def circle other
+      # distance between them is smaller than the sum of their radii?
       Gosu.distance(@x, @y, other.x, other.y) < collision_radius + other.collision_radius
     end
 
