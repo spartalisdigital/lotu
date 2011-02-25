@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{lotu}
-  s.version = "0.1.16"
+  s.version = "0.1.17"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["lobo_tuerto"]
@@ -52,6 +52,7 @@ Gem::Specification.new do |s|
     "lib/lotu/game.rb",
     "lib/lotu/helpers/kernel.rb",
     "lib/lotu/helpers/string.rb",
+    "lib/lotu/helpers/util.rb",
     "lib/lotu/helpers/vector2d.rb",
     "lib/lotu/systems/animation_system.rb",
     "lib/lotu/systems/base_system.rb",
