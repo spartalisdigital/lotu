@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["lobo_tuerto"]
-  s.date = %q{2011-02-24}
+  s.date = %q{2011-02-25}
   s.description = %q{lotu aims to bring an agile and simple game development framework to life. It provides useful abstractions so you can concentrate on developing your game.}
   s.email = %q{dev@lobotuerto.com}
   s.extra_rdoc_files = [
@@ -70,7 +70,7 @@ Gem::Specification.new do |s|
   ]
   s.homepage = %q{http://github.com/lobo-tuerto/lotu}
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.5.0}
+  s.rubygems_version = %q{1.5.2}
   s.summary = %q{A simple, agile Ruby game development framework.}
   s.test_files = [
     "examples/01_hello_world/moving_portraits.rb",
