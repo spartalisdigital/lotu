@@ -34,6 +34,9 @@ module Lotu
     end
 
     def update
+      @user.pos.x = @user.x
+      @user.pos.y = @user.y
+
       @force.zero!
       @behaviors.each_pair do |behavior, active|
         @force += send(behavior) if active

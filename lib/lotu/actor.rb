@@ -1,5 +1,5 @@
 module Lotu
-  class Actor
+  class Actor < GameEntity
     include Lotu::Helpers::Util
     extend Lotu::Behavior
 
@@ -15,7 +15,7 @@ module Lotu
 
     def initialize(opts={})
       # if debug is set, print out class info
-      class_debug_info
+      class_debug_info if $lotu.debug
 
       default_opts = {
         :x => 0,
@@ -43,7 +43,7 @@ module Lotu
       init_behavior opts
 
       # if debug is set, print out instance info
-      instance_debug_info
+      instance_debug_info if $lotu.debug
     end
 
     # Easy access to delta-time
@@ -60,11 +60,16 @@ module Lotu
       @center_y = opts[:center_y] || @center_y
       @factor_x = opts[:factor_x] || @factor_x
       @factor_y = opts[:factor_y] || @factor_y
+      @width = opts[:width]
       @color = opts[:color] || @color
       if @color.kind_of?(Integer)
         @color = Gosu::Color.new(opts[:color])
       end
       @mode = opts[:mode] || @mode
+    end
+
+    def factor= factor
+      @factor_x = @factor_y = factor
     end
 
     def rand_color

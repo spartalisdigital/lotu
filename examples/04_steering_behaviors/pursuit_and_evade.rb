@@ -14,8 +14,7 @@ include Lotu
 # Let's define a Missile class that will use a Steering system to
 # control it's movement
 class Missile < Actor
-  use SteeringSystem
-  use AnimationSystem
+  use_systems :steering, :animation
 
   def teleport(x, y)
     @pos.x, @pos.y = x, y

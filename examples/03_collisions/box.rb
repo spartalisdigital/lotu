@@ -36,7 +36,7 @@ class Painting < Actor
 end
 
 class Example < Game
-  use CollisionSystem
+  use_systems :collision
 
   def initialize
     super

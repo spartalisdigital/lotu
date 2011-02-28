@@ -12,6 +12,7 @@ module Lotu
       @default_font = Hash.new{ |h,k| h[k] = Gosu::Font.new( self, Gosu::default_font_name, k ) }
     end
 
+    # TODO: cambiar a Image['hola.png']
     def image( name )
       @images[name]
     end

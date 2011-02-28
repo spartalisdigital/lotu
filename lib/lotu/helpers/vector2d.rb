@@ -129,11 +129,20 @@ module Lotu
       dot(vector) > 0
     end
 
+    def rotate radians
+      new_x = @x * Math.cos(radians) - @y * Math.sin(radians)
+      new_y = @y * Math.cos(radians) + @x * Math.sin(radians)
+      #self.x = new_x
+      #self.y = new_y
+      #self
+      Vector2d.new( new_x, new_y )
+    end
+
     def to_s
       # TODO tratar de reducir la cantidad de vectores creados, al
       # menos cuando no se está moviendo
       #format('%d %.2f, %.2f', object_id, @x, @y)
-      format('%.2f, %.2f', @x, @y)
+      format('<%.2f, %.2f>', @x, @y)
     end
 
   end

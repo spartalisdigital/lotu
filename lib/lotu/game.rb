@@ -40,7 +40,7 @@ module Lotu
       setup_containers
 
       # if debug is set, print out class info
-      class_debug_info
+      class_debug_info if @debug
 
       # call the Gosu::Window constructor
       super(opts[:width], opts[:height], opts[:fullscreen])
@@ -58,7 +58,7 @@ module Lotu
       setup_events
 
       # if debug is set, print out instance info
-      instance_debug_info
+      instance_debug_info if @debug
     end
 
     def fps

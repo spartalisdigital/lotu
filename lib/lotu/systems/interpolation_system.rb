@@ -2,8 +2,11 @@
 module Lotu
   class InterpolationSystem < BaseSystem
 
+    attr_accessor :interpolations
+
     def initialize(user, opts={})
       super
+      # TODO: cambiar esto por un include en la clase mejor
       user.extend(UserMethods)
       @interpolations = []
       @tagged_for_deletion = []
@@ -20,7 +23,10 @@ module Lotu
         :end => Float(opts[:end]),
         :duration => opts[:duration] || 1,
         :start_in => opts[:start_in] || 0,
-        :on_result => opts[:on_result],
+        :on_stop => opts[:on_stop] || :current,
+        :every_value => opts[:every_value],
+        # TODO: implement callback mechanism
+        :callback => opts[:callback],
         :loop => opts[:loop],
         :bounce => opts[:bounce],
         :bouncing_back => false
@@ -29,6 +35,10 @@ module Lotu
     end
 
     # TODO: incluir código para :loop_for => n
+    # TODO: incluir soporte para "encimar" varias interpolaciones
+    # sobre una misma propiedad, de esa manera podemos "acumular"
+    # varias interpolaciones y el resultado se suma y se aplica a la
+    # propiedad una vez que todo el grupo ha sido calculado
     def update
       @interpolations.each do |t|
         t[:accum_time] += dt
@@ -49,7 +59,7 @@ module Lotu
             end
           end
           value = t[:init] + t[:calc]
-          value = value.send(t[:on_result]) if t[:on_result]
+          value = value.send(t[:every_value]) if t[:every_value]
           t[:object].send( t[:property_setter], value )
         end
       end
@@ -70,8 +80,26 @@ module Lotu
     end
 
     module UserMethods
+      # Clear all interpolations on this object
+      def stop_interpolations
+        @systems[InterpolationSystem].interpolations.each do |t|
+          if t[:on_stop] == :complete
+            value = t[:end]
+          else
+            value = t[:init] + t[:calc]
+          end
+          value = value.send(t[:every_value]) if t[:every_value]
+          t[:object].send( t[:property_setter], value )
+        end
+        @systems[InterpolationSystem].interpolations.clear
+      end
+
       def interpolate(object, property, opts)
         @systems[InterpolationSystem].interpolate(object, property, opts)
+      end
+
+      def interpolate_my(property, opts)
+        interpolate(self, property, opts)
       end
 
       # Image helpers
@@ -89,19 +117,19 @@ module Lotu
 
       # Color helpers
       def interpolate_alpha(opts)
-        interpolate(@color, :alpha, opts.merge!(:on_result => :to_i))
+        interpolate(@color, :alpha, opts.merge!(:every_value => :to_i))
       end
 
       def interpolate_red(opts)
-        interpolate(@color, :red, opts.merge!(:on_result => :to_i))
+        interpolate(@color, :red, opts.merge!(:every_value => :to_i))
       end
 
       def interpolate_green(opts)
-        interpolate(@color, :green, opts.merge!(:on_result => :to_i))
+        interpolate(@color, :green, opts.merge!(:every_value => :to_i))
       end
 
       def interpolate_blue(opts)
-        interpolate(@color, :blue, opts.merge!(:on_result => :to_i))
+        interpolate(@color, :blue, opts.merge!(:every_value => :to_i))
       end
 
       def interpolate_hue(opts)

@@ -7,6 +7,8 @@ module Lotu
       base.extend ClassMethods
     end
 
+    # PONDER: Cambiar por initialize? y controlar el punto de llamado
+    # con super?
     def init_behavior user_opts
       super if defined? super
       @systems ||= Hash.new
@@ -40,6 +42,23 @@ module Lotu
 
     # Allows to activate a system in the host
     module ClassMethods
+      # specify the systems you want to use, using symbols
+      # instead of module names
+      def use_systems *system_names
+        system_names.each do |system_name|
+          if system_name.is_a? Symbol
+            use Lotu.const_get("#{system_name.capitalize}System")
+          elsif system_name.is_a? Hash
+            system_name.each do |key,value|
+              use Lotu.const_get("#{key.capitalize}System"), value
+            end
+          else
+            raise "Unsupported system name as #{system_name.class}"
+          end
+        end
+      end
+
+      # specify the systems you want to use, using module names
       def use( klass, opts={} )
         behavior_options[SystemUser] ||= Hash.new
         behavior_options[SystemUser][klass] = opts
