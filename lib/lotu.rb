@@ -30,7 +30,8 @@ require 'gosu'
  'steering'].map{|s| "#{s}_system"}.each{|file| require "systems/#{file}"}
 
 # Load core files
-['behavior',
+['game_entity',
+ 'behavior',
  'actor',
  'cursor',
  'text_box',
