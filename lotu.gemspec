@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{lotu}
-  s.version = "0.1.19"
+  s.version = "0.1.20"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["lobo_tuerto"]
-  s.date = %q{2011-02-27}
+  s.date = %q{2011-02-28}
   s.description = %q{lotu aims to bring an agile and simple game development framework to life. It provides useful abstractions so you can concentrate on developing your game.}
   s.email = %q{dev@lobotuerto.com}
   s.extra_rdoc_files = [
