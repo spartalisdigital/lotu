@@ -1,6 +1,8 @@
-class GameEntity
+module Lotu
+  class GameEntity
 
-  def draw; end
-  def update; end
+    def draw; end
+    def update; end
 
+  end
 end
