@@ -47,7 +47,7 @@ module Lotu
       def use_systems *system_names
         system_names.each do |system_name|
           if system_name.is_a? Symbol
-            use Lotu.const_get("#{system_name.capitalize}System")
+            use Lotu.const_get("#{system_name.to_s.capitalize}System")
           elsif system_name.is_a? Hash
             system_name.each do |key,value|
               use Lotu.const_get("#{key.capitalize}System"), value
